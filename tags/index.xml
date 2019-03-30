@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Vince&#39;s Blog</title>
+    <link>https://wenqingfu.me/tags/</link>
+    <description>Recent content in Tags on Vince&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 16 Jan 2014 22:19:57 +0000</lastBuildDate>
+    
+	<atom:link href="https://wenqingfu.me/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Apache</title>
+      <link>https://wenqingfu.me/tags/apache/</link>
+      <pubDate>Thu, 16 Jan 2014 22:19:57 +0000</pubDate>
+      
+      <guid>https://wenqingfu.me/tags/apache/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Cache</title>
+      <link>https://wenqingfu.me/tags/cache/</link>
+      <pubDate>Tue, 23 Dec 2014 00:18:22 +0000</pubDate>
+      
+      <guid>https://wenqingfu.me/tags/cache/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Exercise</title>
+      <link>https://wenqingfu.me/tags/exercise/</link>
+      <pubDate>Fri, 02 Oct 2015 08:26:11 +0000</pubDate>
+      
+      <guid>https://wenqingfu.me/tags/exercise/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MASM</title>
+      <link>https://wenqingfu.me/tags/masm/</link>
+      <pubDate>Mon, 21 Apr 2014 09:34:22 +0000</pubDate>
+      
+      <guid>https://wenqingfu.me/tags/masm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Machine Learning</title>
+      <link>https://wenqingfu.me/tags/machine-learning/</link>
+      <pubDate>Fri, 09 Jan 2015 21:51:22 +0000</pubDate>
+      
+      <guid>https://wenqingfu.me/tags/machine-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>OpenCV</title>
+      <link>https://wenqingfu.me/tags/opencv/</link>
+      <pubDate>Mon, 21 Apr 2014 09:34:22 +0000</pubDate>
+      
+      <guid>https://wenqingfu.me/tags/opencv/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>PE</title>
+      <link>https://wenqingfu.me/tags/pe/</link>
+      <pubDate>Sat, 08 Nov 2014 19:34:22 +0000</pubDate>
+      
+      <guid>https://wenqingfu.me/tags/pe/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>https://wenqingfu.me/tags/python/</link>
+      <pubDate>Sat, 08 Nov 2014 19:34:22 +0000</pubDate>
+      
+      <guid>https://wenqingfu.me/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Software Engineering</title>
+      <link>https://wenqingfu.me/tags/software-engineering/</link>
+      <pubDate>Tue, 31 Dec 2013 00:40:11 +0000</pubDate>
+      
+      <guid>https://wenqingfu.me/tags/software-engineering/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

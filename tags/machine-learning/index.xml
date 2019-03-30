@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Machine Learning on Vince&#39;s Blog</title>
+    <link>https://wenqingfu.me/tags/machine-learning/</link>
+    <description>Recent content in Machine Learning on Vince&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 09 Jan 2015 21:51:22 +0000</lastBuildDate>
+    
+	<atom:link href="https://wenqingfu.me/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>音乐情感分类</title>
+      <link>https://wenqingfu.me/post/music_emotion_classification/</link>
+      <pubDate>Fri, 09 Jan 2015 21:51:22 +0000</pubDate>
+      
+      <guid>https://wenqingfu.me/post/music_emotion_classification/</guid>
+      <description>&lt;p&gt;刚上完了&lt;a href=&#34;http://learn.tsinghua.edu.cn:8080/2006990024/index.htm&#34;&gt;王朝坤&lt;/a&gt;老师《数字媒体（2）》音频技术部分的课程，做了一个音乐情感分类的实验，特写出来分享一下。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

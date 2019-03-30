@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.54.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>我是如何用 MASM 汇编写摄像头控制程序的 | Vince&#39;s Blog</title>
+    <meta property="og:title" content="我是如何用 MASM 汇编写摄像头控制程序的 - Vince&#39;s Blog">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2014-04-21T09:34:22&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2014-04-21T09:34:22&#43;08:00">
+        
+    <meta name="Keywords" content="博客,Vince,Blog">
+    <meta name="description" content="我是如何用 MASM 汇编写摄像头控制程序的">
+        
+    <meta name="author" content="Vince">
+    <meta property="og:url" content="https://wenqingfu.me/post/masm_opencv/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+        <link rel="stylesheet" href="/css/style.extra.css">
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://wenqingfu.me">
+                        Vince&#39;s Blog
+                    </a>
+                
+                <p class="description">淡泊明志，宁静致远</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://wenqingfu.me">首页</a>
+                    
+                    <a  href="https://wenqingfu.me/archives/" title="存档">存档</a>
+                    
+                    <a  href="https://wenqingfu.me/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">我是如何用 MASM 汇编写摄像头控制程序的</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2014年4月21日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="https://wenqingfu.me/categories/%E6%B1%87%E7%BC%96">汇编</a></span>
+                            
+                        </div>
+                        
+                        
+                        <div class="post-content">
+                            <p>上周完成了汇编语言这门课程的大作业展示，总体来说做得还是挺满意的。我们小组做的是一个摄像头控制类似微信飞机大战的程序。我们不想只是简单做一个小游戏，希望能将摄像头也加入进来，做一些控制的事情，所以才有了这个项目。在这个项目中，我主要负责的用汇编语言实现摄像头控制，需哥和磊哥负责实现类飞机大战的游戏程序。这是与普通微信飞机大战的区别在于就是我们额外实现了可以用电脑摄像头捕捉人脸移动，对应到飞机的移动，从而实现控制飞机大战游戏。</p>
+
+<p><center>
+    <img src="http://vincespace.qiniudn.com/weixin.jpg" width="150px"/>
+</center>
+具体源码可参看 <a href="https://github.com/xu-wang11/AirWar">https://github.com/xu-wang11/AirWar</a></p>
+
+<p>我这部分的工作主要是用汇编语言实现摄像头控制，控制的原理就是通过识别人脸并跟踪人脸的运动方向来控制飞机的运动。用汇编写基于摄像头的人脸识别程序，初听感觉笔者是在作死，这个难度太大了。其实我没有作死，只是走了些捷径罢了。</p>
+
+<p>我就不卖关子了，我的做法是用 OpenCV 来实现人脸识别与跟踪部门，打开摄像头获取图像流数据用汇编实现。
+起初，我们的想法是直接调用 OpenCV 的 DLL 文件，后面才发现 OpenCV 的函数虽然好用，但是参数实在太复杂了，从汇编传递参数过去比较麻烦。于是在请教了<a href="http://qiankanglai.me/">钱康来</a>大神后，他机智地建议我们直接先用 C++ 将 OpenCV 的函数封装一下，将参数简化，然后编译成 DLL 供汇编调用。
+汇编打开摄像头主要是通过调用 Win32 的 avicap32.dll 来实现，这部分主要参考自 <a href="http://www.aogosoft.com/downpage.asp?mode=viewtext&amp;id=197">http://www.aogosoft.com/downpage.asp?mode=viewtext&amp;id=197</a>， 这里就不再赘述了。</p>
+
+<p>现在似乎有一个问题还没有解决，如何将汇编获取的每一帧图像传递给 OpenCV 程序呢？ 通过查找资料发现，avicap32.dll 中提供了一种方式获取每一帧图像，就是回调 FrameCallbackProc 中 lpVHdr 里存放图像数据。因此我们只需要在 FrameCallbackProc 回调函数中调用我们编写的 DLL 函数，传递参数为 lpVHdr 即可，类型是 LPVIDEOHDR。那么我们在 C++ 函数中如何处理 LPVIDEOHDR lpVHdr 这个数据结构呢，我们知道 OpenCV 希望的图片数据类型是 IplImage， 那么如何实现从 LPVIDEOHDR 到 IplImage 的转换呢？</p>
+
+<p>其实图像数据存储在 LPVIDEOHDR 中 ldata 域下， ldata 实质就是一个 BYTE* 类型。我想直接将 BYTE* 转为 IplImage，花了很长时间一直都没有成功。最后将 BYTE* 类型数据输出到文本，通过分析并查阅资料才发现，原来是因为数据格式的问题，这里获取到的 BYTE* 存储的图像数据的格式是 YUY2 格式的，一种压缩后的格式，而我们主流使用的格式是 RGB，然后就先做了 YUY2RGB 的转换， 再做 Byte2IplImg 的转换，最终顺利实现了 OpenCV 使用 MASM 汇编捕捉的视频图像。</p>
+
+<p>下面给给出图像数据传递部分的主要代码：</p>
+
+<pre><code>FrameCallbackProc proc hWnd,lpVHdr
+invoke detect_and_draw, lpVHdr
+ret
+FrameCallbackProc endp
+</code></pre>
+
+<pre><code>void detect_and_draw(LPVIDEOHDR lpVHdr) 
+{ 
+    BYTE* data = new BYTE[512000];
+	YUY2RGB(lpVHdr-&gt;ldata, data);
+    IplImage* img = Byte2IplImg(data)
+	......
+}
+</code></pre>
+
+<p>之后的工作就是实现人脸识别与追踪算法，并通过判断相邻两帧图像中人脸的相对位移，可以得知人脸移动的方向，从而触发对应按键事件来实现控制。 这里的人脸识别与追踪算法使用的是 OpenCV 库里自带的样例程序，稍作修改就能达到我们的要求，就不一一赘述了。</p>
+                        </div>
+
+                        
+
+
+                        
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="https://wenqingfu.me/tags/opencv">OpenCV</a></li>
+                                
+                                <li><a href="https://wenqingfu.me/tags/masm">MASM</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "wenqf11" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://wenqingfu.me">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wenqingfu.me/post/my_reviews_2016/" title="别了，我的2016">别了，我的2016</a>
+    </li>
+    
+    <li>
+        <a href="https://wenqingfu.me/post/books_movies_2016/" title="2016 我的书单和影单">2016 我的书单和影单</a>
+    </li>
+    
+    <li>
+        <a href="https://wenqingfu.me/post/config-two-network-interfaces/" title="CentOS 上双网卡双 IP 配置，实现内网访问外网">CentOS 上双网卡双 IP 配置，实现内网访问外网</a>
+    </li>
+    
+    <li>
+        <a href="https://wenqingfu.me/post/install_acr122u_drivers_ubuntu/" title="Ubuntu 上安装 ACR122U 驱动">Ubuntu 上安装 ACR122U 驱动</a>
+    </li>
+    
+    <li>
+        <a href="https://wenqingfu.me/post/disaster_causeby_removing_openssl_in_centos5.5/" title="记一次 yum remove openssl 引发的灾难">记一次 yum remove openssl 引发的灾难</a>
+    </li>
+    
+    <li>
+        <a href="https://wenqingfu.me/post/say_something_about_my_2015/" title="说说我的2015">说说我的2015</a>
+    </li>
+    
+    <li>
+        <a href="https://wenqingfu.me/post/how-i-lose-weight-from-80-to-70/" title="我是如何从80减到70的">我是如何从80减到70的</a>
+    </li>
+    
+    <li>
+        <a href="https://wenqingfu.me/post/music_emotion_classification/" title="音乐情感分类">音乐情感分类</a>
+    </li>
+    
+    <li>
+        <a href="https://wenqingfu.me/post/my_reviews_2014/" title="回首我的2014">回首我的2014</a>
+    </li>
+    
+    <li>
+        <a href="https://wenqingfu.me/post/cache_coherency/" title="从一个神奇的Bug开始谈缓存一致性问题">从一个神奇的Bug开始谈缓存一致性问题</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wenqingfu.me/categories/linux/">Linux(3)</a>
+    </li>
+    
+    <li>
+        <a href="https://wenqingfu.me/categories/python/">Python(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wenqingfu.me/categories/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/">体系结构(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wenqingfu.me/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wenqingfu.me/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wenqingfu.me/categories/%E6%B1%87%E7%BC%96/">汇编(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wenqingfu.me/categories/%E9%9A%8F%E7%AC%94/">随笔(6)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://wenqingfu.me/tags/apache/">Apache</a>
+    
+    <a href="https://wenqingfu.me/tags/cache/">Cache</a>
+    
+    <a href="https://wenqingfu.me/tags/exercise/">Exercise</a>
+    
+    <a href="https://wenqingfu.me/tags/masm/">MASM</a>
+    
+    <a href="https://wenqingfu.me/tags/machine-learning/">Machine Learning</a>
+    
+    <a href="https://wenqingfu.me/tags/opencv/">OpenCV</a>
+    
+    <a href="https://wenqingfu.me/tags/pe/">PE</a>
+    
+    <a href="https://wenqingfu.me/tags/python/">Python</a>
+    
+    <a href="https://wenqingfu.me/tags/software-engineering/">Software Engineering</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://dangfan.me" title="">有一说一</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="http://yanglei.me" title="">Yanglei&#39;s Blog</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="http://qiankanglai.me" title="">Loading &amp; Learning</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="http://ise.thss.tsinghua.edu.cn/sidb/people/~chenjun/" title="">Jun Chen&#39;s Homepage</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://wenqingfu.me/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="https://wenqingfu.me">Vince&#39;s Blog By Vince</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        Theme based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    <script type="text/javascript">
+    
+    (function(){
+        $("pre code").parent().addClass("line-numbers")
+    }())
+
+    window.MathJax = {
+        tex2jax: {
+            inlineMath: [ ['$','$'] ],
+            processEscapes: true
+        }
+    };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+
+
+
+  <script src="/js/app.extra.js"></script>
+
+</body>
+</html>

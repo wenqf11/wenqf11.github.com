@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.54.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>从一个神奇的Bug开始谈缓存一致性问题 | Vince&#39;s Blog</title>
+    <meta property="og:title" content="从一个神奇的Bug开始谈缓存一致性问题 - Vince&#39;s Blog">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2014-12-23T00:18:22&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2014-12-23T00:18:22&#43;08:00">
+        
+    <meta name="Keywords" content="博客,Vince,Blog">
+    <meta name="description" content="从一个神奇的Bug开始谈缓存一致性问题">
+        
+    <meta name="author" content="Vince">
+    <meta property="og:url" content="https://wenqingfu.me/post/cache_coherency/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+        <link rel="stylesheet" href="/css/style.extra.css">
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://wenqingfu.me">
+                        Vince&#39;s Blog
+                    </a>
+                
+                <p class="description">淡泊明志，宁静致远</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://wenqingfu.me">首页</a>
+                    
+                    <a  href="https://wenqingfu.me/archives/" title="存档">存档</a>
+                    
+                    <a  href="https://wenqingfu.me/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">从一个神奇的Bug开始谈缓存一致性问题</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2014年12月23日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="https://wenqingfu.me/categories/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84">体系结构</a></span>
+                            
+                        </div>
+                        
+                        
+                        <div class="post-content">
+                            <h2 id="引入">引入</h2>
+
+<p>前一段时间，我一直都在做一个软件保护的项目，上周一直都忙于<a href="https://aicraft.net9.org/">一个赛事</a>的组织筹备工作，没有空闲写一点东西，这周才补上。我所做的工作主要就是对多个不同平台下的动态链接库进行加密，防止用户对其进行反汇编。在加密的流程中，有一个过程需要实现在内存中先解密代码段，然后再执行解密后的代码。显然，这里需要进行内存中代码段的读写操作。</p>
+
+<p>标题中说一个神奇的bug，那么到底是什么bug呢？我是之前在Ubuntu上实现了对动态链接库文件加密的程序，然后扩展到ARM平台上，但在实际运行Android程序调用动态链接库的过程中，总是会报一个错叫非法指令。起初我以为是解密出现了问题，我琢磨了一天，也没能修复这个bug。最终，我向恒牛（@<a href="https://github.com/chyh1990">陈宇恒</a>）请教了这个问题，他用了不到两分钟得时间，调用了一个<a href="http://community.arm.com/groups/processors/blog/2010/02/17/caches-and-self-modifying-code">_clear_cache</a>函数就把bug给解决了。</p>
+
+<h2 id="缓存一致性">缓存一致性</h2>
+
+<p>其实这个bug就是因为缓存不一致导致的。那么什么是缓存不一致呢？我们都知道在计算机体系结构中，有一个很重要的概念叫(<a href="http://en.wikipedia.org/wiki/Cache_(computing)">cache</a>。缓存不一致就是cache和内存在某些时候的不一致而导致CPU执行了与内存中不一样的指令。然而，并不是所有体系结构都会有这种问题，x86的体系结构就是从硬件上确保了缓存一致性：监听总线协议（snoopy cache protocol）使当某片被缓存了的内存被修改时，会被立刻写回，确保cache与内存的一致性。然而这种实时监听方式显然是比较消耗性能的，所以ARM体系结构就没有采用硬件来保证缓存一致性，而是用软件的方法来保证。程序员需要手动调用如_clear_cache 这样类似的指令来保证缓存一致性。那么到这里，也就解释了为什么在Ubuntu(x86)上可以正常运行，但在Android(ARM)上却会报非法指令的错误了。</p>
+
+<h2 id="一点感触">一点感触</h2>
+
+<p>做完这个项目之后，深感要想成为一个优秀的程序员，还是要懂得系统底层的。只是晓得几门编程语言，会写点前端，浮于表面，就以为自己无所不能了，这样是不可取的，毕竟系统底层（操作系统、体系结构、编译原理、数据库、网络）这些才是计算机科学的精髓。</p>
+
+<p>参考资料：</p>
+
+<ul>
+<li>cache一致性问题 <a href="http://blog.csdn.net/dianhuiren/article/details/6896129">http://blog.csdn.net/dianhuiren/article/details/6896129</a></li>
+<li>缓存一致性（Cache Coherency）入门 <a href="http://www.infoq.com/cn/articles/cache-coherency-primer">http://www.infoq.com/cn/articles/cache-coherency-primer</a></li>
+<li>Cache coherence <a href="http://en.wikipedia.org/wiki/Cache_coherence">http://en.wikipedia.org/wiki/Cache_coherence</a></li>
+</ul>
+                        </div>
+
+                        
+
+
+                        
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="https://wenqingfu.me/tags/cache">Cache</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "wenqf11" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://wenqingfu.me">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wenqingfu.me/post/my_reviews_2016/" title="别了，我的2016">别了，我的2016</a>
+    </li>
+    
+    <li>
+        <a href="https://wenqingfu.me/post/books_movies_2016/" title="2016 我的书单和影单">2016 我的书单和影单</a>
+    </li>
+    
+    <li>
+        <a href="https://wenqingfu.me/post/config-two-network-interfaces/" title="CentOS 上双网卡双 IP 配置，实现内网访问外网">CentOS 上双网卡双 IP 配置，实现内网访问外网</a>
+    </li>
+    
+    <li>
+        <a href="https://wenqingfu.me/post/install_acr122u_drivers_ubuntu/" title="Ubuntu 上安装 ACR122U 驱动">Ubuntu 上安装 ACR122U 驱动</a>
+    </li>
+    
+    <li>
+        <a href="https://wenqingfu.me/post/disaster_causeby_removing_openssl_in_centos5.5/" title="记一次 yum remove openssl 引发的灾难">记一次 yum remove openssl 引发的灾难</a>
+    </li>
+    
+    <li>
+        <a href="https://wenqingfu.me/post/say_something_about_my_2015/" title="说说我的2015">说说我的2015</a>
+    </li>
+    
+    <li>
+        <a href="https://wenqingfu.me/post/how-i-lose-weight-from-80-to-70/" title="我是如何从80减到70的">我是如何从80减到70的</a>
+    </li>
+    
+    <li>
+        <a href="https://wenqingfu.me/post/music_emotion_classification/" title="音乐情感分类">音乐情感分类</a>
+    </li>
+    
+    <li>
+        <a href="https://wenqingfu.me/post/my_reviews_2014/" title="回首我的2014">回首我的2014</a>
+    </li>
+    
+    <li>
+        <a href="https://wenqingfu.me/post/cache_coherency/" title="从一个神奇的Bug开始谈缓存一致性问题">从一个神奇的Bug开始谈缓存一致性问题</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wenqingfu.me/categories/linux/">Linux(3)</a>
+    </li>
+    
+    <li>
+        <a href="https://wenqingfu.me/categories/python/">Python(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wenqingfu.me/categories/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/">体系结构(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wenqingfu.me/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wenqingfu.me/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wenqingfu.me/categories/%E6%B1%87%E7%BC%96/">汇编(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wenqingfu.me/categories/%E9%9A%8F%E7%AC%94/">随笔(6)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://wenqingfu.me/tags/apache/">Apache</a>
+    
+    <a href="https://wenqingfu.me/tags/cache/">Cache</a>
+    
+    <a href="https://wenqingfu.me/tags/exercise/">Exercise</a>
+    
+    <a href="https://wenqingfu.me/tags/masm/">MASM</a>
+    
+    <a href="https://wenqingfu.me/tags/machine-learning/">Machine Learning</a>
+    
+    <a href="https://wenqingfu.me/tags/opencv/">OpenCV</a>
+    
+    <a href="https://wenqingfu.me/tags/pe/">PE</a>
+    
+    <a href="https://wenqingfu.me/tags/python/">Python</a>
+    
+    <a href="https://wenqingfu.me/tags/software-engineering/">Software Engineering</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://dangfan.me" title="">有一说一</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="http://yanglei.me" title="">Yanglei&#39;s Blog</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="http://qiankanglai.me" title="">Loading &amp; Learning</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="http://ise.thss.tsinghua.edu.cn/sidb/people/~chenjun/" title="">Jun Chen&#39;s Homepage</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://wenqingfu.me/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="https://wenqingfu.me">Vince&#39;s Blog By Vince</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        Theme based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    <script type="text/javascript">
+    
+    (function(){
+        $("pre code").parent().addClass("line-numbers")
+    }())
+
+    window.MathJax = {
+        tex2jax: {
+            inlineMath: [ ['$','$'] ],
+            processEscapes: true
+        }
+    };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+
+
+
+  <script src="/js/app.extra.js"></script>
+
+</body>
+</html>
