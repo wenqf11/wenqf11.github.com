@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Linux on Vince&#39;s Blog</title>
@@ -6,11 +6,7 @@
     <description>Recent content in Linux on Vince&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 09 Dec 2016 22:09:22 +0000</lastBuildDate>
-    
-	<atom:link href="https://wenqingfu.me/categories/linux/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 09 Dec 2016 22:09:22 +0000</lastBuildDate><atom:link href="https://wenqingfu.me/categories/linux/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>CentOS 上双网卡双 IP 配置，实现内网访问外网</title>
       <link>https://wenqingfu.me/post/config-two-network-interfaces/</link>

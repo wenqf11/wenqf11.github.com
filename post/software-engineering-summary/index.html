@@ -1,345 +1,151 @@
-<!doctype html>
-<html lang="zh-CN">
+<!DOCTYPE html>
+<html>
 <head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>《软件工程》学习总结 - Vince&#39;s Blog</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta itemprop="name" content="《软件工程》学习总结">
+<meta itemprop="description" content="这个学期接近尾声，软工课也已经正式结课了，也该好好的给自己这个学期的软工学习做一个总结了。
+软件工程，工程化的软件开发思想
+什么是软件工程？软件工程是研究和应用如何以系统性的、规范化的、可定量的过程化方法去开发和维护软件，以及如何把经过时间考验而证明正确的管理技术和当前能够得到的最好的技术方法结合起来的学科（摘自维基百科）。"><meta itemprop="datePublished" content="2013-12-31T00:40:11&#43;00:00" />
+<meta itemprop="dateModified" content="2013-12-31T00:40:11&#43;00:00" />
+<meta itemprop="wordCount" content="2084">
+<meta itemprop="keywords" content="Software Engineering," /><meta property="og:title" content="《软件工程》学习总结" />
+<meta property="og:description" content="这个学期接近尾声，软工课也已经正式结课了，也该好好的给自己这个学期的软工学习做一个总结了。
+软件工程，工程化的软件开发思想
+什么是软件工程？软件工程是研究和应用如何以系统性的、规范化的、可定量的过程化方法去开发和维护软件，以及如何把经过时间考验而证明正确的管理技术和当前能够得到的最好的技术方法结合起来的学科（摘自维基百科）。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://wenqingfu.me/post/software-engineering-summary/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2013-12-31T00:40:11&#43;00:00" />
+<meta property="article:modified_time" content="2013-12-31T00:40:11&#43;00:00" />
 
-    <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.54.0" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="《软件工程》学习总结"/>
+<meta name="twitter:description" content="这个学期接近尾声，软工课也已经正式结课了，也该好好的给自己这个学期的软工学习做一个总结了。
+软件工程，工程化的软件开发思想
+什么是软件工程？软件工程是研究和应用如何以系统性的、规范化的、可定量的过程化方法去开发和维护软件，以及如何把经过时间考验而证明正确的管理技术和当前能够得到的最好的技术方法结合起来的学科（摘自维基百科）。"/>
+<link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" media="screen" href="https://wenqingfu.mecss/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://wenqingfu.mecss/main.css" />
 
-    <title>《软件工程》学习总结 | Vince&#39;s Blog</title>
-    <meta property="og:title" content="《软件工程》学习总结 - Vince&#39;s Blog">
-    <meta property="og:type" content="article">
-        
-    <meta property="article:published_time" content="2013-12-31T00:40:11&#43;08:00">
-        
-        
-    <meta property="article:modified_time" content="2013-12-31T00:40:11&#43;08:00">
-        
-    <meta name="Keywords" content="博客,Vince,Blog">
-    <meta name="description" content="《软件工程》学习总结">
-        
-    <meta name="author" content="Vince">
-    <meta property="og:url" content="https://wenqingfu.me/post/software-engineering-summary/">
+        <link id="dark-scheme" rel="stylesheet" type="text/css" href="https://wenqingfu.mecss/dark.css" />
 
-    <link rel="icon" type="image/png" href="/favicon.png" />
-
-    <link rel="stylesheet" href="/css/normalize.css">
-    
-        <link rel="stylesheet" href="/css/prism.css">
-    
-    <link rel="stylesheet" href="/css/style.css">
-    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-
-    
-
-
-    
-    
+	
+		<script src="https://wenqingfu.mejs/main.js"></script>
 </head>
 
 <body>
-<header id="header" class="clearfix">
-    <div class="container">
-        <div class="col-group">
-            <div class="site-name ">
-                
-                    <a id="logo" href="https://wenqingfu.me">
-                        Vince&#39;s Blog
-                    </a>
-                
-                <p class="description">淡泊明志，宁静致远</p>
-            </div>
-            <div>
-                <nav id="nav-menu" class="clearfix">
-                    <a class="current" href="https://wenqingfu.me">首页</a>
-                    
-                    <a  href="https://wenqingfu.me/archives/" title="存档">存档</a>
-                    
-                    <a  href="https://wenqingfu.me/about/" title="关于">关于</a>
-                    
-                </nav>
-            </div>
-        </div>
-    </div>
-</header>
+	<div class="container wrapper">
+		<div class="header">
+	
+	<h1 class="site-title"><a href="https://wenqingfu.me">Vince&#39;s Blog</a></h1>
+	<div class="site-description"><p>淡泊明志，宁静致远</p><nav class="nav social">
+			<ul class="flat"></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/post/">Posts</a>
+			</li>
+			
+			<li>
+				<a href="/categories/">Categories</a>
+			</li>
+			
+			<li>
+				<a href="/tags/">Tags</a>
+			</li>
+			
+			<li>
+				<a href="/about/">About</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
 
 
-<div id="body">
-    <div class="container">
-        <div class="col-group">
-
-            <div class="col-8" id="main">
-                <div class="res-cons">
-                    <article class="post">
-                        <header>
-                            <h1 class="post-title">《软件工程》学习总结</h1>
-                        </header>
-                        <date class="post-meta meta-date">
-                            2013年12月31日
-                        </date>
-                        
-                        <div class="post-meta">
-                            <span>|</span>
-                            
-                                <span class="meta-category"><a href="https://wenqingfu.me/categories/%E9%9A%8F%E7%AC%94">随笔</a></span>
-                            
-                        </div>
-                        
-                        
-                        <div class="post-content">
-                            <p>这个学期接近尾声，软工课也已经正式结课了，也该好好的给自己这个学期的软工学习做一个总结了。</p>
-
-<h2 id="软件工程-工程化的软件开发思想">软件工程，工程化的软件开发思想</h2>
-
+		<div class="post">
+			<div class="post-header">
+				
+					<div class="meta">
+						<div class="date">
+							<span class="day">31</span>
+							<span class="rest">Dec 2013</span>
+						</div>
+					</div>
+				
+				<div class="matter">
+					<h1 class="title">《软件工程》学习总结</h1>
+				</div>
+			</div>
+					
+			<div class="markdown">
+				<p>这个学期接近尾声，软工课也已经正式结课了，也该好好的给自己这个学期的软工学习做一个总结了。</p>
+<h2 id="软件工程工程化的软件开发思想">软件工程，工程化的软件开发思想</h2>
 <p>什么是软件工程？软件工程是研究和应用如何以系统性的、规范化的、可定量的过程化方法去开发和维护软件，以及如何把经过时间考验而证明正确的管理技术和当前能够得到的最好的技术方法结合起来的学科（摘自维基百科）。</p>
-
 <p>其实说白了就是把工程化思想运用到软件开发整个过程中，使得软件开发的流程更加高效，做出的软件更加实用。从需求分析、软件设计、软件实现到软件测试，每一个环节都应该采用工程化得方法来解决。在需求建模的过程中，我们需要采用UML语言，画UML图，采用面向对象技术来进行建模。在代码编写过程中，我们需要采用一些设计模式，使代码更加可复用性和可维护性更强。</p>
-
 <p>当然，软件工程不是金科玉律，而是一种工程化的思想，绝不是要求我们在开发过程遵循条条框框，让我们的开发受到限制，相反是为了高效地开发出高质量的软件。这就好比古代的将帅学习兵法，不应循规蹈矩，而应掌握战争的一般规律，在战场上随机应变，灵活运用。</p>
-
-<h2 id="需求-不可忽视的重点">需求，不可忽视的重点</h2>
-
+<h2 id="需求不可忽视的重点">需求，不可忽视的重点</h2>
 <p>作为程序员，我们常常把关注的焦点放在代码上，而容易忽视需求的重要性。我们常常会看到对需求这样的描述，“一般来说,在软件产品的开发过程中,需求分析的过程要占到整个软件开发过程的40%-50%”。其实，这么描述是有其道理的。Standish Group 2009年对IT项目调查中显示，在所有失败的项目中由于需求问题而失败的项目占13.1%，比例最高，由此可见需求分析的重要性。在开发过程中，我们常常减少需求分析的时间用来编写代码，但是却忽视了，不明确的需求会大大降低编码的效率。在代码编写过程中，需求不明确或者需求的改变常常会导致开发后段时间出现大幅度修改代码的情况，最终的结果就是程序结构混乱，漏洞重重。所以，“磨刀不误砍柴工”，清晰明确的需求分析会让之后的工作事半功倍。</p>
-
 <h2 id="程序员也要懂设计">程序员也要懂设计</h2>
-
 <p>这句话是我自己切身感受，以前做一些网站就在这方面吃过亏，这次做微信的公众平台，让我感受更加深刻。有时候，决定一个软件成功的要素，不是写代码而是设计。此处所说的设计，不是指架构设计，而是界面设计和交互设计。界面和交互直接影响到用户体验，用户体验差的软件显然是不可能成为一款成功的软件的。这次项目二的开发中，我们的项目在第一次迭代后进行了反复的修改，其中很大一部就是交互方式和界面设计的细节。当时为了支持同一时间可以抢多个活动的票，需要修改交互方式，一种方案输入活动代号来区分每个活动，另一种是以直接点击按钮来抢票，但是实现起来会稍微复杂一些。幸好最终决定采用了后者，若是采用前者，后期发现输入代码太麻烦又要改成后者。交互设计的过程中有一条非常重要的原则就是，以用户为中心。从用户角度出发，怎样交互简单便捷就怎么做。</p>
-
 <h2 id="测试让软件更完美">测试让软件更完美</h2>
-
 <p>软件测试唯一的目标就是为了发现软件的bug，好的测试不是印证软件的正确性，而是能够发现难以发现的缺陷，只有这样才能做出接近完美的软件。我们的公众平台已经投入实际使用，目前还未收到什么负面的反应，这与我们在上线之前大量的测试是离不开的。说到此处，却感到非常惭愧，因为我们项目的很多测试工作都是老师和助教来完成的。一方面，我们小组在测试上的投入确实不够多；另一方面，正如之前所说，程序员把精力都集中在了代码上，自己在测试自己编写的软件时，往往会习惯性按照逻辑去测试其正确性，并不能发现很多潜在的bug。我想应该也正是因为这个原因所以才会有测试工程师这个职位。</p>
-
 <h2 id="在课程学习上的不足">在课程学习上的不足</h2>
-
 <p>首先，课堂上所学的关于软件工程的知识没有及时复习，没有很好地将其运用到实际工程之中。在项目二开始时，由于大帝和磊哥去参加百度的比赛，留下一个简单的框架让我和帆姐来写微信交互逻辑部分。那个周末我们设计完成数据库，写出初版的微信交互，之后也是我负责修改交互逻辑这部分的代码，一开始没有运用设计模式，想到哪里写到哪里，觉得如果有问题之后再来改，后面代码越写越多，问题就出现了。由于需要改变交互方式，所以交互的逻辑这部分就需要改变，结果发现修改起来非常不方便，有时候自己都理不清思路。</p>
-
 <p>还有就是感觉自己的提出问题能力不够，课堂上老师也反复强调希望学生能多提问题，其实有时候自己真想提出一些问题，但是却又不知道问什么好。可能自己一直以来都习惯了老师问学生的这种方式吧，等到要自己提问的时候却都不知道该问什么。有人曾说过，“提出问题远比解决问题难，因为解决问题是技术性的，而提出问题则是革命性的”。只有主动提出问题，才更有可能解决问题。</p>
-
 <h2 id="课程感想">课程感想</h2>
-
 <p>这门课程确实让我了解了很多软件工程的知识，不敢说学会，因为自己确实没有能够将这些知识熟练运用。若要真正学会这些知识，还需要在今后的软件开发过程中，多尝试使用一些软件工程的方法来解决问题，在实践中运用，在实践中感悟。此外，在团队开发的过程中，从他们身上认识到很多自己的很多不足。磊哥的沉着稳重，帆姐的一丝不苟，大帝的追求完美，这些都是值得自己学习的。在整个团队开发过程中，大家相互配合，相互帮助，共同开发完成一个软件，这种经历是很难得的。</p>
-                        </div>
+			</div>
 
-                        
+			<div class="tags">
+				
+					
+						<ul class="flat">
+							
+							<li><a href="/tags/software-engineering">Software Engineering</a></li>
+							
+						</ul>
+					
+				
+			</div><div id="disqus_thread"></div>
+<script type="text/javascript">
+	(function () {
+		
+		
+		if (window.location.hostname == "localhost")
+			return;
 
-
-                        
-
-                        <div class="post-meta meta-tags">
-                            
-                            <ul class="clearfix">
-                                
-                                <li><a href="https://wenqingfu.me/tags/software-engineering">Software Engineering</a></li>
-                                
-                            </ul>
-                            
-                        </div>
-                    </article>
-                    
-    
-
-    
-    
-    <div class="post bg-white">
-      <script src="https://utteranc.es/client.js"
-            repo= "wenqf11/blog-comments"
-            issue-term="pathname"
-            theme="github-light"
-            crossorigin="anonymous"
-            async>
-      </script>
-    </div>
-    
-                </div>
-            </div>
-            <div id="secondary">
-    <section class="widget">
-        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
-      
-      <input type="text" name="q" maxlength="20" placeholder="Search">
-      <input type="hidden" name="sitesearch" value="https://wenqingfu.me">
-      <button type="submit" class="submit icon-search"></button>
-</form>
-    </section>
-    
-    <section class="widget">
-        <h3 class="widget-title">最近文章</h3>
-<ul class="widget-list">
-    
-    <li>
-        <a href="https://wenqingfu.me/post/my_reviews_2016/" title="别了，我的2016">别了，我的2016</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/post/books_movies_2016/" title="2016 我的书单和影单">2016 我的书单和影单</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/post/config-two-network-interfaces/" title="CentOS 上双网卡双 IP 配置，实现内网访问外网">CentOS 上双网卡双 IP 配置，实现内网访问外网</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/post/install_acr122u_drivers_ubuntu/" title="Ubuntu 上安装 ACR122U 驱动">Ubuntu 上安装 ACR122U 驱动</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/post/disaster_causeby_removing_openssl_in_centos5.5/" title="记一次 yum remove openssl 引发的灾难">记一次 yum remove openssl 引发的灾难</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/post/say_something_about_my_2015/" title="说说我的2015">说说我的2015</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/post/how-i-lose-weight-from-80-to-70/" title="我是如何从80减到70的">我是如何从80减到70的</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/post/music_emotion_classification/" title="音乐情感分类">音乐情感分类</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/post/my_reviews_2014/" title="回首我的2014">回首我的2014</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/post/cache_coherency/" title="从一个神奇的Bug开始谈缓存一致性问题">从一个神奇的Bug开始谈缓存一致性问题</a>
-    </li>
-    
-</ul>
-    </section>
-
-    
-
-    <section class="widget">
-        <h3 class="widget-title">分类</h3>
-<ul class="widget-list">
-    
-    <li>
-        <a href="https://wenqingfu.me/categories/linux/">Linux(3)</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/categories/python/">Python(1)</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/categories/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/">体系结构(1)</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器(1)</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习(1)</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/categories/%E6%B1%87%E7%BC%96/">汇编(1)</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/categories/%E9%9A%8F%E7%AC%94/">随笔(6)</a>
-    </li>
-    
-</ul>
-    </section>
-
-    <section class="widget">
-        <h3 class="widget-title">标签</h3>
-<div class="tagcloud">
-    
-    <a href="https://wenqingfu.me/tags/apache/">Apache</a>
-    
-    <a href="https://wenqingfu.me/tags/cache/">Cache</a>
-    
-    <a href="https://wenqingfu.me/tags/exercise/">Exercise</a>
-    
-    <a href="https://wenqingfu.me/tags/masm/">MASM</a>
-    
-    <a href="https://wenqingfu.me/tags/machine-learning/">Machine Learning</a>
-    
-    <a href="https://wenqingfu.me/tags/opencv/">OpenCV</a>
-    
-    <a href="https://wenqingfu.me/tags/pe/">PE</a>
-    
-    <a href="https://wenqingfu.me/tags/python/">Python</a>
-    
-    <a href="https://wenqingfu.me/tags/software-engineering/">Software Engineering</a>
-    
+		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		var disqus_shortname = 'spf13';
+		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+</script>
+<noscript>Please enable JavaScript to view the </a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 </div>
-    </section>
-
-    
-<section class="widget">
-    <h3 class="widget-title">友情链接</h3>
-    <ul class="widget-list">
-        
-        <li>
-            <a target="_blank" href="https://dangfan.me" title="">有一说一</a>
-        </li>
-        
-        <li>
-            <a target="_blank" href="http://yanglei.me" title="">Yanglei&#39;s Blog</a>
-        </li>
-        
-        <li>
-            <a target="_blank" href="http://qiankanglai.me" title="">Loading &amp; Learning</a>
-        </li>
-        
-        <li>
-            <a target="_blank" href="http://ise.thss.tsinghua.edu.cn/sidb/people/~chenjun/" title="">Jun Chen&#39;s Homepage</a>
-        </li>
-        
-    </ul>
-</section>
-
-
-    <section class="widget">
-        <h3 class="widget-title">其它</h3>
-        <ul class="widget-list">
-            <li><a href="https://wenqingfu.me/index.xml">文章 RSS</a></li>
-        </ul>
-    </section>
+	</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div>2021  <a href="https://github.com/knadh/hugo-ink">Ink</a> theme on <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
 </div>
-        </div>
-    </div>
-</div>
-<footer id="footer">
-    <div class="container">
-        &copy; 2019 <a href="https://wenqingfu.me">Vince&#39;s Blog By Vince</a>.
-        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
-        Theme based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
-        
-    </div>
-</footer>
 
 
-    <script type="text/javascript">
-    
-    (function(){
-        $("pre code").parent().addClass("line-numbers")
-    }())
-
-    window.MathJax = {
-        tex2jax: {
-            inlineMath: [ ['$','$'] ],
-            processEscapes: true
-        }
-    };
-    </script>
-    <script type="text/javascript" src="/js/prism.js" async="true"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
-
-<a id="rocket" href="#top"></a>
-<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
-
-
-
-
-
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'Your tracking code', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
 
 </body>
 </html>

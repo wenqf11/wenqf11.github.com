@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>Posts | Vince&#39;s Blog</title>
+    <meta property="og:title" content="Posts - Vince&#39;s Blog">
+    <meta property="og:type" content="article">
+        
+        
+    <meta name="Keywords" content="博客,Vince,Blog">
+    <meta name="description" content="Posts">
+        
+    <meta name="author" content="Vince">
+    <meta property="og:url" content="https://wenqingfu.me/post/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <link rel="alternate" type="application/rss+xml" href="https://wenqingfu.me/post/index.xml" title="Vince's Blog" />
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+    
+    
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://wenqingfu.me">
+                        Vince&#39;s Blog
+                    </a>
+                
+                <p class="description">淡泊明志，宁静致远</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://wenqingfu.me">首页</a>
+                    
+                    <a  href="https://wenqingfu.me/archives/" title="存档">存档</a>
+                    
+                    <a  href="https://wenqingfu.me/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://wenqingfu.me/post/pe_file/" title="Python pefile 模块读写 PE 文件">Python pefile 模块读写 PE 文件</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2014年11月8日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/python'>Python</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            <h2 id="pe-文件">PE 文件</h2>
+<p>PE（&ldquo;portable executable&rdquo;，可移植的可执行文件）文件是 Windows 操作系统中常见的目标文件、库文件和可执行文件格式，常见的 EXE、DLL、OCX、SYS、COM 都是 PE 文件。深入地了解 PE 文件格式不仅是做一些 Windows hack 相关编程所必须的，同时对我们理解 Windows 系统的内部构造也有很大的帮助。</p>……
+        </div>
+        <p class="readmore"><a href="https://wenqingfu.me/post/pe_file/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://wenqingfu.me/post/masm_opencv/" title="我是如何用 MASM 汇编写摄像头控制程序的">我是如何用 MASM 汇编写摄像头控制程序的</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2014年4月21日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E6%B1%87%E7%BC%96'>汇编</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            <p>上周完成了汇编语言这门课程的大作业展示，总体来说做得还是挺满意的。我们小组做的是一个摄像头控制类似微信飞机大战的程序。我们不想只是简单做一个小游戏，希望能将摄像头也加入进来，做一些控制的事情，所以才有了这个项目。在这个项目中，我主要负责的用汇编语言实现摄像头控制，需哥和磊哥负责实现类飞机大战的游戏程序。这是与普通微信飞机大战的区别在于就是我们额外实现了可以用电脑摄像头捕捉人脸移动，对应到飞机的移动，从而实现控制飞机大战游戏。</p>……
+        </div>
+        <p class="readmore"><a href="https://wenqingfu.me/post/masm_opencv/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://wenqingfu.me/post/apache_proxy_reverse/" title="Apache反向代理实现转发">Apache反向代理实现转发</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2014年1月16日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8'>服务器</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            <p>这两天一直用 WordPress 在做一个网站，在部署网站的时候遇到了一些困难。服务器是 Windows Server 2008 的，之前上面已经有 Tomcat 了，现在想在 Apache 下来跑 WordPress。两台服务器同时监听80端口显然是不行的，很容易想到一台服务器监听80端口，另一台服务器监听另一个端口，比如说8080端口，然后通过转发来实现 Tomcat 和 Apache 并存。那么如何实现这种转发呢？反向代理！</p>……
+        </div>
+        <p class="readmore"><a href="https://wenqingfu.me/post/apache_proxy_reverse/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://wenqingfu.me/post/software-engineering-summary/" title="《软件工程》学习总结">《软件工程》学习总结</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2013年12月31日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E9%9A%8F%E7%AC%94'>随笔</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            <p>这个学期接近尾声，软工课也已经正式结课了，也该好好的给自己这个学期的软工学习做一个总结了。</p>
+<h2 id="软件工程工程化的软件开发思想">软件工程，工程化的软件开发思想</h2>
+<p>什么是软件工程？软件工程是研究和应用如何以系统性的、规范化的、可定量的过程化方法去开发和维护软件，以及如何把经过时间考验而证明正确的管理技术和当前能够得到的最好的技术方法结合起来的学科（摘自维基百科）。</p>……
+        </div>
+        <p class="readmore"><a href="https://wenqingfu.me/post/software-engineering-summary/">阅读全文</a></p>
+    </article>
+    
+    
+    
+
+
+
+<ol class="page-navigator">
+    
+    <li class="prev">
+        <a href="https://wenqingfu.me/post/">上一页</a>
+    </li>
+    
+
+    
+    <li >
+        <a href="https://wenqingfu.me/post/">1</a>
+    </li>
+    
+    <li  class="current">
+        <a href="https://wenqingfu.me/post/page/2/">2</a>
+    </li>
+    
+
+    
+</ol>
+
+
+
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2021 <a href="https://wenqingfu.me">Vince&#39;s Blog By Vince</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='//www.google.com/search' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://wenqingfu.me">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wenqingfu.me/post/my_reviews_2016/" title="别了，我的2016">别了，我的2016</a>
+    </li>
+    
+    <li>
+        <a href="https://wenqingfu.me/post/books_movies_2016/" title="2016 我的书单和影单">2016 我的书单和影单</a>
+    </li>
+    
+    <li>
+        <a href="https://wenqingfu.me/post/config-two-network-interfaces/" title="CentOS 上双网卡双 IP 配置，实现内网访问外网">CentOS 上双网卡双 IP 配置，实现内网访问外网</a>
+    </li>
+    
+    <li>
+        <a href="https://wenqingfu.me/post/install_acr122u_drivers_ubuntu/" title="Ubuntu 上安装 ACR122U 驱动">Ubuntu 上安装 ACR122U 驱动</a>
+    </li>
+    
+    <li>
+        <a href="https://wenqingfu.me/post/disaster_causeby_removing_openssl_in_centos5.5/" title="记一次 yum remove openssl 引发的灾难">记一次 yum remove openssl 引发的灾难</a>
+    </li>
+    
+    <li>
+        <a href="https://wenqingfu.me/post/say_something_about_my_2015/" title="说说我的2015">说说我的2015</a>
+    </li>
+    
+    <li>
+        <a href="https://wenqingfu.me/post/how-i-lose-weight-from-80-to-70/" title="我是如何从80减到70的">我是如何从80减到70的</a>
+    </li>
+    
+    <li>
+        <a href="https://wenqingfu.me/post/music_emotion_classification/" title="音乐情感分类">音乐情感分类</a>
+    </li>
+    
+    <li>
+        <a href="https://wenqingfu.me/post/my_reviews_2014/" title="回首我的2014">回首我的2014</a>
+    </li>
+    
+    <li>
+        <a href="https://wenqingfu.me/post/cache_coherency/" title="从一个神奇的Bug开始谈缓存一致性问题">从一个神奇的Bug开始谈缓存一致性问题</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://wenqingfu.me/categories/linux/">Linux (3)</a></li>
+    
+    <li><a href="https://wenqingfu.me/categories/python/">Python (1)</a></li>
+    
+    <li><a href="https://wenqingfu.me/categories/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/">体系结构 (1)</a></li>
+    
+    <li><a href="https://wenqingfu.me/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器 (1)</a></li>
+    
+    <li><a href="https://wenqingfu.me/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习 (1)</a></li>
+    
+    <li><a href="https://wenqingfu.me/categories/%E6%B1%87%E7%BC%96/">汇编 (1)</a></li>
+    
+    <li><a href="https://wenqingfu.me/categories/%E9%9A%8F%E7%AC%94/">随笔 (6)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://wenqingfu.me/tags/apache/">Apache</a>
+    
+    <a href="https://wenqingfu.me/tags/cache/">Cache</a>
+    
+    <a href="https://wenqingfu.me/tags/exercise/">Exercise</a>
+    
+    <a href="https://wenqingfu.me/tags/machine-learning/">Machine Learning</a>
+    
+    <a href="https://wenqingfu.me/tags/masm/">MASM</a>
+    
+    <a href="https://wenqingfu.me/tags/opencv/">OpenCV</a>
+    
+    <a href="https://wenqingfu.me/tags/pe/">PE</a>
+    
+    <a href="https://wenqingfu.me/tags/python/">Python</a>
+    
+    <a href="https://wenqingfu.me/tags/software-engineering/">Software Engineering</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://dangfan.me" title="">有一说一</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="http://yanglei.me" title="">Yanglei&#39;s Blog</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="http://qiankanglai.me" title="">Loading &amp; Learning</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="http://ise.thss.tsinghua.edu.cn/sidb/people/~chenjun/" title="">Jun Chen&#39;s Homepage</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://wenqingfu.me/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

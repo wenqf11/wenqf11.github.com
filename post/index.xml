@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Vince&#39;s Blog</title>
@@ -6,11 +6,7 @@
     <description>Recent content in Posts on Vince&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 30 Dec 2016 16:50:22 +0000</lastBuildDate>
-    
-	<atom:link href="https://wenqingfu.me/post/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 30 Dec 2016 16:50:22 +0000</lastBuildDate><atom:link href="https://wenqingfu.me/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>别了，我的2016</title>
       <link>https://wenqingfu.me/post/my_reviews_2016/</link>
@@ -18,7 +14,6 @@
       
       <guid>https://wenqingfu.me/post/my_reviews_2016/</guid>
       <description>&lt;p&gt;一年又过去了，希望自己可以每年都写一篇总结，曾子说“吾日三省吾身”，我做不到每天反省自己，但希望自己至少一年能总结一下自己。&lt;/p&gt;
-
 &lt;p&gt;过去的一年，对我来说，是最好的一年，也是最坏的的一年。在这一年里，我思考了很多，想明白了一些问题，也坚定了自己的目标。当然，我也失去了很多，有过很不开心的日子，有过无比郁闷的时候，但不管怎样我还是走过来了。&lt;/p&gt;</description>
     </item>
     
@@ -101,7 +96,6 @@
       
       <guid>https://wenqingfu.me/post/cache_coherency/</guid>
       <description>&lt;h2 id=&#34;引入&#34;&gt;引入&lt;/h2&gt;
-
 &lt;p&gt;前一段时间，我一直都在做一个软件保护的项目，上周一直都忙于&lt;a href=&#34;https://aicraft.net9.org/&#34;&gt;一个赛事&lt;/a&gt;的组织筹备工作，没有空闲写一点东西，这周才补上。我所做的工作主要就是对多个不同平台下的动态链接库进行加密，防止用户对其进行反汇编。在加密的流程中，有一个过程需要实现在内存中先解密代码段，然后再执行解密后的代码。显然，这里需要进行内存中代码段的读写操作。&lt;/p&gt;</description>
     </item>
     
@@ -112,8 +106,7 @@
       
       <guid>https://wenqingfu.me/post/pe_file/</guid>
       <description>&lt;h2 id=&#34;pe-文件&#34;&gt;PE 文件&lt;/h2&gt;
-
-&lt;p&gt;PE（&amp;rdquo;portable executable&amp;rdquo;，可移植的可执行文件）文件是 Windows 操作系统中常见的目标文件、库文件和可执行文件格式，常见的 EXE、DLL、OCX、SYS、COM 都是 PE 文件。深入地了解 PE 文件格式不仅是做一些 Windows hack 相关编程所必须的，同时对我们理解 Windows 系统的内部构造也有很大的帮助。&lt;/p&gt;</description>
+&lt;p&gt;PE（&amp;ldquo;portable executable&amp;rdquo;，可移植的可执行文件）文件是 Windows 操作系统中常见的目标文件、库文件和可执行文件格式，常见的 EXE、DLL、OCX、SYS、COM 都是 PE 文件。深入地了解 PE 文件格式不仅是做一些 Windows hack 相关编程所必须的，同时对我们理解 Windows 系统的内部构造也有很大的帮助。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -141,9 +134,7 @@
       
       <guid>https://wenqingfu.me/post/software-engineering-summary/</guid>
       <description>&lt;p&gt;这个学期接近尾声，软工课也已经正式结课了，也该好好的给自己这个学期的软工学习做一个总结了。&lt;/p&gt;
-
-&lt;h2 id=&#34;软件工程-工程化的软件开发思想&#34;&gt;软件工程，工程化的软件开发思想&lt;/h2&gt;
-
+&lt;h2 id=&#34;软件工程工程化的软件开发思想&#34;&gt;软件工程，工程化的软件开发思想&lt;/h2&gt;
 &lt;p&gt;什么是软件工程？软件工程是研究和应用如何以系统性的、规范化的、可定量的过程化方法去开发和维护软件，以及如何把经过时间考验而证明正确的管理技术和当前能够得到的最好的技术方法结合起来的学科（摘自维基百科）。&lt;/p&gt;</description>
     </item>
     

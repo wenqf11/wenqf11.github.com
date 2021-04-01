@@ -1,287 +1,211 @@
-<!doctype html>
-<html lang="zh-CN">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
 <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="Hugo 0.82.0" />
 
-    <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.54.0" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Python &middot; Vince&#39;s Blog</title>
 
-    <title>Python | Vince&#39;s Blog</title>
-    <meta property="og:title" content="Python - Vince&#39;s Blog">
-    <meta property="og:type" content="article">
+  <meta name="description" content="" />
+
+  
+
+<meta itemprop="name" content="Python">
+<meta itemprop="description" content="Vince&#39;s Blog">
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python"/>
+<meta name="twitter:description" content="Vince&#39;s Blog"/>
+
+
+<meta property="og:title" content="Python" />
+<meta property="og:description" content="Vince&#39;s Blog" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://wenqingfu.me/categories/python/" />
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type":"Person",
+      "@id": "https://wenqingfu.me#author",
+      "name":  null ,
+      "image": {
+        "@type":"ImageObject",
         
+        "url": "https://wenqingfu.me/images/profile.png"
         
-    <meta name="Keywords" content="博客,Vince,Blog">
-    <meta name="description" content="Python">
-        
-    <meta name="author" content="Vince">
-    <meta property="og:url" content="https://wenqingfu.me/categories/python/">
+      },
+      "description": "Vince's Blog"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://wenqingfu.me#website",
+      "url": "https://wenqingfu.me",
+      "name": "Vince's Blog",
+      "description": "Vince's Blog",
+      "publisher": {
+        "@id": "https://wenqingfu.me#author"
+      },
+      "inLanguage": "zh-CN"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://wenqingfu.me/categories/python/#webpage",
+      "url": "https://wenqingfu.me/categories/python/",
+      "name": "Python",
+      "isPartOf": {
+        "@id": "https://wenqingfu.me#website"
+      },
+      "about": {
+         "@id": "https://wenqingfu.me#author"
+      },
+      "dateModified": "2014-11-08T19:34:22+00:00",
+      "description": "Vince's Blog",
+      "inLanguage": "zh-CN",
+      "potentialAction": [
+        {
+          "@type": "ReadAction",
+          "target": [
+            "https://wenqingfu.me/categories/python/"
+          ]
+        }
+      ]
+    }
+  ]
+}
+</script>
 
-    <link rel="icon" type="image/png" href="/favicon.png" />
-
-    <link rel="stylesheet" href="/css/normalize.css">
-    
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="alternate" type="application/rss+xml+xml" href="https://wenqingfu.me/categories/python/index.xml" title="Vince's Blog" />
-    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-
-    
 
 
-    
-    
-</head>
+  <link type="text/css"
+        rel="stylesheet"
+        href="/css/print.css"
+        media="print">
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="/css/poole.css">
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="/css/hyde.css">
+
+  
 
 
+  
+
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&display=swap">
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+        integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
+        crossorigin="anonymous" />
+
+  <link rel="apple-touch-icon-precomposed"
+        sizes="144x144"
+        href="/apple-touch-icon-144-precomposed.png">
+
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="https://wenqingfu.me/categories/python/index.xml" rel="alternate" type="application/rss+xml" title="Vince's Blog" />
+  </head>
 <body>
-<header id="header" class="clearfix">
-    <div class="container">
-        <div class="col-group">
-            <div class="site-name ">
-                
-                    <a id="logo" href="https://wenqingfu.me">
-                        Vince&#39;s Blog
-                    </a>
-                
-                <p class="description">淡泊明志，宁静致远</p>
-            </div>
-            <div>
-                <nav id="nav-menu" class="clearfix">
-                    <a class="" href="https://wenqingfu.me">首页</a>
-                    
-                    <a  href="https://wenqingfu.me/archives/" title="存档">存档</a>
-                    
-                    <a  href="https://wenqingfu.me/about/" title="关于">关于</a>
-                    
-                </nav>
-            </div>
-        </div>
-    </div>
-</header>
-
-
-<div id="body">
-    <div class="container">
-        <div class="col-group">
-
-            <div class="col-8" id="main">
-                <div class="res-cons">
-                    
-                    <h3 class="archive-title">
-                        分类
-                        <span class="keyword">Python</span>
-                        中的文章
-                    </h3>
-                    
-
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wenqingfu.me/post/pe_file/">Python pefile 模块读写 PE 文件</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2014年11月8日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wenqingfu.me/categories/python">Python</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                <h2 id="pe-文件">PE 文件</h2>
-
-<p>PE（&rdquo;portable executable&rdquo;，可移植的可执行文件）文件是 Windows 操作系统中常见的目标文件、库文件和可执行文件格式，常见的 EXE、DLL、OCX、SYS、COM 都是 PE 文件。深入地了解 PE 文件格式不仅是做一些 Windows hack 相关编程所必须的，同时对我们理解 Windows 系统的内部构造也有很大的帮助。</p>……
-                                <p class="readmore"><a href="https://wenqingfu.me/post/pe_file/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
-
-                    
-
-
-
-
-                </div>
-            </div>
-
-            <div id="secondary">
-    <section class="widget">
-        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+  <aside class="sidebar">
+  <div class="container">
+    <div class="sidebar-about">
       
-      <input type="text" name="q" maxlength="20" placeholder="Search">
-      <input type="hidden" name="sitesearch" value="https://wenqingfu.me">
-      <button type="submit" class="submit icon-search"></button>
-</form>
-    </section>
-    
-    <section class="widget">
-        <h3 class="widget-title">最近文章</h3>
-<ul class="widget-list">
-    
-    <li>
-        <a href="https://wenqingfu.me/post/my_reviews_2016/" title="别了，我的2016">别了，我的2016</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/post/books_movies_2016/" title="2016 我的书单和影单">2016 我的书单和影单</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/post/config-two-network-interfaces/" title="CentOS 上双网卡双 IP 配置，实现内网访问外网">CentOS 上双网卡双 IP 配置，实现内网访问外网</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/post/install_acr122u_drivers_ubuntu/" title="Ubuntu 上安装 ACR122U 驱动">Ubuntu 上安装 ACR122U 驱动</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/post/disaster_causeby_removing_openssl_in_centos5.5/" title="记一次 yum remove openssl 引发的灾难">记一次 yum remove openssl 引发的灾难</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/post/say_something_about_my_2015/" title="说说我的2015">说说我的2015</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/post/how-i-lose-weight-from-80-to-70/" title="我是如何从80减到70的">我是如何从80减到70的</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/post/music_emotion_classification/" title="音乐情感分类">音乐情感分类</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/post/my_reviews_2014/" title="回首我的2014">回首我的2014</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/post/cache_coherency/" title="从一个神奇的Bug开始谈缓存一致性问题">从一个神奇的Bug开始谈缓存一致性问题</a>
-    </li>
-    
-</ul>
-    </section>
-
-    
-
-    <section class="widget">
-        <h3 class="widget-title">分类</h3>
-<ul class="widget-list">
-    
-    <li>
-        <a href="https://wenqingfu.me/categories/linux/">Linux(3)</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/categories/python/">Python(1)</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/categories/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/">体系结构(1)</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器(1)</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习(1)</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/categories/%E6%B1%87%E7%BC%96/">汇编(1)</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/categories/%E9%9A%8F%E7%AC%94/">随笔(6)</a>
-    </li>
-    
-</ul>
-    </section>
-
-    <section class="widget">
-        <h3 class="widget-title">标签</h3>
-<div class="tagcloud">
-    
-    <a href="https://wenqingfu.me/tags/apache/">Apache</a>
-    
-    <a href="https://wenqingfu.me/tags/cache/">Cache</a>
-    
-    <a href="https://wenqingfu.me/tags/exercise/">Exercise</a>
-    
-    <a href="https://wenqingfu.me/tags/masm/">MASM</a>
-    
-    <a href="https://wenqingfu.me/tags/machine-learning/">Machine Learning</a>
-    
-    <a href="https://wenqingfu.me/tags/opencv/">OpenCV</a>
-    
-    <a href="https://wenqingfu.me/tags/pe/">PE</a>
-    
-    <a href="https://wenqingfu.me/tags/python/">Python</a>
-    
-    <a href="https://wenqingfu.me/tags/software-engineering/">Software Engineering</a>
-    
-</div>
-    </section>
-
-    
-<section class="widget">
-    <h3 class="widget-title">友情链接</h3>
-    <ul class="widget-list">
         
-        <li>
-            <a target="_blank" href="https://dangfan.me" title="">有一说一</a>
-        </li>
-        
-        <li>
-            <a target="_blank" href="http://yanglei.me" title="">Yanglei&#39;s Blog</a>
-        </li>
-        
-        <li>
-            <a target="_blank" href="http://qiankanglai.me" title="">Loading &amp; Learning</a>
-        </li>
-        
-        <li>
-            <a target="_blank" href="http://ise.thss.tsinghua.edu.cn/sidb/people/~chenjun/" title="">Jun Chen&#39;s Homepage</a>
-        </li>
-        
-    </ul>
-</section>
-
-
-    <section class="widget">
-        <h3 class="widget-title">其它</h3>
-        <ul class="widget-list">
-            <li><a href="https://wenqingfu.me/index.xml">文章 RSS</a></li>
-        </ul>
-    </section>
-</div>
+        <div class="author-image">
+          <a href="https://wenqingfu.me">
+            <img src="/images/profile.png" class="img-circle img-headshot center" alt="Profile Picture">
+          </a>
         </div>
-    </div>
-</div>
-<footer id="footer">
-    <div class="container">
-        &copy; 2019 <a href="https://wenqingfu.me">Vince&#39;s Blog By Vince</a>.
-        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
-        Theme based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
         
+      
+
+      <h1>Vince&#39;s Blog</h1>
+
+      
+      <p class="lead">Vince&#39;s Blog</p>
+      
     </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li>
+          <a href="https://wenqingfu.me">Home</a>
+        </li>
+        <li>
+          <a href="/post/">文章</a>
+        </li><li>
+          <a href="/about/">关于</a>
+        </li>
+      </ul>
+    </nav>
+
+    <section class="social-icons">
+      
+      <a href="#" rel="me" title="Linkedin" target="_blank">
+        <i class="fab fa-linkedin" aria-hidden="true"></i>
+      </a>
+      
+      <a href="#" rel="me" title="GitHub" target="_blank">
+        <i class="fab fa-github" aria-hidden="true"></i>
+      </a>
+      
+      <a href="#" rel="me" title="Twitter" target="_blank">
+        <i class="fab fa-twitter" aria-hidden="true"></i>
+      </a>
+      
+    </section>
+  </div>
+</aside>
+
+
+  <main class="content container">
+  <ul class="posts">
+  <h1>Category: Python</h1>
+  <li>
+    <div class="flex">
+      <a href="https://wenqingfu.me/post/pe_file/" class="truncate">Python pefile 模块读写 PE 文件</a>
+      <time class="nowrap" datetime="2014-11-08T19:34:22Z">Nov 8, 2014</time>
+    </div>
+  </li>
+</ul>
+  </main>
+
+  <footer>
+  <div>
+    <p>
+      &copy; Author Name 2021
+
+      &middot; <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank">CC BY-SA 4.0</a>
+
+      
+    </p>
+  </div>
 </footer>
 
 
-<a id="rocket" href="#top"></a>
-<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js"
+          integrity="sha256-MAgcygDRahs+F/Nk5Vz387whB4kSK9NXlDN3w58LLq0="
+          crossorigin="anonymous"></script>
 
 
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/soho.js"></script>
 
+  
 
-
-
-
+  
 </body>
 </html>

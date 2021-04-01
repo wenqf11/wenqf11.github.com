@@ -1,373 +1,172 @@
-<!doctype html>
-<html lang="zh-CN">
+<!DOCTYPE html>
+<html>
 <head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>音乐情感分类 - Vince&#39;s Blog</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta itemprop="name" content="音乐情感分类">
+<meta itemprop="description" content="刚上完了王朝坤老师《数字媒体（2）》音频技术部分的课程，做了一个音乐情感分类的实验，特写出来分享一下。"><meta itemprop="datePublished" content="2015-01-09T21:51:22&#43;00:00" />
+<meta itemprop="dateModified" content="2015-01-09T21:51:22&#43;00:00" />
+<meta itemprop="wordCount" content="990">
+<meta itemprop="keywords" content="Machine Learning," /><meta property="og:title" content="音乐情感分类" />
+<meta property="og:description" content="刚上完了王朝坤老师《数字媒体（2）》音频技术部分的课程，做了一个音乐情感分类的实验，特写出来分享一下。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://wenqingfu.me/post/music_emotion_classification/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2015-01-09T21:51:22&#43;00:00" />
+<meta property="article:modified_time" content="2015-01-09T21:51:22&#43;00:00" />
 
-    <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.54.0" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="音乐情感分类"/>
+<meta name="twitter:description" content="刚上完了王朝坤老师《数字媒体（2）》音频技术部分的课程，做了一个音乐情感分类的实验，特写出来分享一下。"/>
+<link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" media="screen" href="https://wenqingfu.mecss/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://wenqingfu.mecss/main.css" />
 
-    <title>音乐情感分类 | Vince&#39;s Blog</title>
-    <meta property="og:title" content="音乐情感分类 - Vince&#39;s Blog">
-    <meta property="og:type" content="article">
-        
-    <meta property="article:published_time" content="2015-01-09T21:51:22&#43;08:00">
-        
-        
-    <meta property="article:modified_time" content="2015-01-09T21:51:22&#43;08:00">
-        
-    <meta name="Keywords" content="博客,Vince,Blog">
-    <meta name="description" content="音乐情感分类">
-        
-    <meta name="author" content="Vince">
-    <meta property="og:url" content="https://wenqingfu.me/post/music_emotion_classification/">
+        <link id="dark-scheme" rel="stylesheet" type="text/css" href="https://wenqingfu.mecss/dark.css" />
 
-    <link rel="icon" type="image/png" href="/favicon.png" />
-
-    <link rel="stylesheet" href="/css/normalize.css">
-    
-        <link rel="stylesheet" href="/css/prism.css">
-    
-    <link rel="stylesheet" href="/css/style.css">
-    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-
-    
-
-
-    
-    
+	
+		<script src="https://wenqingfu.mejs/main.js"></script>
 </head>
 
 <body>
-<header id="header" class="clearfix">
-    <div class="container">
-        <div class="col-group">
-            <div class="site-name ">
-                
-                    <a id="logo" href="https://wenqingfu.me">
-                        Vince&#39;s Blog
-                    </a>
-                
-                <p class="description">淡泊明志，宁静致远</p>
-            </div>
-            <div>
-                <nav id="nav-menu" class="clearfix">
-                    <a class="current" href="https://wenqingfu.me">首页</a>
-                    
-                    <a  href="https://wenqingfu.me/archives/" title="存档">存档</a>
-                    
-                    <a  href="https://wenqingfu.me/about/" title="关于">关于</a>
-                    
-                </nav>
-            </div>
-        </div>
-    </div>
-</header>
+	<div class="container wrapper">
+		<div class="header">
+	
+	<h1 class="site-title"><a href="https://wenqingfu.me">Vince&#39;s Blog</a></h1>
+	<div class="site-description"><p>淡泊明志，宁静致远</p><nav class="nav social">
+			<ul class="flat"></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/post/">Posts</a>
+			</li>
+			
+			<li>
+				<a href="/categories/">Categories</a>
+			</li>
+			
+			<li>
+				<a href="/tags/">Tags</a>
+			</li>
+			
+			<li>
+				<a href="/about/">About</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
 
 
-<div id="body">
-    <div class="container">
-        <div class="col-group">
-
-            <div class="col-8" id="main">
-                <div class="res-cons">
-                    <article class="post">
-                        <header>
-                            <h1 class="post-title">音乐情感分类</h1>
-                        </header>
-                        <date class="post-meta meta-date">
-                            2015年1月9日
-                        </date>
-                        
-                        <div class="post-meta">
-                            <span>|</span>
-                            
-                                <span class="meta-category"><a href="https://wenqingfu.me/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0">机器学习</a></span>
-                            
-                        </div>
-                        
-                        
-                        <div class="post-content">
-                            <p>刚上完了<a href="http://learn.tsinghua.edu.cn:8080/2006990024/index.htm">王朝坤</a>老师《数字媒体（2）》音频技术部分的课程，做了一个音乐情感分类的实验，特写出来分享一下。</p>
-
+		<div class="post">
+			<div class="post-header">
+				
+					<div class="meta">
+						<div class="date">
+							<span class="day">09</span>
+							<span class="rest">Jan 2015</span>
+						</div>
+					</div>
+				
+				<div class="matter">
+					<h1 class="title">音乐情感分类</h1>
+				</div>
+			</div>
+					
+			<div class="markdown">
+				<p>刚上完了<a href="http://learn.tsinghua.edu.cn:8080/2006990024/index.htm">王朝坤</a>老师《数字媒体（2）》音频技术部分的课程，做了一个音乐情感分类的实验，特写出来分享一下。</p>
 <h2 id="实验要求简介">实验要求简介</h2>
-
 <p>实验的任务就是对给定的音乐片段进行情感分类。实验要求输入一个音乐片段（mp3 格式），输出该音乐片段的情感标签。本实验中所有音乐片段的情感标签包括 Happy、 Sad、 Tender、 Fear、 Anger、 Surprise 一共 6 种。提供的数据为有标数据，每种情感类型包括 20 个音乐短片段（ MP3 格式），即每个音乐片段已知其情感标签。本实验的评价指标为分类结果的准确度，即 #Right / (#Right + #Wrong)，以及算法的创新性。建议将提供的有标数据划分成多份，便于进行交叉验证。</p>
-
 <h2 id="mfcc-特征提取">MFCC 特征提取</h2>
-
 <p>根据老师课上的介绍的内容以及查阅网上的资料，最终决定提取 <a href="http://zh.wikipedia.org/wiki/%E6%A2%85%E5%B0%94%E9%A2%91%E7%8E%87%E5%80%92%E8%B0%B1%E7%B3%BB%E6%95%B0">MFCC</a> 特征。
 在本次实验中，每 50ms 的讯框（Frame）提取一个 13 维的 MFCC 特征，一段音频可以提取到约 400 个的 MFCC 特征。</p>
-
 <h2 id="bow-特征表示">BoW 特征表示</h2>
-
 <p>由于上面每个音频提取的 MFCC 数量不一，不便于做后续的分类，故需要将他们用等维度的特征来表示。
 词袋模型（<a href="http://en.wikipedia.org/wiki/Bag-of-words_model">Bag of Words</a>）是信息检索领域常用的模型之一。针对所有的特征进行聚类，得到具有代表性的 K 个词汇。将这 K 个词汇建立 k-d tree 高维索引，然后将每个 MFCC 特征在 K 个词汇上找到距离最近的词汇，从而每段音频的 MFCCs 都能映射到 K 维的向量上，得到一个 K 维的向量表示。
 在本次实验中，总共有约 47000 个 MFCC 特征，聚类中心 K 分别取 1000， 5000 进行实验。</p>
-
 <h2 id="multi-svm-训练">Multi-SVM 训练</h2>
-
 <p>在 BoW 的基础上，以及加上原有的标注类别，这样我们就可以利用 SVM 模型进行训练以及分类预测。我们知道，SVM 原本是用来解决二分类问题的，但是此处我们需要解决的是一个多分类的问题。我们采用最简单的 “1-V-R” 方式，就是每次仍然解一个二分类的问题。比如我们有 6 个类别，首先把类别 1 的样本定为正样本，其余的样本合起来定为负样本，得到一个二分类器，它能够指出新的样本是不是第 1 类的；然后我们把类别 2 的样本定为正样本，把 1、 3、 4、 5、 6 的样本合起来定为负样本，得到一个分类器，如此下去，最终可以得到 6 个这样的二分类器。</p>
-
 <h2 id="实验环境与工具">实验环境与工具</h2>
-
 <ul>
 <li>Windows 8(6G RAM, 4-core CPU)</li>
 <li>MATLAB 2012b</li>
 <li>MIRtoolbox 1.6.1</li>
 <li>VLFeat 0.9.17</li>
 </ul>
-
 <h2 id="实验结果">实验结果</h2>
-
 <p>本实验采用自己写的算法与 MIRtoolbox 自带的分类算法比较，都是采用交叉验证的方式得出的实验结果。其中 mirclassify1 是直接调用 mirclassify 函数，而 mirclassify2 是 mirclassify+GMM 模型。MFCC-1000 表示本次实现算法， 聚类中心 1000，采用 6 折交叉验证。同理，MFCC-5000 表示聚类中心为 5000。</p>
-
 <table>
 <thead>
 <tr>
-<th align="center">Methods</th>
-<th align="center">mirclassify1</th>
-<th align="center">mirclassify2</th>
-<th align="center">MFCC-1000</th>
-<th align="center">MFCC-5000</th>
+<th style="text-align:center">Methods</th>
+<th style="text-align:center">mirclassify1</th>
+<th style="text-align:center">mirclassify2</th>
+<th style="text-align:center">MFCC-1000</th>
+<th style="text-align:center">MFCC-5000</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
-<td align="center">AP</td>
-<td align="center">0.34</td>
-<td align="center">0.33</td>
-<td align="center">0.25</td>
-<td align="center">0.243</td>
+<td style="text-align:center">AP</td>
+<td style="text-align:center">0.34</td>
+<td style="text-align:center">0.33</td>
+<td style="text-align:center">0.25</td>
+<td style="text-align:center">0.243</td>
 </tr>
 </tbody>
 </table>
-
 <h2 id="实验代码与数据">实验代码与数据</h2>
-
 <p>下载链接 <a href="http://pan.baidu.com/s/1bnfbdkb">http://pan.baidu.com/s/1bnfbdkb</a></p>
-                        </div>
+			</div>
 
-                        
+			<div class="tags">
+				
+					
+						<ul class="flat">
+							
+							<li><a href="/tags/machine-learning">Machine Learning</a></li>
+							
+						</ul>
+					
+				
+			</div><div id="disqus_thread"></div>
+<script type="text/javascript">
+	(function () {
+		
+		
+		if (window.location.hostname == "localhost")
+			return;
 
-
-                        
-
-                        <div class="post-meta meta-tags">
-                            
-                            <ul class="clearfix">
-                                
-                                <li><a href="https://wenqingfu.me/tags/machine-learning">Machine Learning</a></li>
-                                
-                            </ul>
-                            
-                        </div>
-                    </article>
-                    
-    
-
-    
-    
-    <div class="post bg-white">
-      <script src="https://utteranc.es/client.js"
-            repo= "wenqf11/blog-comments"
-            issue-term="pathname"
-            theme="github-light"
-            crossorigin="anonymous"
-            async>
-      </script>
-    </div>
-    
-                </div>
-            </div>
-            <div id="secondary">
-    <section class="widget">
-        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
-      
-      <input type="text" name="q" maxlength="20" placeholder="Search">
-      <input type="hidden" name="sitesearch" value="https://wenqingfu.me">
-      <button type="submit" class="submit icon-search"></button>
-</form>
-    </section>
-    
-    <section class="widget">
-        <h3 class="widget-title">最近文章</h3>
-<ul class="widget-list">
-    
-    <li>
-        <a href="https://wenqingfu.me/post/my_reviews_2016/" title="别了，我的2016">别了，我的2016</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/post/books_movies_2016/" title="2016 我的书单和影单">2016 我的书单和影单</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/post/config-two-network-interfaces/" title="CentOS 上双网卡双 IP 配置，实现内网访问外网">CentOS 上双网卡双 IP 配置，实现内网访问外网</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/post/install_acr122u_drivers_ubuntu/" title="Ubuntu 上安装 ACR122U 驱动">Ubuntu 上安装 ACR122U 驱动</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/post/disaster_causeby_removing_openssl_in_centos5.5/" title="记一次 yum remove openssl 引发的灾难">记一次 yum remove openssl 引发的灾难</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/post/say_something_about_my_2015/" title="说说我的2015">说说我的2015</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/post/how-i-lose-weight-from-80-to-70/" title="我是如何从80减到70的">我是如何从80减到70的</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/post/music_emotion_classification/" title="音乐情感分类">音乐情感分类</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/post/my_reviews_2014/" title="回首我的2014">回首我的2014</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/post/cache_coherency/" title="从一个神奇的Bug开始谈缓存一致性问题">从一个神奇的Bug开始谈缓存一致性问题</a>
-    </li>
-    
-</ul>
-    </section>
-
-    
-
-    <section class="widget">
-        <h3 class="widget-title">分类</h3>
-<ul class="widget-list">
-    
-    <li>
-        <a href="https://wenqingfu.me/categories/linux/">Linux(3)</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/categories/python/">Python(1)</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/categories/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/">体系结构(1)</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器(1)</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习(1)</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/categories/%E6%B1%87%E7%BC%96/">汇编(1)</a>
-    </li>
-    
-    <li>
-        <a href="https://wenqingfu.me/categories/%E9%9A%8F%E7%AC%94/">随笔(6)</a>
-    </li>
-    
-</ul>
-    </section>
-
-    <section class="widget">
-        <h3 class="widget-title">标签</h3>
-<div class="tagcloud">
-    
-    <a href="https://wenqingfu.me/tags/apache/">Apache</a>
-    
-    <a href="https://wenqingfu.me/tags/cache/">Cache</a>
-    
-    <a href="https://wenqingfu.me/tags/exercise/">Exercise</a>
-    
-    <a href="https://wenqingfu.me/tags/masm/">MASM</a>
-    
-    <a href="https://wenqingfu.me/tags/machine-learning/">Machine Learning</a>
-    
-    <a href="https://wenqingfu.me/tags/opencv/">OpenCV</a>
-    
-    <a href="https://wenqingfu.me/tags/pe/">PE</a>
-    
-    <a href="https://wenqingfu.me/tags/python/">Python</a>
-    
-    <a href="https://wenqingfu.me/tags/software-engineering/">Software Engineering</a>
-    
+		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		var disqus_shortname = 'spf13';
+		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+</script>
+<noscript>Please enable JavaScript to view the </a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 </div>
-    </section>
-
-    
-<section class="widget">
-    <h3 class="widget-title">友情链接</h3>
-    <ul class="widget-list">
-        
-        <li>
-            <a target="_blank" href="https://dangfan.me" title="">有一说一</a>
-        </li>
-        
-        <li>
-            <a target="_blank" href="http://yanglei.me" title="">Yanglei&#39;s Blog</a>
-        </li>
-        
-        <li>
-            <a target="_blank" href="http://qiankanglai.me" title="">Loading &amp; Learning</a>
-        </li>
-        
-        <li>
-            <a target="_blank" href="http://ise.thss.tsinghua.edu.cn/sidb/people/~chenjun/" title="">Jun Chen&#39;s Homepage</a>
-        </li>
-        
-    </ul>
-</section>
-
-
-    <section class="widget">
-        <h3 class="widget-title">其它</h3>
-        <ul class="widget-list">
-            <li><a href="https://wenqingfu.me/index.xml">文章 RSS</a></li>
-        </ul>
-    </section>
+	</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div>2021  <a href="https://github.com/knadh/hugo-ink">Ink</a> theme on <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
 </div>
-        </div>
-    </div>
-</div>
-<footer id="footer">
-    <div class="container">
-        &copy; 2019 <a href="https://wenqingfu.me">Vince&#39;s Blog By Vince</a>.
-        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
-        Theme based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
-        
-    </div>
-</footer>
 
 
-    <script type="text/javascript">
-    
-    (function(){
-        $("pre code").parent().addClass("line-numbers")
-    }())
-
-    window.MathJax = {
-        tex2jax: {
-            inlineMath: [ ['$','$'] ],
-            processEscapes: true
-        }
-    };
-    </script>
-    <script type="text/javascript" src="/js/prism.js" async="true"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
-
-<a id="rocket" href="#top"></a>
-<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
-
-
-
-
-
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'Your tracking code', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
 
 </body>
 </html>
