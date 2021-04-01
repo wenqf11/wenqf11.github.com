@@ -1,107 +1,252 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
 <head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Apache反向代理实现转发 - Vince&#39;s Blog</title><meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta itemprop="name" content="Apache反向代理实现转发">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="Hugo 0.82.0" />
+
+  <title>Apache反向代理实现转发 &middot; Vince&#39;s Blog</title>
+
+  <meta name="description" content="" />
+
+  
+
+<meta itemprop="name" content="Apache反向代理实现转发">
 <meta itemprop="description" content="这两天一直用 WordPress 在做一个网站，在部署网站的时候遇到了一些困难。服务器是 Windows Server 2008 的，之前上面已经有 Tomcat 了，现在想在 Apache 下来跑 WordPress。两台服务器同时监听80端口显然是不行的，很容易想到一台服务器监听80端口，另一台服务器监听另一个端口，比如说8080端口，然后通过转发来实现 Tomcat 和 Apache 并存。那么如何实现这种转发呢？反向代理！"><meta itemprop="datePublished" content="2014-01-16T22:19:57&#43;00:00" />
 <meta itemprop="dateModified" content="2014-01-16T22:19:57&#43;00:00" />
-<meta itemprop="wordCount" content="813">
-<meta itemprop="keywords" content="Apache," /><meta property="og:title" content="Apache反向代理实现转发" />
-<meta property="og:description" content="这两天一直用 WordPress 在做一个网站，在部署网站的时候遇到了一些困难。服务器是 Windows Server 2008 的，之前上面已经有 Tomcat 了，现在想在 Apache 下来跑 WordPress。两台服务器同时监听80端口显然是不行的，很容易想到一台服务器监听80端口，另一台服务器监听另一个端口，比如说8080端口，然后通过转发来实现 Tomcat 和 Apache 并存。那么如何实现这种转发呢？反向代理！" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://wenqingfu.me/post/apache_proxy_reverse/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2014-01-16T22:19:57&#43;00:00" />
-<meta property="article:modified_time" content="2014-01-16T22:19:57&#43;00:00" />
+<meta itemprop="wordCount" content="813"><meta itemprop="image" content="https://wenqingfu.me/images/profile.jpg"/>
+<meta itemprop="keywords" content="Apache," />
 
-<meta name="twitter:card" content="summary"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://wenqingfu.me/images/profile.jpg"/>
+
 <meta name="twitter:title" content="Apache反向代理实现转发"/>
 <meta name="twitter:description" content="这两天一直用 WordPress 在做一个网站，在部署网站的时候遇到了一些困难。服务器是 Windows Server 2008 的，之前上面已经有 Tomcat 了，现在想在 Apache 下来跑 WordPress。两台服务器同时监听80端口显然是不行的，很容易想到一台服务器监听80端口，另一台服务器监听另一个端口，比如说8080端口，然后通过转发来实现 Tomcat 和 Apache 并存。那么如何实现这种转发呢？反向代理！"/>
-<link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" type="text/css" media="screen" href="https://wenqingfu.me/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="https://wenqingfu.me/css/main.css" />
 
-        <link id="dark-scheme" rel="stylesheet" type="text/css" href="https://wenqingfu.me/css/dark.css" />
 
-	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-		<script src="https://wenqingfu.me/js/main.js"></script>
-</head>
+<meta property="og:title" content="Apache反向代理实现转发" />
+<meta property="og:description" content="这两天一直用 WordPress 在做一个网站，在部署网站的时候遇到了一些困难。服务器是 Windows Server 2008 的，之前上面已经有 Tomcat 了，现在想在 Apache 下来跑 WordPress。两台服务器同时监听80端口显然是不行的，很容易想到一台服务器监听80端口，另一台服务器监听另一个端口，比如说8080端口，然后通过转发来实现 Tomcat 和 Apache 并存。那么如何实现这种转发呢？反向代理！" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://wenqingfu.me/post/apache_proxy_reverse/" /><meta property="og:image" content="https://wenqingfu.me/images/profile.jpg"/><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2014-01-16T22:19:57&#43;00:00" />
+<meta property="article:modified_time" content="2014-01-16T22:19:57&#43;00:00" /><meta property="og:site_name" content="Vince&#39;s Blog" />
 
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type":"Person",
+      "@id": "https://wenqingfu.me/#author",
+      "name":  null ,
+      "image": {
+        "@type":"ImageObject",
+        
+        "url": "https://wenqingfu.me/images/profile.jpg"
+        
+      },
+      "description": "淡泊明志，宁静致远"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://wenqingfu.me/#website",
+      "url": "https://wenqingfu.me/",
+      "name": "Vince's Blog",
+      "description": "淡泊明志，宁静致远",
+      "publisher": {
+        "@id": "https://wenqingfu.me/#author"
+      },
+      "inLanguage": "zh-CN"
+    },
+    {
+      "@type": "ImageObject",
+      "url": "https://wenqingfu.me/images/profile.jpg",
+      "caption": "Vince's Blog"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://wenqingfu.me/post/apache_proxy_reverse/#webpage",
+      "url": "https://wenqingfu.me/post/apache_proxy_reverse/",
+      "name": "Apache反向代理实现转发",
+      "isPartOf": {
+        "@id": "https://wenqingfu.me/#website"
+      },
+      "about": {
+         "@id": "https://wenqingfu.me/#author"
+      },
+      "datePublished": "2014-01-16T22:19:57+00:00",
+      "dateModified": "2014-01-16T22:19:57+00:00",
+      "description": "\u003cp\u003e这两天一直用 WordPress 在做一个网站，在部署网站的时候遇到了一些困难。服务器是 Windows Server 2008 的，之前上面已经有 Tomcat 了，现在想在 Apache 下来跑 WordPress。两台服务器同时监听80端口显然是不行的，很容易想到一台服务器监听80端口，另一台服务器监听另一个端口，比如说8080端口，然后通过转发来实现 Tomcat 和 Apache 并存。那么如何实现这种转发呢？反向代理！\u003c/p\u003e",
+      "inLanguage": "zh-CN",
+      "potentialAction": [
+        {
+          "@type": "ReadAction",
+          "target": [
+            "https://wenqingfu.me/post/apache_proxy_reverse/"
+          ]
+        }
+      ]
+    },
+    {
+      "@type": "Article",
+      "isPartOf": {
+        "@id": "https://wenqingfu.me/post/apache_proxy_reverse/#webpage"
+      },
+      "mainEntityOfPage": {
+        "@id": "https://wenqingfu.me/post/apache_proxy_reverse/#webpage"
+      },
+      "headline": "Apache反向代理实现转发",
+      "datePublished": "2014-01-16T22:19:57+00:00",
+      "dateModified": "2014-01-16T22:19:57+00:00",
+      "publisher": {
+        "@id": "https://wenqingfu.me/#author"
+      },
+      "keywords": [
+        "Apache"
+      ],
+      "articleSection": [
+        "服务器"
+      ],
+      "inLanguage": "zh-CN",
+      "author": {
+        "@type": "Person",
+        "name":  null 
+      },
+      "potentialAction": [
+        {
+          "@type": "CommentAction",
+          "name": "Comment",
+          "target": [
+            "https://wenqingfu.me/post/apache_proxy_reverse/#comments"
+          ]
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="/css/print.css"
+        media="print">
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="/css/poole.css">
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="/css/hyde.css">
+
+  
+
+
+  
+
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&display=swap">
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+        integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
+        crossorigin="anonymous" />
+
+  <link rel="apple-touch-icon-precomposed"
+        sizes="144x144"
+        href="/apple-touch-icon-144-precomposed.png">
+
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  </head>
 <body>
-	<div class="container wrapper">
-		<div class="header">
-	
-		<div class="avatar">
-			<a href="https://wenqingfu.me/">
-				<img src="https://image.freepik.com/free-vector/young-man-head-with-beard-avatar-character_24877-36786.jpg" alt="Vince&#39;s Blog" />
-			</a>
-		</div>
-	
-	<h1 class="site-title"><a href="https://wenqingfu.me/">Vince&#39;s Blog</a></h1>
-	<div class="site-description"><p>淡泊明志，宁静致远</p><nav class="nav social">
-			<ul class="flat"><li><a href="https://github.com/wenqf11" title="GitHub"><i data-feather="github"></i></a></li><li><a href="https://www.linkedin.com/in/wenqingfu" title="Linkedin"><i data-feather="linkedin"></i></a></li><li><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></li><li><a href="#" class="scheme-toggle" id="scheme-toggle"></a></li></ul>
-		</nav>
-	</div>
+  <aside class="sidebar">
+  <div class="container">
+    <div class="sidebar-about">
+      
+        
+        <div class="author-image">
+          <a href="https://wenqingfu.me/">
+            <img src="/images/profile.jpg" class="img-circle img-headshot center" alt="Profile Picture">
+          </a>
+        </div>
+        
+      
 
-	<nav class="nav">
-		<ul class="flat">
-			
-			<li>
-				<a href="/">首页</a>
-			</li>
-			
-			<li>
-				<a href="/post">文章</a>
-			</li>
-			
-			<li>
-				<a href="/about">关于</a>
-			</li>
-			
-			<li>
-				<a href="/categories">分类</a>
-			</li>
-			
-			<li>
-				<a href="/tags">标签</a>
-			</li>
-			
-		</ul>
-	</nav>
-</div>
+      <h1>Vince&#39;s Blog</h1>
+
+      
+      <p class="lead">淡泊明志，宁静致远</p>
+      
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li>
+          <a href="https://wenqingfu.me/">Home</a>
+        </li>
+        <li>
+          <a href="/categories/">Categories</a>
+        </li><li>
+          <a href="/tags/">Tags</a>
+        </li><li>
+          <a href="/post/">Posts</a>
+        </li><li>
+          <a href="/about/">About</a>
+        </li>
+      </ul>
+    </nav>
+
+    <section class="social-icons">
+      
+      <a href="http://weibo.com/wenqf11" rel="me" title="Weibo" target="_blank">
+        <i class="fab fa-weibo" aria-hidden="true"></i>
+      </a>
+      
+      <a href="https://www.linkedin.com/in/wenqingfu" rel="me" title="Linkedin" target="_blank">
+        <i class="fab fa-linkedin" aria-hidden="true"></i>
+      </a>
+      
+      <a href="https://github.com/wenqf11" rel="me" title="GitHub" target="_blank">
+        <i class="fab fa-github" aria-hidden="true"></i>
+      </a>
+      
+    </section>
+  </div>
+</aside>
 
 
-		<div class="post">
-			<div class="post-header">
-				
-					<div class="meta">
-						<div class="date">
-							<span class="day">16</span>
-							<span class="rest">Jan 2014</span>
-						</div>
-					</div>
-				
-				<div class="matter">
-					<h1 class="title">Apache反向代理实现转发</h1>
-				</div>
-			</div>
-					
-			<div class="markdown">
-				<p>这两天一直用 WordPress 在做一个网站，在部署网站的时候遇到了一些困难。服务器是 Windows Server 2008 的，之前上面已经有 Tomcat 了，现在想在 Apache 下来跑 WordPress。两台服务器同时监听80端口显然是不行的，很容易想到一台服务器监听80端口，另一台服务器监听另一个端口，比如说8080端口，然后通过转发来实现 Tomcat 和 Apache 并存。那么如何实现这种转发呢？反向代理！</p>
+  <main class="content container">
+  <div class="post">
+  <h1 class="title">Apache反向代理实现转发</h1>
+  
+
+  <div class="post-date">
+    <time datetime="2014-01-16T22:19:57Z">Jan 16, 2014</time> <span class="readtime">&middot; 2 min read</span>
+  </div>
+
+  <div>
+  <p>这两天一直用 WordPress 在做一个网站，在部署网站的时候遇到了一些困难。服务器是 Windows Server 2008 的，之前上面已经有 Tomcat 了，现在想在 Apache 下来跑 WordPress。两台服务器同时监听80端口显然是不行的，很容易想到一台服务器监听80端口，另一台服务器监听另一个端口，比如说8080端口，然后通过转发来实现 Tomcat 和 Apache 并存。那么如何实现这种转发呢？反向代理！</p>
 <p>什么是反向代理？反向代理的意思就是用代理服务器来接受客户端的连接请求，然后将请求转发给的另一台服务器，并将从服务器上得到的结果返回给internet上请求连接的客户端。说白了就是 A 向 B 发起 http 请求，B 将请求转给 C，从C获取到内容，然后返回给 A，这时候 A 只知道内容是从 B 那里来的，不知道是不是经过转发什么的。</p>
 <p>apache 下如何配置反向代理呢？首先在http.conf文件中开启下面四个模块，即去掉前面的#注释。</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">LoadModule proxy_module modules/mod_proxy.so
+<pre><code>LoadModule proxy_module modules/mod_proxy.so
 LoadModule proxy_connect_module modules/mod_proxy_connect.so
 LoadModule proxy_ftp_module modules/mod_proxy_ftp.so
 LoadModule proxy_http_module modules/mod_proxy_http.so
-</code></pre></div><p>下面开启反向代理</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ProxyRequests Off  #开启反向代理 
+</code></pre><p>下面开启反向代理</p>
+<pre><code>ProxyRequests Off  #开启反向代理 
 &lt;Proxy *&gt;  #允许所有访问者使用反向代理
 Order deny,allow
 Allow from all
 &lt;Proxy&gt;
-</code></pre></div><p>之后需要建立虚拟主机，这样可以在同一台机器搭建属于不同域名或者不同 IP 的多个网站服务的技术. 可以为运行在同一物理机器上的各个网站指配不同的 IP 和端口, 也可让多个网站拥有不同的域名。 可以通过Include conf/extra/httpd-vhosts.conf，然后修改httpd-vhosts.conf文件来实现。</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">NameVirtualHost *:80
+</code></pre><p>之后需要建立虚拟主机，这样可以在同一台机器搭建属于不同域名或者不同 IP 的多个网站服务的技术. 可以为运行在同一物理机器上的各个网站指配不同的 IP 和端口, 也可让多个网站拥有不同的域名。 可以通过Include conf/extra/httpd-vhosts.conf，然后修改httpd-vhosts.conf文件来实现。</p>
+<pre><code>NameVirtualHost *:80
 
 &lt;VirtualHost *:80&gt; 
 ProxyPreserveHost On 
@@ -125,46 +270,105 @@ Allow from all
 ErrorLog “logs/2-error.log”
 CustomLog “logs/2-access.log” common
 &lt;VirtualHost&gt;
-</code></pre></div><p>Apache 在接受到请求时，首先会默认第一个VirtualHost，然后再找匹配的，如果没有匹配的，就是第一个VirtualHost起作用。上面的设置virtualhost 均为80，通过域名的不同来区分。最后让原有的服务器 Tomcat 监听8080端口即可实现二者并存。</p>
+</code></pre><p>Apache 在接受到请求时，首先会默认第一个VirtualHost，然后再找匹配的，如果没有匹配的，就是第一个VirtualHost起作用。上面的设置virtualhost 均为80，通过域名的不同来区分。最后让原有的服务器 Tomcat 监听8080端口即可实现二者并存。</p>
 <p>参考网址：</p>
 <p><a href="http://www.cnblogs.com/zemliu/archive/2012/04/18/2454655.html">http://www.cnblogs.com/zemliu/archive/2012/04/18/2454655.html</a></p>
 <p><a href="http://www.cnblogs.com/zemliu/archive/2012/04/18/2454655.html">http://www.cnblogs.com/wpjsolo/archive/2012/01/19/2327457.html</a></p>
-			</div>
+  </div>
 
-			<div class="tags">
-				
-					
-						<ul class="flat">
-							
-							<li><a href="/tags/apache">Apache</a></li>
-							
-						</ul>
-					
-				
-			</div><div id="disqus_thread"></div>
-<script type="text/javascript">
-	(function () {
-		
-		
-		if (window.location.hostname == "localhost")
-			return;
+  
+<div>
+  <ul class="tags">
+  <li>
+    <a href="https://wenqingfu.me/tags/apache/" class="tag-link">Apache</a>
+  </li>
+  </ul>
+</div>
 
-		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-		var disqus_shortname = 'wenqf11';
-		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-	})();
+
+
+  <div class="share-buttons">
+  <a class="twitter-share-button"
+     href="#"
+     title="Share on Twitter"
+     data-url="https://wenqingfu.me/post/apache_proxy_reverse/"
+     data-text="Apache反向代理实现转发"><i class="fab fa-twitter"></i></a>
+
+  <a class="linkedin-share-button"
+     href="#"
+     title="Share on LinkedIn"
+     data-url="https://wenqingfu.me/post/apache_proxy_reverse/"
+     data-text="Apache反向代理实现转发"><i class="fab fa-linkedin-in"></i></a>
+
+  <a class="facebook-share-button"
+     href="#"
+     title="Share on Facebook"
+     data-url="https://wenqingfu.me/post/apache_proxy_reverse/"
+     data-text="Apache反向代理实现转发"><i class="fab fa-facebook"></i></a>
+
+  <a class="telegram-share-button"
+     href="#"
+     title="Share on Telegram"
+     data-url="https://wenqingfu.me/post/apache_proxy_reverse/"
+     data-text="Apache反向代理实现转发"><i class="fab fa-telegram"></i></a>
+
+  <a class="pinterest-share-button"
+     href="#"
+     title="Share on Pinterest"
+     data-url="https://wenqingfu.me/post/apache_proxy_reverse/"
+     data-text="Apache反向代理实现转发"><i class="fab fa-pinterest"></i></a>
+</div>
+
+
+  <div class="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "wenqf11" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
 </script>
-<noscript>Please enable JavaScript to view the </a></noscript>
-<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
 </div>
-	</div>
-	<div class="footer wrapper">
-	<nav class="nav">
-		<div>2021  <a href="https://github.com/knadh/hugo-ink">Ink</a> theme on <a href="https://gohugo.io">Hugo</a></div>
-	</nav>
-</div>
+  </main>
 
-<script>feather.replace()</script>
+  <footer>
+  <div>
+    <p>
+      &copy; Qingfu Wen 2021
+
+      &middot; <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank">CC BY-SA 4.0</a>
+
+      &middot; Build with <a href="https://gohugo.io/" target="_blank">Hugo</a> & <a href="https://themes.gohugo.io/soho/" target="_blank">Soho</a> theme
+    </p>
+  </div>
+</footer>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js"
+          integrity="sha256-MAgcygDRahs+F/Nk5Vz387whB4kSK9NXlDN3w58LLq0="
+          crossorigin="anonymous"></script>
+
+
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/soho.js"></script>
+
+  
+
+  
 </body>
 </html>
