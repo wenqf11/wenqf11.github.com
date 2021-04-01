@@ -18,22 +18,28 @@
 <meta name="twitter:title" content="Apache反向代理实现转发"/>
 <meta name="twitter:description" content="这两天一直用 WordPress 在做一个网站，在部署网站的时候遇到了一些困难。服务器是 Windows Server 2008 的，之前上面已经有 Tomcat 了，现在想在 Apache 下来跑 WordPress。两台服务器同时监听80端口显然是不行的，很容易想到一台服务器监听80端口，另一台服务器监听另一个端口，比如说8080端口，然后通过转发来实现 Tomcat 和 Apache 并存。那么如何实现这种转发呢？反向代理！"/>
 <link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" type="text/css" media="screen" href="https://wenqingfu.mecss/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="https://wenqingfu.mecss/main.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://wenqingfu.me/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://wenqingfu.me/css/main.css" />
 
-        <link id="dark-scheme" rel="stylesheet" type="text/css" href="https://wenqingfu.mecss/dark.css" />
+        <link id="dark-scheme" rel="stylesheet" type="text/css" href="https://wenqingfu.me/css/dark.css" />
 
-	
-		<script src="https://wenqingfu.mejs/main.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+		<script src="https://wenqingfu.me/js/main.js"></script>
 </head>
 
 <body>
 	<div class="container wrapper">
 		<div class="header">
 	
-	<h1 class="site-title"><a href="https://wenqingfu.me">Vince&#39;s Blog</a></h1>
+		<div class="avatar">
+			<a href="https://wenqingfu.me/">
+				<img src="https://image.freepik.com/free-vector/young-man-head-with-beard-avatar-character_24877-36786.jpg" alt="Vince&#39;s Blog" />
+			</a>
+		</div>
+	
+	<h1 class="site-title"><a href="https://wenqingfu.me/">Vince&#39;s Blog</a></h1>
 	<div class="site-description"><p>淡泊明志，宁静致远</p><nav class="nav social">
-			<ul class="flat"></ul>
+			<ul class="flat"><li><a href="https://github.com/wenqf11" title="GitHub"><i data-feather="github"></i></a></li><li><a href="https://www.linkedin.com/in/wenqingfu" title="Linkedin"><i data-feather="linkedin"></i></a></li><li><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></li><li><a href="#" class="scheme-toggle" id="scheme-toggle"></a></li></ul>
 		</nav>
 	</div>
 
@@ -41,19 +47,23 @@
 		<ul class="flat">
 			
 			<li>
-				<a href="/post/">Posts</a>
+				<a href="/">首页</a>
 			</li>
 			
 			<li>
-				<a href="/categories/">Categories</a>
+				<a href="/post">文章</a>
 			</li>
 			
 			<li>
-				<a href="/tags/">Tags</a>
+				<a href="/about">关于</a>
 			</li>
 			
 			<li>
-				<a href="/about/">About</a>
+				<a href="/categories">分类</a>
+			</li>
+			
+			<li>
+				<a href="/tags">标签</a>
 			</li>
 			
 		</ul>
@@ -80,18 +90,18 @@
 				<p>这两天一直用 WordPress 在做一个网站，在部署网站的时候遇到了一些困难。服务器是 Windows Server 2008 的，之前上面已经有 Tomcat 了，现在想在 Apache 下来跑 WordPress。两台服务器同时监听80端口显然是不行的，很容易想到一台服务器监听80端口，另一台服务器监听另一个端口，比如说8080端口，然后通过转发来实现 Tomcat 和 Apache 并存。那么如何实现这种转发呢？反向代理！</p>
 <p>什么是反向代理？反向代理的意思就是用代理服务器来接受客户端的连接请求，然后将请求转发给的另一台服务器，并将从服务器上得到的结果返回给internet上请求连接的客户端。说白了就是 A 向 B 发起 http 请求，B 将请求转给 C，从C获取到内容，然后返回给 A，这时候 A 只知道内容是从 B 那里来的，不知道是不是经过转发什么的。</p>
 <p>apache 下如何配置反向代理呢？首先在http.conf文件中开启下面四个模块，即去掉前面的#注释。</p>
-<pre><code>LoadModule proxy_module modules/mod_proxy.so
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">LoadModule proxy_module modules/mod_proxy.so
 LoadModule proxy_connect_module modules/mod_proxy_connect.so
 LoadModule proxy_ftp_module modules/mod_proxy_ftp.so
 LoadModule proxy_http_module modules/mod_proxy_http.so
-</code></pre><p>下面开启反向代理</p>
-<pre><code>ProxyRequests Off  #开启反向代理 
+</code></pre></div><p>下面开启反向代理</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ProxyRequests Off  #开启反向代理 
 &lt;Proxy *&gt;  #允许所有访问者使用反向代理
 Order deny,allow
 Allow from all
 &lt;Proxy&gt;
-</code></pre><p>之后需要建立虚拟主机，这样可以在同一台机器搭建属于不同域名或者不同 IP 的多个网站服务的技术. 可以为运行在同一物理机器上的各个网站指配不同的 IP 和端口, 也可让多个网站拥有不同的域名。 可以通过Include conf/extra/httpd-vhosts.conf，然后修改httpd-vhosts.conf文件来实现。</p>
-<pre><code>NameVirtualHost *:80
+</code></pre></div><p>之后需要建立虚拟主机，这样可以在同一台机器搭建属于不同域名或者不同 IP 的多个网站服务的技术. 可以为运行在同一物理机器上的各个网站指配不同的 IP 和端口, 也可让多个网站拥有不同的域名。 可以通过Include conf/extra/httpd-vhosts.conf，然后修改httpd-vhosts.conf文件来实现。</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">NameVirtualHost *:80
 
 &lt;VirtualHost *:80&gt; 
 ProxyPreserveHost On 
@@ -115,7 +125,7 @@ Allow from all
 ErrorLog “logs/2-error.log”
 CustomLog “logs/2-access.log” common
 &lt;VirtualHost&gt;
-</code></pre><p>Apache 在接受到请求时，首先会默认第一个VirtualHost，然后再找匹配的，如果没有匹配的，就是第一个VirtualHost起作用。上面的设置virtualhost 均为80，通过域名的不同来区分。最后让原有的服务器 Tomcat 监听8080端口即可实现二者并存。</p>
+</code></pre></div><p>Apache 在接受到请求时，首先会默认第一个VirtualHost，然后再找匹配的，如果没有匹配的，就是第一个VirtualHost起作用。上面的设置virtualhost 均为80，通过域名的不同来区分。最后让原有的服务器 Tomcat 监听8080端口即可实现二者并存。</p>
 <p>参考网址：</p>
 <p><a href="http://www.cnblogs.com/zemliu/archive/2012/04/18/2454655.html">http://www.cnblogs.com/zemliu/archive/2012/04/18/2454655.html</a></p>
 <p><a href="http://www.cnblogs.com/zemliu/archive/2012/04/18/2454655.html">http://www.cnblogs.com/wpjsolo/archive/2012/01/19/2327457.html</a></p>
@@ -140,7 +150,7 @@ CustomLog “logs/2-access.log” common
 			return;
 
 		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-		var disqus_shortname = 'spf13';
+		var disqus_shortname = 'wenqf11';
 		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 	})();
@@ -155,17 +165,6 @@ CustomLog “logs/2-access.log” common
 	</nav>
 </div>
 
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'Your tracking code', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
+<script>feather.replace()</script>
 </body>
 </html>

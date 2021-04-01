@@ -15,22 +15,28 @@
 <meta name="twitter:title" content="Vince&#39;s Blog"/>
 <meta name="twitter:description" content="Vince&#39;s Blog"/>
 <link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" type="text/css" media="screen" href="https://wenqingfu.mecss/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="https://wenqingfu.mecss/main.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://wenqingfu.me/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://wenqingfu.me/css/main.css" />
 
-        <link id="dark-scheme" rel="stylesheet" type="text/css" href="https://wenqingfu.mecss/dark.css" />
+        <link id="dark-scheme" rel="stylesheet" type="text/css" href="https://wenqingfu.me/css/dark.css" />
 
-	
-		<script src="https://wenqingfu.mejs/main.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+		<script src="https://wenqingfu.me/js/main.js"></script>
 </head>
 
 <body>
 	<div class="container wrapper">
 		<div class="header">
 	
-	<h1 class="site-title"><a href="https://wenqingfu.me">Vince&#39;s Blog</a></h1>
+		<div class="avatar">
+			<a href="https://wenqingfu.me/">
+				<img src="https://image.freepik.com/free-vector/young-man-head-with-beard-avatar-character_24877-36786.jpg" alt="Vince&#39;s Blog" />
+			</a>
+		</div>
+	
+	<h1 class="site-title"><a href="https://wenqingfu.me/">Vince&#39;s Blog</a></h1>
 	<div class="site-description"><p>淡泊明志，宁静致远</p><nav class="nav social">
-			<ul class="flat"></ul>
+			<ul class="flat"><li><a href="https://github.com/wenqf11" title="GitHub"><i data-feather="github"></i></a></li><li><a href="https://www.linkedin.com/in/wenqingfu" title="Linkedin"><i data-feather="linkedin"></i></a></li><li><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></li><li><a href="#" class="scheme-toggle" id="scheme-toggle"></a></li></ul>
 		</nav>
 	</div>
 
@@ -38,19 +44,23 @@
 		<ul class="flat">
 			
 			<li>
-				<a href="/post/">Posts</a>
+				<a href="/">首页</a>
 			</li>
 			
 			<li>
-				<a href="/categories/">Categories</a>
+				<a href="/post">文章</a>
 			</li>
 			
 			<li>
-				<a href="/tags/">Tags</a>
+				<a href="/about">关于</a>
 			</li>
 			
 			<li>
-				<a href="/about/">About</a>
+				<a href="/categories">分类</a>
+			</li>
+			
+			<li>
+				<a href="/tags">标签</a>
 			</li>
 			
 		</ul>
@@ -62,6 +72,54 @@
 			<div class="posts">
 				
 				
+				
+					<div class="post">
+						<div class="post-header">
+							<div class="meta">
+								<div class="date">
+									<span class="day">31</span>
+							<span class="rest">Dec 2014</span>
+								</div>
+							</div>
+							<div class="matter">
+								<h4 class="title small">
+									<a href="/post/my_reviews_2014/">回首我的2014</a>
+								</h4>
+								<span class="description">
+									
+										
+时间过得真快，一年前与子任一同看清华的新年晚会仿佛还在昨日。临近年末，一直都想写点东西总结一下，但到了此时此刻却不知道该写些什么好。
+&lt;!--more--&gt;
+
+## 关于改变
+如果要说自己这一年来最大的变化，我觉得应该是变得更加...
+									
+								</span>
+							</div>
+						</div>
+					</div>
+				
+					<div class="post">
+						<div class="post-header">
+							<div class="meta">
+								<div class="date">
+									<span class="day">23</span>
+							<span class="rest">Dec 2014</span>
+								</div>
+							</div>
+							<div class="matter">
+								<h4 class="title small">
+									<a href="/post/cache_coherency/">从一个神奇的Bug开始谈缓存一致性问题</a>
+								</h4>
+								<span class="description">
+									
+										## 引入
+前一段时间，我一直都在做一个软件保护的项目，上周一直都忙于[一个赛事](https://aicraft.net9.org/)的组织筹备工作，没有空闲写一点东西，这周才补上。我所做的工作主要就是对多个不同平台下的动态链接库进行加...
+									
+								</span>
+							</div>
+						</div>
+					</div>
 				
 					<div class="post">
 						<div class="post-header">
@@ -176,17 +234,6 @@ PE（&#34;portable executable&#34;，可移植的可执行文件）文件是 Win
 	</nav>
 </div>
 
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'Your tracking code', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
+<script>feather.replace()</script>
 </body>
 </html>

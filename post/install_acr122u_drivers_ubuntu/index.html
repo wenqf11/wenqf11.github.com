@@ -18,22 +18,28 @@
 <meta name="twitter:title" content="Ubuntu 上安装 ACR122U 驱动"/>
 <meta name="twitter:description" content="ACR122U 是一种基于13.56MHz非接触式的智能卡读写器，详细资料可以参考官方网站。"/>
 <link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" type="text/css" media="screen" href="https://wenqingfu.mecss/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="https://wenqingfu.mecss/main.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://wenqingfu.me/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://wenqingfu.me/css/main.css" />
 
-        <link id="dark-scheme" rel="stylesheet" type="text/css" href="https://wenqingfu.mecss/dark.css" />
+        <link id="dark-scheme" rel="stylesheet" type="text/css" href="https://wenqingfu.me/css/dark.css" />
 
-	
-		<script src="https://wenqingfu.mejs/main.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+		<script src="https://wenqingfu.me/js/main.js"></script>
 </head>
 
 <body>
 	<div class="container wrapper">
 		<div class="header">
 	
-	<h1 class="site-title"><a href="https://wenqingfu.me">Vince&#39;s Blog</a></h1>
+		<div class="avatar">
+			<a href="https://wenqingfu.me/">
+				<img src="https://image.freepik.com/free-vector/young-man-head-with-beard-avatar-character_24877-36786.jpg" alt="Vince&#39;s Blog" />
+			</a>
+		</div>
+	
+	<h1 class="site-title"><a href="https://wenqingfu.me/">Vince&#39;s Blog</a></h1>
 	<div class="site-description"><p>淡泊明志，宁静致远</p><nav class="nav social">
-			<ul class="flat"></ul>
+			<ul class="flat"><li><a href="https://github.com/wenqf11" title="GitHub"><i data-feather="github"></i></a></li><li><a href="https://www.linkedin.com/in/wenqingfu" title="Linkedin"><i data-feather="linkedin"></i></a></li><li><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></li><li><a href="#" class="scheme-toggle" id="scheme-toggle"></a></li></ul>
 		</nav>
 	</div>
 
@@ -41,19 +47,23 @@
 		<ul class="flat">
 			
 			<li>
-				<a href="/post/">Posts</a>
+				<a href="/">首页</a>
 			</li>
 			
 			<li>
-				<a href="/categories/">Categories</a>
+				<a href="/post">文章</a>
 			</li>
 			
 			<li>
-				<a href="/tags/">Tags</a>
+				<a href="/about">关于</a>
 			</li>
 			
 			<li>
-				<a href="/about/">About</a>
+				<a href="/categories">分类</a>
+			</li>
+			
+			<li>
+				<a href="/tags">标签</a>
 			</li>
 			
 		</ul>
@@ -80,21 +90,21 @@
 				<p>ACR122U 是一种基于13.56MHz非接触式的智能卡读写器，详细资料可以参考<a href="http://www.acs.com.hk/cn/products/73/acr122u-nfc%E8%AF%BB%E5%86%99%E5%99%A8%EF%BC%88usb%E6%8E%A5%E5%8F%A3%EF%BC%89/">官方网站</a>。</p>
 <h3 id="安装-pcscd-和-pcsc_tools">安装 pcscd 和 pcsc_tools</h3>
 <p>在安装驱动之前，我们首先需要安装 pcscd 智能卡读写的守护进程，用于和智能卡读写器通信的资源管理。</p>
-<pre><code>sudo apt-get install pcscd pcsc-tools
-</code></pre><p>执行上述指令安装 pcscd 和 pcsc-tools。pcsc-tools会提供 pcsc_scan 指令来测试我们的驱动是否安装正确。在安装驱动之前，我们可以尝试执行下 pcsc_scan 执行，应该会停留在 Scaning present readers 阶段，表示找不到任何读卡器。</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo apt-get install pcscd pcsc-tools
+</code></pre></div><p>执行上述指令安装 pcscd 和 pcsc-tools。pcsc-tools会提供 pcsc_scan 指令来测试我们的驱动是否安装正确。在安装驱动之前，我们可以尝试执行下 pcsc_scan 执行，应该会停留在 Scaning present readers 阶段，表示找不到任何读卡器。</p>
 <h3 id="禁用-pn533-和-nfc-驱动">禁用 PN533 和 NFC 驱动</h3>
 <p>当 ACR122U 读写器插入，内核（&gt;3.5）会自动的安装 PN533 的驱动。这样，pcscd 就会报错 &ldquo;Can&rsquo;t claim interface&rdquo;。因此，使用下面执行禁用 PN533 和 NFC 的内核驱动。</p>
-<pre><code>echo &quot;install nfc /bin/false&quot; &gt;&gt; /etc/modprobe.d/blacklist.conf
-echo &quot;install pn533 /bin/false&quot; &gt;&gt; /etc/modprobe.d/blacklist.conf
-</code></pre><p>使用 root 权限执行上面两行指令，就是向 /etc/modprobe.d/blacklist.conf 文件增加两行。</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">echo &#34;install nfc /bin/false&#34; &gt;&gt; /etc/modprobe.d/blacklist.conf
+echo &#34;install pn533 /bin/false&#34; &gt;&gt; /etc/modprobe.d/blacklist.conf
+</code></pre></div><p>使用 root 权限执行上面两行指令，就是向 /etc/modprobe.d/blacklist.conf 文件增加两行。</p>
 <h3 id="安装-acr122u-驱动">安装 ACR122U 驱动</h3>
 <p>下面我们可以开始安装 ACR122U 的驱动了。它的驱动可以从<a href="http://www.acs.com.hk/en/products/3/acr122u-usb-nfc-reader/">官网</a>上找到，下载 PC/SC Driver Package 。解压后，按照 ReadMe 的操作执行即可安装驱动，注意自己的操作系统版本。</p>
 <p><strong>安装完后，一定记得重启机器。</strong></p>
 <p>最后，待机器重启之后，执行 pcsc_scan 指令，我们应该可以看到下面的情形：</p>
-<pre><code>PC/SC device scanner
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">PC/SC device scanner
 V 1.4.22 (c) 2001-2011, Ludovic Rousseau &lt;ludovic.rousseau@free.fr&gt;
 Compiled with PC/SC lite version: 1.8.10
-Using reader plug'n play mechanism
+Using reader plug&#39;n play mechanism
 Scanning present readers...
 0: ACS ACR122U 00 00
 
@@ -102,7 +112,7 @@ Thu Jul  7 00:43:00 2016
 Reader 0: ACS ACR122U 00 00
   Card state: Card inserted, 
   ATR: 3B 82 80 01 48 58 13
-</code></pre><p>这样，整个 ACR122U 的驱动就装好了。</p>
+</code></pre></div><p>这样，整个 ACR122U 的驱动就装好了。</p>
 <h3 id="参考资料">参考资料</h3>
 <p><a href="https://www.james-ridgway.co.uk/blog/installing-acr122u-drivers-on-linux">https://www.james-ridgway.co.uk/blog/installing-acr122u-drivers-on-linux</a>
 <a href="https://wiki.archlinux.org/index.php/Touchatag_RFID_Reader">https://wiki.archlinux.org/index.php/Touchatag_RFID_Reader</a>
@@ -122,7 +132,7 @@ Reader 0: ACS ACR122U 00 00
 			return;
 
 		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-		var disqus_shortname = 'spf13';
+		var disqus_shortname = 'wenqf11';
 		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 	})();
@@ -137,17 +147,6 @@ Reader 0: ACS ACR122U 00 00
 	</nav>
 </div>
 
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'Your tracking code', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
+<script>feather.replace()</script>
 </body>
 </html>

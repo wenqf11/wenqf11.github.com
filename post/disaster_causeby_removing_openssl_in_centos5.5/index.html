@@ -18,22 +18,28 @@
 <meta name="twitter:title" content="记一次 yum remove openssl 引发的灾难"/>
 <meta name="twitter:description" content="前段时间本来想要更新一台 Centos 5.5 服务器SSH，所以打算先 yum remove openssl，当时也是粗心大意，没仔细看卸载所依赖的包，结果没曾想把系统的一些 bash 指令都卸载掉了，什么 ls、cp 这些基本指令都不能用了，顿时人就傻了，当时是远程 ssh 连接到服务器的，当时都不敢断开连接，知道断开连接肯定就连不上了，最后还是断开连接了。"/>
 <link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" type="text/css" media="screen" href="https://wenqingfu.mecss/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="https://wenqingfu.mecss/main.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://wenqingfu.me/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://wenqingfu.me/css/main.css" />
 
-        <link id="dark-scheme" rel="stylesheet" type="text/css" href="https://wenqingfu.mecss/dark.css" />
+        <link id="dark-scheme" rel="stylesheet" type="text/css" href="https://wenqingfu.me/css/dark.css" />
 
-	
-		<script src="https://wenqingfu.mejs/main.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+		<script src="https://wenqingfu.me/js/main.js"></script>
 </head>
 
 <body>
 	<div class="container wrapper">
 		<div class="header">
 	
-	<h1 class="site-title"><a href="https://wenqingfu.me">Vince&#39;s Blog</a></h1>
+		<div class="avatar">
+			<a href="https://wenqingfu.me/">
+				<img src="https://image.freepik.com/free-vector/young-man-head-with-beard-avatar-character_24877-36786.jpg" alt="Vince&#39;s Blog" />
+			</a>
+		</div>
+	
+	<h1 class="site-title"><a href="https://wenqingfu.me/">Vince&#39;s Blog</a></h1>
 	<div class="site-description"><p>淡泊明志，宁静致远</p><nav class="nav social">
-			<ul class="flat"></ul>
+			<ul class="flat"><li><a href="https://github.com/wenqf11" title="GitHub"><i data-feather="github"></i></a></li><li><a href="https://www.linkedin.com/in/wenqingfu" title="Linkedin"><i data-feather="linkedin"></i></a></li><li><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></li><li><a href="#" class="scheme-toggle" id="scheme-toggle"></a></li></ul>
 		</nav>
 	</div>
 
@@ -41,19 +47,23 @@
 		<ul class="flat">
 			
 			<li>
-				<a href="/post/">Posts</a>
+				<a href="/">首页</a>
 			</li>
 			
 			<li>
-				<a href="/categories/">Categories</a>
+				<a href="/post">文章</a>
 			</li>
 			
 			<li>
-				<a href="/tags/">Tags</a>
+				<a href="/about">关于</a>
 			</li>
 			
 			<li>
-				<a href="/about/">About</a>
+				<a href="/categories">分类</a>
+			</li>
+			
+			<li>
+				<a href="/tags">标签</a>
 			</li>
 			
 		</ul>
@@ -79,19 +89,19 @@
 			<div class="markdown">
 				<p>前段时间本来想要更新一台 Centos 5.5 服务器SSH，所以打算先 yum remove openssl，当时也是粗心大意，没仔细看卸载所依赖的包，结果没曾想把系统的一些 bash 指令都卸载掉了，什么 ls、cp 这些基本指令都不能用了，顿时人就傻了，当时是远程 ssh 连接到服务器的，当时都不敢断开连接，知道断开连接肯定就连不上了，最后还是断开连接了。</p>
 <p>虽然没法远程，但是服务器上跑着的网站依赖可以正常访问，猜想应该只是卸载掉了基本指令，是不是可以通过安装或是拷贝丢失文件还原回来？跑到机房，接显示屏试试看能不能登录，结果输入用户名就没有反应，也不提示要我输入密码，只是不断重新要输入用户名。大概就是回车后反复出现下面这段话。</p>
-<pre><code>(isehome)login: 
-</code></pre><p>看来登录也是登录不了了，但是上面又还有一些 web 服务，不敢轻易重启。网上搜索了一下，看来遇到类似问题的不止我一个。
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">(isehome)login: 
+</code></pre></div><p>看来登录也是登录不了了，但是上面又还有一些 web 服务，不敢轻易重启。网上搜索了一下，看来遇到类似问题的不止我一个。
 <a href="http://wuhancd.blog.51cto.com/376986/932809">http://wuhancd.blog.51cto.com/376986/932809</a>
 <a href="http://www.linuxquestions.org/questions/linux-newbie-8/yum-remove-openssl-issue-809601/">http://www.linuxquestions.org/questions/linux-newbie-8/yum-remove-openssl-issue-809601/</a></p>
 <p>显然，最差的一种方法就是想办法备份数据，然后重装系统了，想想这个过程有多麻烦就知道了，其实我也不知道这个系统上还有些啥重要数据。心想还是能恢复尽量恢复吧，咨询了宫大汉同学，最后决定还是采用从U盘启动一个操作系统，然后把原来系统所在的盘挂载过来看看问题。</p>
 <p>起初还打算采用 Centos 的 rescue mode 看能不能恢复，但不知道怎么的就是进不去系统（似乎当时下载的是64位的），放弃了。直接从U盘启动 Ubuntu 14.04，刚开始尝试用 df 指令之类的尝试找没有找到，后来就用系统上自带的软件 disk 找到原来系统的所在分区并挂载，谢天谢地原来的文件都还在，看了一下系统是32位的，/usr/bin下面的许多指令都没了，chroot到原来系统的根目录，发现确实很多指令都不能执行，只能采用从另一个 Centos 5.5 的系统上拷贝的方法了。</p>
 <p>跑去网上下载了一个32位 Centos 5.5 DVD 版的，发现太大了，索性偷懒下了一个几百兆的 LiveCD 版。从中提取出 img 文件，将其挂在到  Ubuntu 的一个目录，然后就可以看到一个全新的 Centos 5.5 的所有文件，然后就小心翼翼的拷贝，将 /usr/bin, /usr/sbin, /usr/lib/, /usr/local/bin, usr/local/sbin, /usr/local/lib，几个目录的全部对应拷贝。</p>
-<pre><code>cp -r -n -p /usr/bin ../../usr/
-</code></pre><p>像上面一样拷贝，将整个目录拷贝，不覆盖已有文件，保持指定的属性(默认：模式,所有权,时间戳)。</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">cp -r -n -p /usr/bin ../../usr/
+</code></pre></div><p>像上面一样拷贝，将整个目录拷贝，不覆盖已有文件，保持指定的属性(默认：模式,所有权,时间戳)。</p>
 <p>终于拷贝完了，重启机器试一试啦，结果还是进不了系统，报错说缺少 /etc/inittab，又重新从 U 盘启动进入 Ubuntu，对应文件拷贝，重启之后总算是可以输入用户名了。</p>
-<pre><code>(isehome)login: 
-</code></pre><p>高兴得太早，反复输入用户名还是登录不进去，搜了一些资料说是可能是 /etc/inittab 的问题。看了下 inittab。这是一个指明 Linux INIT 进程如何启动系统的过程，反正不管了，死马当活马医，最后把这里面提到的所有的文件和目录都重新拷贝。</p>
-<pre><code>#
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">(isehome)login: 
+</code></pre></div><p>高兴得太早，反复输入用户名还是登录不进去，搜了一些资料说是可能是 /etc/inittab 的问题。看了下 inittab。这是一个指明 Linux INIT 进程如何启动系统的过程，反正不管了，死马当活马医，最后把这里面提到的所有的文件和目录都重新拷贝。</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#
 # inittab       This file describes how the INIT process should set up
 #               the system in a certain run-level.
 #
@@ -128,14 +138,14 @@ ca::ctrlaltdel:/sbin/shutdown -t3 -r now
 # of power left.  Schedule a shutdown for 2 minutes from now.
 # This does, of course, assume you have powerd installed and your
 # UPS connected and working correctly.
-pf::powerfail:/sbin/shutdown -f -h +2 &quot;Power Failure; System Shutting Down&quot;
+pf::powerfail:/sbin/shutdown -f -h +2 &#34;Power Failure; System Shutting Down&#34;
 
 # If power was restored before the shutdown kicked in, cancel it.
-pr:12345:powerokwait:/sbin/shutdown -c &quot;Power Restored; Shutdown Cancelled&quot;
+pr:12345:powerokwait:/sbin/shutdown -c &#34;Power Restored; Shutdown Cancelled&#34;
 ...
 ...
 ...
-</code></pre><p>经过漫长的拷贝，终于拷贝完了，重启之后发现一切顺利进入到了需要图形化输入用户名的界面了，输入完用户们和密码进入系统，发现桌面上的中文不能正常显示，其他都还好，反正可以用 Terminal 就行，其他什么都不重要了，感觉整个世界又恢复了平静了。</p>
+</code></pre></div><p>经过漫长的拷贝，终于拷贝完了，重启之后发现一切顺利进入到了需要图形化输入用户名的界面了，输入完用户们和密码进入系统，发现桌面上的中文不能正常显示，其他都还好，反正可以用 Terminal 就行，其他什么都不重要了，感觉整个世界又恢复了平静了。</p>
 <p>最后把网络连接搞定，缺啥装啥，把已有的 Web 服务和 FTP 服务重新开起来，一切又恢复如初了。</p>
 			</div>
 
@@ -152,7 +162,7 @@ pr:12345:powerokwait:/sbin/shutdown -c &quot;Power Restored; Shutdown Cancelled&
 			return;
 
 		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-		var disqus_shortname = 'spf13';
+		var disqus_shortname = 'wenqf11';
 		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 	})();
@@ -167,17 +177,6 @@ pr:12345:powerokwait:/sbin/shutdown -c &quot;Power Restored; Shutdown Cancelled&
 	</nav>
 </div>
 
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'Your tracking code', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
+<script>feather.replace()</script>
 </body>
 </html>

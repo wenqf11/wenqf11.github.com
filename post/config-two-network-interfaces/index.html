@@ -18,22 +18,28 @@
 <meta name="twitter:title" content="CentOS 上双网卡双 IP 配置，实现内网访问外网"/>
 <meta name="twitter:description" content="前两天配置了一台 CentOS 7 的服务器双网卡双IP，一个内网IP，一个外网IP。这样为这台服务器配置转发规则，内网网段的所有机器都可以通过它作为网关转发来上网了。"/>
 <link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" type="text/css" media="screen" href="https://wenqingfu.mecss/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="https://wenqingfu.mecss/main.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://wenqingfu.me/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://wenqingfu.me/css/main.css" />
 
-        <link id="dark-scheme" rel="stylesheet" type="text/css" href="https://wenqingfu.mecss/dark.css" />
+        <link id="dark-scheme" rel="stylesheet" type="text/css" href="https://wenqingfu.me/css/dark.css" />
 
-	
-		<script src="https://wenqingfu.mejs/main.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+		<script src="https://wenqingfu.me/js/main.js"></script>
 </head>
 
 <body>
 	<div class="container wrapper">
 		<div class="header">
 	
-	<h1 class="site-title"><a href="https://wenqingfu.me">Vince&#39;s Blog</a></h1>
+		<div class="avatar">
+			<a href="https://wenqingfu.me/">
+				<img src="https://image.freepik.com/free-vector/young-man-head-with-beard-avatar-character_24877-36786.jpg" alt="Vince&#39;s Blog" />
+			</a>
+		</div>
+	
+	<h1 class="site-title"><a href="https://wenqingfu.me/">Vince&#39;s Blog</a></h1>
 	<div class="site-description"><p>淡泊明志，宁静致远</p><nav class="nav social">
-			<ul class="flat"></ul>
+			<ul class="flat"><li><a href="https://github.com/wenqf11" title="GitHub"><i data-feather="github"></i></a></li><li><a href="https://www.linkedin.com/in/wenqingfu" title="Linkedin"><i data-feather="linkedin"></i></a></li><li><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></li><li><a href="#" class="scheme-toggle" id="scheme-toggle"></a></li></ul>
 		</nav>
 	</div>
 
@@ -41,19 +47,23 @@
 		<ul class="flat">
 			
 			<li>
-				<a href="/post/">Posts</a>
+				<a href="/">首页</a>
 			</li>
 			
 			<li>
-				<a href="/categories/">Categories</a>
+				<a href="/post">文章</a>
 			</li>
 			
 			<li>
-				<a href="/tags/">Tags</a>
+				<a href="/about">关于</a>
 			</li>
 			
 			<li>
-				<a href="/about/">About</a>
+				<a href="/categories">分类</a>
+			</li>
+			
+			<li>
+				<a href="/tags">标签</a>
 			</li>
 			
 		</ul>
@@ -81,8 +91,8 @@
 <h3 id="配置双网卡ip">配置双网卡IP</h3>
 <p>首先需要做的是确保双网卡都能正常工作并且已经开启，这里可以使用 ifconfig 来查看网卡工作状态。确保有两块网卡正常工作，然后就可以去 /etc/sysconfig/network-scripts/ 目录下配置每块网卡的 IP 了。</p>
 <p>该机器的外网 IP 配置为 166.111.80.x，网关为 166.111.80.gate，子网掩码255.255.255.0；内网IP配置为 192.168.3.y，网关为 192.168.3.gate，子网掩码255.255.255.0。</p>
-<pre><code>vim /etc/sysconfig/network-scripts/ifcfg-eth0
-</code></pre><pre><code>HWADDR=A0:42:3F:32:F0:5C
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">vim /etc/sysconfig/network-scripts/ifcfg-eth0
+</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">HWADDR=A0:42:3F:32:F0:5C
 TYPE=Ethernet
 BOOTPROTO=static
 DEFROUTE=yes 
@@ -91,9 +101,9 @@ IPADDR=166.111.80.x  #外网IP
 PREFIX=24  #子网掩码为255.255.255.0
 GATEWAY=166.111.80.gate  #网关
 DNS1=166.111.8.28 #根据设置自己的DNS设置
-</code></pre><p>保存后配置内网IP</p>
-<pre><code>vim /etc/sysconfig/network-scripts/ifcfg-eth1
-</code></pre><pre><code>HWADDR=A0:42:3F:32:F0:5D
+</code></pre></div><p>保存后配置内网IP</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">vim /etc/sysconfig/network-scripts/ifcfg-eth1
+</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">HWADDR=A0:42:3F:32:F0:5D
 TYPE=Ethernet
 BOOTPROTO=static
 DEFROUTE=yes 
@@ -102,36 +112,36 @@ IPADDR=192.168.3.y  #内网IP
 PREFIX=24  #子网掩码为255.255.255.0
 #GATEWAY=192.168.3.gate  #注意：内网网卡网关不要填写或者注释掉，否则两个网卡同时启用后上不了外网
 DNS1=166.111.8.28 #根据设置自己的DNS设置
-</code></pre><h3 id="配置双网关路由表">配置双网关路由表</h3>
+</code></pre></div><h3 id="配置双网关路由表">配置双网关路由表</h3>
 <p>目前系统默认网关是外网网关，内网IP是不能正常访问的，需要增加两个路由表，实现双网关正常访问。</p>
-<pre><code>vim /etc/iproute2/rt_tables
-</code></pre><p>增加如下内容：</p>
-<pre><code>252  net2
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">vim /etc/iproute2/rt_tables
+</code></pre></div><p>增加如下内容：</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">252  net2
 251  net3
-</code></pre><p>修改 /etc/rc.local，动添加静态路由规则，让网络请求哪里进来的，就从哪里出去。</p>
-<pre><code>ip route flush table net2
+</code></pre></div><p>修改 /etc/rc.local，动添加静态路由规则，让网络请求哪里进来的，就从哪里出去。</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ip route flush table net2
 ip route add default via 166.111.80.gate dev eth0 src 166.111.80.x table net2
 ip rule add from 166.111.80.x table net2
 
 ip route flush table net3
 ip route add default via 192.168.3.gate dev eth1 src 192.168.3.y table net3
 ip rule add from 192.168.3.y table net3
-</code></pre><p>这样，双网卡双IP应该就配置好了，重启网络服务检测一下。在内网用内网IP访问，在外网用外网IP访问应该可以正常连接。</p>
-<pre><code>service network restart
-</code></pre><h3 id="配置转发规则">配置转发规则</h3>
+</code></pre></div><p>这样，双网卡双IP应该就配置好了，重启网络服务检测一下。在内网用内网IP访问，在外网用外网IP访问应该可以正常连接。</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">service network restart
+</code></pre></div><h3 id="配置转发规则">配置转发规则</h3>
 <p>添加SNAT 规则，POSTROUTING 经过路由的源地址为192.168.3.0/24包把源地址改变为166.111.80.x。</p>
-<pre><code>iptables -t nat -A POSTROUTING -s 192.168.3.0/24 -j SNAT --to-source 166.111.80.x
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">iptables -t nat -A POSTROUTING -s 192.168.3.0/24 -j SNAT --to-source 166.111.80.x
 iptables -A FORWARD -s 192.168.3.0/24 -j ACCEPT
 iptables -A FORWARD -d 192.168.3.0/24 -j ACCEPT
 service iptables save
-</code></pre><p>然后重启重启防火墙。</p>
-<pre><code>service iptables restart
-</code></pre><p>为了防止别人修改，可以把上述指令写入到 /etc/rc.local，每次开机启动时会重新执行。 
+</code></pre></div><p>然后重启重启防火墙。</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">service iptables restart
+</code></pre></div><p>为了防止别人修改，可以把上述指令写入到 /etc/rc.local，每次开机启动时会重新执行。 
 此外，还要打开 Linux 内核转发功能，使Linux内核的IP层能够数据转发。直接修改 /etc/sysctl.conf 增加 net.ipv4.ip_forward=1 或者直接执行下面指令：</p>
-<pre><code>sysctl net.ipv4.ip_forward=1
-</code></pre><p>重启一下网络服务</p>
-<pre><code>service network restart
-</code></pre><h3 id="配置内网机器访问外网">配置内网机器访问外网</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sysctl net.ipv4.ip_forward=1
+</code></pre></div><p>重启一下网络服务</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">service network restart
+</code></pre></div><h3 id="配置内网机器访问外网">配置内网机器访问外网</h3>
 <p>将内网某台机器的网关设置为 192.168.3.y，重启网络服务，应该就可以正常访问外网了。</p>
 <h3 id="参考资料">参考资料</h3>
 <p><a href="https://mr21.cc/network-technology/centos-two-gateway-configration.html">https://mr21.cc/network-technology/centos-two-gateway-configration.html</a>
@@ -154,7 +164,7 @@ service iptables save
 			return;
 
 		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-		var disqus_shortname = 'spf13';
+		var disqus_shortname = 'wenqf11';
 		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 	})();
@@ -169,17 +179,6 @@ service iptables save
 	</nav>
 </div>
 
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'Your tracking code', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
+<script>feather.replace()</script>
 </body>
 </html>

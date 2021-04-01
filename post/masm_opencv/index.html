@@ -18,22 +18,28 @@
 <meta name="twitter:title" content="我是如何用 MASM 汇编写摄像头控制程序的"/>
 <meta name="twitter:description" content="上周完成了汇编语言这门课程的大作业展示，总体来说做得还是挺满意的。我们小组做的是一个摄像头控制类似微信飞机大战的程序。我们不想只是简单做一个小游戏，希望能将摄像头也加入进来，做一些控制的事情，所以才有了这个项目。在这个项目中，我主要负责的用汇编语言实现摄像头控制，需哥和磊哥负责实现类飞机大战的游戏程序。这是与普通微信飞机大战的区别在于就是我们额外实现了可以用电脑摄像头捕捉人脸移动，对应到飞机的移动，从而实现控制飞机大战游戏。"/>
 <link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" type="text/css" media="screen" href="https://wenqingfu.mecss/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="https://wenqingfu.mecss/main.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://wenqingfu.me/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://wenqingfu.me/css/main.css" />
 
-        <link id="dark-scheme" rel="stylesheet" type="text/css" href="https://wenqingfu.mecss/dark.css" />
+        <link id="dark-scheme" rel="stylesheet" type="text/css" href="https://wenqingfu.me/css/dark.css" />
 
-	
-		<script src="https://wenqingfu.mejs/main.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+		<script src="https://wenqingfu.me/js/main.js"></script>
 </head>
 
 <body>
 	<div class="container wrapper">
 		<div class="header">
 	
-	<h1 class="site-title"><a href="https://wenqingfu.me">Vince&#39;s Blog</a></h1>
+		<div class="avatar">
+			<a href="https://wenqingfu.me/">
+				<img src="https://image.freepik.com/free-vector/young-man-head-with-beard-avatar-character_24877-36786.jpg" alt="Vince&#39;s Blog" />
+			</a>
+		</div>
+	
+	<h1 class="site-title"><a href="https://wenqingfu.me/">Vince&#39;s Blog</a></h1>
 	<div class="site-description"><p>淡泊明志，宁静致远</p><nav class="nav social">
-			<ul class="flat"></ul>
+			<ul class="flat"><li><a href="https://github.com/wenqf11" title="GitHub"><i data-feather="github"></i></a></li><li><a href="https://www.linkedin.com/in/wenqingfu" title="Linkedin"><i data-feather="linkedin"></i></a></li><li><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></li><li><a href="#" class="scheme-toggle" id="scheme-toggle"></a></li></ul>
 		</nav>
 	</div>
 
@@ -41,19 +47,23 @@
 		<ul class="flat">
 			
 			<li>
-				<a href="/post/">Posts</a>
+				<a href="/">首页</a>
 			</li>
 			
 			<li>
-				<a href="/categories/">Categories</a>
+				<a href="/post">文章</a>
 			</li>
 			
 			<li>
-				<a href="/tags/">Tags</a>
+				<a href="/about">关于</a>
 			</li>
 			
 			<li>
-				<a href="/about/">About</a>
+				<a href="/categories">分类</a>
+			</li>
+			
+			<li>
+				<a href="/tags">标签</a>
 			</li>
 			
 		</ul>
@@ -86,18 +96,18 @@
 <p>现在似乎有一个问题还没有解决，如何将汇编获取的每一帧图像传递给 OpenCV 程序呢？ 通过查找资料发现，avicap32.dll 中提供了一种方式获取每一帧图像，就是回调 FrameCallbackProc 中 lpVHdr 里存放图像数据。因此我们只需要在 FrameCallbackProc 回调函数中调用我们编写的 DLL 函数，传递参数为 lpVHdr 即可，类型是 LPVIDEOHDR。那么我们在 C++ 函数中如何处理 LPVIDEOHDR lpVHdr 这个数据结构呢，我们知道 OpenCV 希望的图片数据类型是 IplImage， 那么如何实现从 LPVIDEOHDR 到 IplImage 的转换呢？</p>
 <p>其实图像数据存储在 LPVIDEOHDR 中 ldata 域下， ldata 实质就是一个 BYTE* 类型。我想直接将 BYTE* 转为 IplImage，花了很长时间一直都没有成功。最后将 BYTE* 类型数据输出到文本，通过分析并查阅资料才发现，原来是因为数据格式的问题，这里获取到的 BYTE* 存储的图像数据的格式是 YUY2 格式的，一种压缩后的格式，而我们主流使用的格式是 RGB，然后就先做了 YUY2RGB 的转换， 再做 Byte2IplImg 的转换，最终顺利实现了 OpenCV 使用 MASM 汇编捕捉的视频图像。</p>
 <p>下面给给出图像数据传递部分的主要代码：</p>
-<pre><code>FrameCallbackProc proc hWnd,lpVHdr
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">FrameCallbackProc proc hWnd,lpVHdr
 invoke detect_and_draw, lpVHdr
 ret
 FrameCallbackProc endp
-</code></pre><pre><code>void detect_and_draw(LPVIDEOHDR lpVHdr) 
+</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void detect_and_draw(LPVIDEOHDR lpVHdr) 
 { 
     BYTE* data = new BYTE[512000];
 	YUY2RGB(lpVHdr-&gt;ldata, data);
     IplImage* img = Byte2IplImg(data)
 	......
 }
-</code></pre><p>之后的工作就是实现人脸识别与追踪算法，并通过判断相邻两帧图像中人脸的相对位移，可以得知人脸移动的方向，从而触发对应按键事件来实现控制。 这里的人脸识别与追踪算法使用的是 OpenCV 库里自带的样例程序，稍作修改就能达到我们的要求，就不一一赘述了。</p>
+</code></pre></div><p>之后的工作就是实现人脸识别与追踪算法，并通过判断相邻两帧图像中人脸的相对位移，可以得知人脸移动的方向，从而触发对应按键事件来实现控制。 这里的人脸识别与追踪算法使用的是 OpenCV 库里自带的样例程序，稍作修改就能达到我们的要求，就不一一赘述了。</p>
 			</div>
 
 			<div class="tags">
@@ -121,7 +131,7 @@ FrameCallbackProc endp
 			return;
 
 		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-		var disqus_shortname = 'spf13';
+		var disqus_shortname = 'wenqf11';
 		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 	})();
@@ -136,17 +146,6 @@ FrameCallbackProc endp
 	</nav>
 </div>
 
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'Your tracking code', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
+<script>feather.replace()</script>
 </body>
 </html>
