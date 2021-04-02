@@ -36,13 +36,14 @@ $(document).ready(function(){
     window.open(`https://t.me/share/url?url=${url}&text=${text}`, "_blank").focus();
   });
 
-  $(".pinterest-share-button").click(function (e) {
+  $(".weibo-share-button").click(function (e) {
     e.preventDefault();
     var self = $(this);
     var url = encodeURIComponent(self.data("url"));
     var text = encodeURIComponent(self.data("text"));
 
-    window.open(`https://pinterest.com/pin/create/button/?url=${url}&media=&description=${text}`, "_blank").focus();
+   //window.open(`https://pinterest.com/pin/create/button/?url=${url}&media=&description=${text}`, "_blank").focus();
+	window.open(`http://service.weibo.com/share/share.php?appkey=&title=${text}&url=${url}&pic=&style=simple`, "_blank").focus()
   });
 
 });
