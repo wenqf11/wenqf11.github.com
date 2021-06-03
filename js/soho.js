@@ -42,7 +42,6 @@ $(document).ready(function(){
     var url = encodeURIComponent(self.data("url"));
     var text = encodeURIComponent(self.data("text"));
 
-   //window.open(`https://pinterest.com/pin/create/button/?url=${url}&media=&description=${text}`, "_blank").focus();
 	window.open(`http://service.weibo.com/share/share.php?appkey=&title=${text}&url=${url}&pic=&style=simple`, "_blank").focus()
   });
 

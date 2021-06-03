@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="Hugo 0.82.0" />
+
+  <title>PostGIS与MySQL空间索引对比 &middot; Vince&#39;s Blog</title>
+
+  <meta name="description" content="" />
+
+  
+
+<meta itemprop="name" content="PostGIS与MySQL空间索引对比">
+<meta itemprop="description" content="什么是数据库空间索引？
+数据库中的索引我们都是知道，最常见的就是用B&#43;数来索引我们存储在数据库中的数据。顾名思义，空间索引就是一种用来索引空间数据（例如2维数据）的索引结构。"><meta itemprop="datePublished" content="2021-06-03T17:55:11&#43;08:00" />
+<meta itemprop="dateModified" content="2021-06-03T17:55:11&#43;08:00" />
+<meta itemprop="wordCount" content="1129"><meta itemprop="image" content="https://wenqingfu.me/images/profile.jpg"/>
+<meta itemprop="keywords" content="PostGIS,PostgreSQL,MySQL,Spatial Index,空间索引," />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://wenqingfu.me/images/profile.jpg"/>
+
+<meta name="twitter:title" content="PostGIS与MySQL空间索引对比"/>
+<meta name="twitter:description" content="什么是数据库空间索引？
+数据库中的索引我们都是知道，最常见的就是用B&#43;数来索引我们存储在数据库中的数据。顾名思义，空间索引就是一种用来索引空间数据（例如2维数据）的索引结构。"/>
+
+
+<meta property="og:title" content="PostGIS与MySQL空间索引对比" />
+<meta property="og:description" content="什么是数据库空间索引？
+数据库中的索引我们都是知道，最常见的就是用B&#43;数来索引我们存储在数据库中的数据。顾名思义，空间索引就是一种用来索引空间数据（例如2维数据）的索引结构。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://wenqingfu.me/post/2021_06_03_postgis_mysql/" /><meta property="og:image" content="https://wenqingfu.me/images/profile.jpg"/><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-06-03T17:55:11&#43;08:00" />
+<meta property="article:modified_time" content="2021-06-03T17:55:11&#43;08:00" /><meta property="og:site_name" content="Vince&#39;s Blog" />
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type":"Person",
+      "@id": "https://wenqingfu.me/#author",
+      "name":  null ,
+      "image": {
+        "@type":"ImageObject",
+        
+        "url": "https://wenqingfu.me/images/profile.jpg"
+        
+      },
+      "description": "淡泊明志，宁静致远"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://wenqingfu.me/#website",
+      "url": "https://wenqingfu.me/",
+      "name": "Vince's Blog",
+      "description": "淡泊明志，宁静致远",
+      "publisher": {
+        "@id": "https://wenqingfu.me/#author"
+      },
+      "inLanguage": "zh-CN"
+    },
+    {
+      "@type": "ImageObject",
+      "url": "https://wenqingfu.me/images/profile.jpg",
+      "caption": "Vince's Blog"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://wenqingfu.me/post/2021_06_03_postgis_mysql/#webpage",
+      "url": "https://wenqingfu.me/post/2021_06_03_postgis_mysql/",
+      "name": "PostGIS与MySQL空间索引对比",
+      "isPartOf": {
+        "@id": "https://wenqingfu.me/#website"
+      },
+      "about": {
+         "@id": "https://wenqingfu.me/#author"
+      },
+      "datePublished": "2021-06-03T17:55:11+08:00",
+      "dateModified": "2021-06-03T17:55:11+08:00",
+      "description": "\u003ch2 id=\"什么是数据库空间索引\"\u003e什么是数据库空间索引？\u003c/h2\u003e\n\u003cp\u003e数据库中的索引我们都是知道，最常见的就是用B+数来索引我们存储在数据库中的数据。顾名思义，空间索引就是一种用来索引空间数据（例如2维数据）的索引结构。\u003c/p\u003e",
+      "inLanguage": "zh-CN",
+      "potentialAction": [
+        {
+          "@type": "ReadAction",
+          "target": [
+            "https://wenqingfu.me/post/2021_06_03_postgis_mysql/"
+          ]
+        }
+      ]
+    },
+    {
+      "@type": "Article",
+      "isPartOf": {
+        "@id": "https://wenqingfu.me/post/2021_06_03_postgis_mysql/#webpage"
+      },
+      "mainEntityOfPage": {
+        "@id": "https://wenqingfu.me/post/2021_06_03_postgis_mysql/#webpage"
+      },
+      "headline": "PostGIS与MySQL空间索引对比",
+      "datePublished": "2021-06-03T17:55:11+08:00",
+      "dateModified": "2021-06-03T17:55:11+08:00",
+      "publisher": {
+        "@id": "https://wenqingfu.me/#author"
+      },
+      "keywords": [
+        "PostGIS",
+        "PostgreSQL",
+        "MySQL",
+        "空间索引"
+      ],
+      "articleSection": [
+        "数据库"
+      ],
+      "inLanguage": "zh-CN",
+      "author": {
+        "@type": "Person",
+        "name":  null 
+      },
+      "potentialAction": [
+        {
+          "@type": "CommentAction",
+          "name": "Comment",
+          "target": [
+            "https://wenqingfu.me/post/2021_06_03_postgis_mysql/#comments"
+          ]
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="/css/print.css"
+        media="print">
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="/css/poole.css">
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="/css/hyde.css">
+
+  
+
+
+  
+
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&display=swap">
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+        integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
+        crossorigin="anonymous" />
+
+  <link rel="apple-touch-icon-precomposed"
+        sizes="144x144"
+        href="/apple-touch-icon-144-precomposed.png">
+
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  </head>
+<body>
+  <aside class="sidebar">
+  <div class="container">
+    <div class="sidebar-about">
+      
+        
+        <div class="author-image">
+          <a href="https://wenqingfu.me/">
+            <img src="/images/profile.jpg" class="img-circle img-headshot center" alt="Profile Picture">
+          </a>
+        </div>
+        
+      
+
+      <h1>Vince&#39;s Blog</h1>
+
+      
+      <p class="lead">淡泊明志，宁静致远</p>
+      
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li>
+          <a href="https://wenqingfu.me/">Home</a>
+        </li>
+        <li>
+          <a href="/categories/">Categories</a>
+        </li><li>
+          <a href="/tags/">Tags</a>
+        </li><li>
+          <a href="/post/">Posts</a>
+        </li><li>
+          <a href="/about/">About</a>
+        </li>
+      </ul>
+    </nav>
+
+    <section class="social-icons">
+      
+      <a href="http://weibo.com/wenqf11" rel="me" title="Weibo" target="_blank">
+        <i class="fab fa-weibo" aria-hidden="true"></i>
+      </a>
+      
+      <a href="https://www.linkedin.com/in/wenqingfu" rel="me" title="Linkedin" target="_blank">
+        <i class="fab fa-linkedin" aria-hidden="true"></i>
+      </a>
+      
+      <a href="https://github.com/wenqf11" rel="me" title="GitHub" target="_blank">
+        <i class="fab fa-github" aria-hidden="true"></i>
+      </a>
+      
+    </section>
+  </div>
+</aside>
+
+
+  <main class="content container">
+  <div class="post">
+  <h1 class="title">PostGIS与MySQL空间索引对比</h1>
+  
+
+  <div class="post-date">
+    <time datetime="2021-06-03T17:55:11&#43;0800">Jun 3, 2021</time> <span class="readtime">&middot; 3 min read</span>
+  </div>
+
+  <div>
+  <h2 id="什么是数据库空间索引">什么是数据库空间索引？</h2>
+<p>数据库中的索引我们都是知道，最常见的就是用B+数来索引我们存储在数据库中的数据。顾名思义，空间索引就是一种用来索引空间数据（例如2维数据）的索引结构。</p>
+<p>用户可以像使用传统一维索引一样快捷便利地处理空间数据。常见的空间数据主要包括点、线、多边形。</p>
+<h2 id="mysql空间索引的一个疑似bug">MySQL空间索引的一个疑似bug</h2>
+<p>最近工作中需要用到空间索引来索引二维数据，由于之前业务使用的是MySQL 5.7.18，所以为了便捷，优先考虑使用MySQL的Spatial Index来索引二维数据。但是在开发之后，使用一个较为复杂的测试用例进行测试。大致是往MySQL中写入96W个polygon，形成96W条记录。然后需要查找出在特定区域内的所有polygon。SQL语句如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> my_polygon <span style="color:#66d9ef">where</span> ST_Intersects(ST_GEOMFROMTEXT
+(<span style="color:#e6db74">&#39;POLYGON((1 1,40000 1,40000 40000, 1 40000, 1 1))&#39;</span>), polygon);
+</code></pre></div><p>这样MySQL会报错<code>error: 3037 Invalid GIS data provided to function st_intersects</code>，但是如果缩小区域搜索则可以得到正确结果。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> my_polygon <span style="color:#66d9ef">where</span> ST_Intersects(ST_GEOMFROMTEXT
+(<span style="color:#e6db74">&#39;POLYGON((1 1,10000 1,10000 10000, 1 10000, 1 1))&#39;</span>), polygon);
+</code></pre></div><p>这个问题真是太奇怪，找了一些资料也没有人遇到类似情况，只能理解可能是MySQL自带的问题。最终无奈只能考虑换成对空间索引支持更好的PostgreSQL/PostGIS。</p>
+<h2 id="postgresql-与-mysql-spatial-index">PostgreSQL 与 MySQL Spatial Index</h2>
+<p>在引入PostGIS之前，我对比了PostgreSQL 13 和 MySQL 5.7.18在不同查询语句上的消耗时间。</p>
+<p>首先在MySQL和PostgreSQL中创建两张表，一张是my_point存储点数据，另一张是my_polygon存储多边形。分别在my_point和my_polygon中各自插入96W条数据。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> my_point (
+id SERIAL <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>,
+point point <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>
+) ;
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> my_polygon (
+id SERIAL <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>
+polygon polygon <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>
+) ;
+</code></pre></div><p>然后对比以下4个查询语句上的区别：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ae81ff">1</span>. <span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> my_polygon
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ae81ff">2</span>. <span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> my<span style="color:#960050;background-color:#1e0010">\</span>_polygon <span style="color:#66d9ef">where</span> ST<span style="color:#960050;background-color:#1e0010">\</span>_Intersects(ST_GEOMFROMTEXT
+(<span style="color:#e6db74">&#39;POLYGON((1 1,10000 1,10000 10000,1 10000, 1 1))&#39;</span>), polygon)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ae81ff">3</span>. <span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> my<span style="color:#960050;background-color:#1e0010">\</span>_polygon <span style="color:#66d9ef">where</span> ST<span style="color:#960050;background-color:#1e0010">\</span>_Intersects(ST_GEOMFROMTEXT
+(<span style="color:#e6db74">&#39;POLYGON((1 1,40000 1,40000 40000, 1 40000, 1 1))&#39;</span>), polygon)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ae81ff">4</span>. <span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> my<span style="color:#960050;background-color:#1e0010">\</span>_point <span style="color:#66d9ef">where</span> ST<span style="color:#960050;background-color:#1e0010">\</span>_Intersects(ST_GEOMFROMTEXT
+(<span style="color:#e6db74">&#39;POLYGON((1 1,40000 1,40000 40000,1 40000, 1 1))&#39;</span>), point)
+</code></pre></div><p>执行时间结果如下表：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">序号</th>
+<th style="text-align:center">MySQL</th>
+<th style="text-align:center">PostgreSQL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">23.076s</td>
+<td style="text-align:center">8.026s</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">1.285s</td>
+<td style="text-align:center">1.257s</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">/</td>
+<td style="text-align:center">3.525s</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">6.431s</td>
+<td style="text-align:center">0.680s</td>
+</tr>
+</tbody>
+</table>
+<p>从表格数据对比中可以看出，PostgreSQL的空间索引都是要比MySQL性能要好的，特别是在数据量更大的情况下，优势更明显。
+那么除了时间效率，其他方面二者有哪些区别呢？</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">功能</th>
+<th style="text-align:center">Mysql spatial Index</th>
+<th style="text-align:center">PostGIS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">空间索引</td>
+<td style="text-align:center">R树</td>
+<td style="text-align:center">R树和GIST树索引</td>
+</tr>
+<tr>
+<td style="text-align:center">空间类型</td>
+<td style="text-align:center">二维</td>
+<td style="text-align:center">二维、三维甚至四维</td>
+</tr>
+<tr>
+<td style="text-align:center">空间操作函数</td>
+<td style="text-align:center">有限</td>
+<td style="text-align:center">基本实现OGC标准定义的空间操作函数</td>
+</tr>
+<tr>
+<td style="text-align:center">事务支持</td>
+<td style="text-align:center">不支持</td>
+<td style="text-align:center">支持</td>
+</tr>
+<tr>
+<td style="text-align:center">空间索引</td>
+<td style="text-align:center">较慢</td>
+<td style="text-align:center">较快</td>
+</tr>
+<tr>
+<td style="text-align:center">查询效率</td>
+<td style="text-align:center">较慢</td>
+<td style="text-align:center">较快</td>
+</tr>
+<tr>
+<td style="text-align:center">GIS系统使用</td>
+<td style="text-align:center">使用较少</td>
+<td style="text-align:center"><a href="https://postgis.net/workshops/postgis-intro/introduction.html#what-applications-support-postgisresql+Postgis">使用较多</a></td>
+</tr>
+</tbody>
+</table>
+<p>除了MySQL Spatial 以为，还有一些关系型数据库支持空间索引，例如SQL Server, Oracle，<a href="http://www.bostongis.com/PrinterFriendly.aspx?content_name=sqlserver2008r2_oracle11gr2_postgis15_compare">这里</a>有前人做的一些对比。还有一些非关系型数据库如MongoDB, Redis等，但是<a href="https://www.cnblogs.com/zhenbianshu/p/6817569.html">支持程度有限</a>。</p>
+<h2 id="总结">总结</h2>
+<p>综上所述，PostgreSQL是目前对空间数据索引支持最为优秀的数据库，如果业务中需要应对各类复杂空间查询需求则推荐使用。否则只是一些简单应用则MySQL也足够应付。</p>
+  </div>
+
+  
+<div>
+  <ul class="tags">
+  <li>
+    <a href="https://wenqingfu.me/tags/postgis/" class="tag-link">PostGIS</a>
+  </li>
+  
+  <li>
+    <a href="https://wenqingfu.me/tags/postgresql/" class="tag-link">PostgreSQL</a>
+  </li>
+  
+  <li>
+    <a href="https://wenqingfu.me/tags/mysql/" class="tag-link">MySQL</a>
+  </li>
+  
+  <li>
+    <a href="https://wenqingfu.me/tags/%E7%A9%BA%E9%97%B4%E7%B4%A2%E5%BC%95/" class="tag-link">空间索引</a>
+  </li>
+  </ul>
+</div>
+
+
+
+  <div class="share-buttons">
+  <a class="weibo-share-button"
+     href="#"
+     title="Share on Weibo"
+     data-url="https://wenqingfu.me/post/2021_06_03_postgis_mysql/"
+     data-text="PostGIS与MySQL空间索引对比"><i class="fab fa-weibo"></i></a>
+
+  <a class="linkedin-share-button"
+     href="#"
+     title="Share on LinkedIn"
+     data-url="https://wenqingfu.me/post/2021_06_03_postgis_mysql/"
+     data-text="PostGIS与MySQL空间索引对比"><i class="fab fa-linkedin-in"></i></a>
+
+  <a class="facebook-share-button"
+     href="#"
+     title="Share on Facebook"
+     data-url="https://wenqingfu.me/post/2021_06_03_postgis_mysql/"
+     data-text="PostGIS与MySQL空间索引对比"><i class="fab fa-facebook"></i></a>
+
+  <a class="twitter-share-button"
+     href="#"
+     title="Share on Twitter"
+     data-url="https://wenqingfu.me/post/2021_06_03_postgis_mysql/"
+     data-text="PostGIS与MySQL空间索引对比"><i class="fab fa-twitter"></i></a>
+
+  <a class="telegram-share-button"
+     href="#"
+     title="Share on Telegram"
+     data-url="https://wenqingfu.me/post/2021_06_03_postgis_mysql/"
+     data-text="PostGIS与MySQL空间索引对比"><i class="fab fa-telegram"></i></a>
+
+</div>
+
+
+  <div class="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "wenqf11" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+</div>
+  </main>
+
+  <footer>
+  <div>
+    <p>
+      &copy; Qingfu Wen 2021
+
+      &middot; <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank">CC BY-SA 4.0</a>
+
+      &middot; Build with <a href="https://gohugo.io/" target="_blank">Hugo</a> & <a href="https://themes.gohugo.io/soho/" target="_blank">Soho</a> theme
+    </p>
+  </div>
+</footer>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js"
+          integrity="sha256-MAgcygDRahs+F/Nk5Vz387whB4kSK9NXlDN3w58LLq0="
+          crossorigin="anonymous"></script>
+
+
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/soho.js"></script>
+
+  
+
+  
+</body>
+</html>
