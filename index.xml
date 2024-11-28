@@ -2,145 +2,136 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Vince&#39;s Blog</title>
-    <link>http://localhost:1313/</link>
+    <link>https://wenqf11.github.io/</link>
     <description>Recent content on Vince&#39;s Blog</description>
     <generator>Hugo</generator>
     <language>zh-CN</language>
     <lastBuildDate>Thu, 28 Nov 2024 00:40:11 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://wenqf11.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-<<<<<<< HEAD
       <title>浅谈大语言模型推理相关技术之一：综述</title>
-      <link>http://localhost:1313/post/llm_inference_survey_01/</link>
+      <link>https://wenqf11.github.io/post/llm_inference_survey_01/</link>
       <pubDate>Thu, 28 Nov 2024 00:40:11 +0000</pubDate>
-      <guid>http://localhost:1313/post/llm_inference_survey_01/</guid>
+      <guid>https://wenqf11.github.io/post/llm_inference_survey_01/</guid>
       <description>&lt;h2 id=&#34;引言&#34;&gt;引言&lt;/h2&gt;&#xA;&lt;p&gt;随着ChatGPT应用的爆火出圈，大模型相关的技术被广泛关注。利用大模型技术来生成文字、图像、音频、视频、3D模型等多种模态数据的应用也层出不穷，诸如ChatGPT(文字)、Midjourney(图像)、Suno(音频)、Sora(视频)、Meshy(3D)等。同时，融合文本、图像、视频、音频等多种模态数据的大模型研究也日益增多。这些大模型以其庞大的参数量著称，对计算和内存资源的需求巨大，给模型训练和推理部署带来了挑战。&lt;/p&gt;</description>
     </item>
     <item>
       <title>About</title>
-      <link>http://localhost:1313/about/</link>
-      <pubDate>Wed, 17 May 2023 17:12:51 +0800</pubDate>
-      <guid>http://localhost:1313/about/</guid>
-      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Basing Shenzhen, China, I am a Software Engineer focusing on LLM Infra and MLSys. I Like running, reading and basketball.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;education&#34;&gt;Education&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Tsinghua University, Beijing（2015－2018）School of Software, Master&lt;/li&gt;&#xA;&lt;li&gt;Tsinghua University, Beijing（2011—2015）School of Software, Bachelor&lt;/li&gt;&#xA;&lt;li&gt;Changjun High School, Changsha（2008－2011）&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;experience&#34;&gt;Experience&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Tecent，Software Engineer（2020—2024)&lt;/li&gt;&#xA;&lt;li&gt;SenseTime，Full-Stack Software Engineer（2018—2020）&lt;/li&gt;&#xA;&lt;li&gt;JD.com，Algorithm Engineer Intern（2017—2017）&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
-=======
-      <title>About</title>
       <link>https://wenqf11.github.io/about/</link>
-      <pubDate>Sun, 25 Aug 2024 11:12:51 +0800</pubDate>
-      
+      <pubDate>Wed, 17 May 2023 17:12:51 +0800</pubDate>
       <guid>https://wenqf11.github.io/about/</guid>
-      <description>Introduction  Basing Shenzhen, China, I am a Software Engineer focusing on LLM Infra and MLSys.</description>
->>>>>>> 57c0adf7bc5d6eb5c995fc78c6b0214d8a01a056
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Basing Shenzhen, China, I am a Software Engineer focusing on LLM Infra and MLSys. I Like running, reading and basketball.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;education&#34;&gt;Education&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Tsinghua University, Beijing（2015－2018）School of Software, Master&lt;/li&gt;&#xA;&lt;li&gt;Tsinghua University, Beijing（2011—2015）School of Software, Bachelor&lt;/li&gt;&#xA;&lt;li&gt;Changjun High School, Changsha（2008－2011）&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;experience&#34;&gt;Experience&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Tecent，Software Engineer（2020—2024)&lt;/li&gt;&#xA;&lt;li&gt;SenseTime，Full-Stack Software Engineer（2018—2020）&lt;/li&gt;&#xA;&lt;li&gt;JD.com，Algorithm Engineer Intern（2017—2017）&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
     <item>
       <title>PostGIS与MySQL空间索引对比</title>
-      <link>http://localhost:1313/post/2021_06_03_postgis_mysql/</link>
+      <link>https://wenqf11.github.io/post/2021_06_03_postgis_mysql/</link>
       <pubDate>Thu, 03 Jun 2021 17:55:11 +0800</pubDate>
-      <guid>http://localhost:1313/post/2021_06_03_postgis_mysql/</guid>
+      <guid>https://wenqf11.github.io/post/2021_06_03_postgis_mysql/</guid>
       <description>&lt;h2 id=&#34;什么是数据库空间索引&#34;&gt;什么是数据库空间索引？&lt;/h2&gt;&#xA;&lt;p&gt;数据库中的索引我们都是知道，最常见的就是用B+数来索引我们存储在数据库中的数据。顾名思义，空间索引就是一种用来索引空间数据（例如2维数据）的索引结构。&lt;/p&gt;</description>
     </item>
     <item>
       <title>别了，我的2016</title>
-      <link>http://localhost:1313/post/my_reviews_2016/</link>
+      <link>https://wenqf11.github.io/post/my_reviews_2016/</link>
       <pubDate>Fri, 30 Dec 2016 16:50:22 +0000</pubDate>
-      <guid>http://localhost:1313/post/my_reviews_2016/</guid>
+      <guid>https://wenqf11.github.io/post/my_reviews_2016/</guid>
       <description>&lt;p&gt;一年又过去了，希望自己可以每年都写一篇总结，曾子说“吾日三省吾身”，我做不到每天反省自己，但希望自己至少一年能总结一下自己。&lt;/p&gt;</description>
     </item>
     <item>
       <title>2016 我的书单和影单</title>
-      <link>http://localhost:1313/post/books_movies_2016/</link>
+      <link>https://wenqf11.github.io/post/books_movies_2016/</link>
       <pubDate>Fri, 23 Dec 2016 22:18:22 +0000</pubDate>
-      <guid>http://localhost:1313/post/books_movies_2016/</guid>
+      <guid>https://wenqf11.github.io/post/books_movies_2016/</guid>
       <description>&lt;p&gt;这一年一直坚持读书，也看过一些电影，希望把自己看过的书和电影简单归纳一下，推荐少量我觉得最值得一看的书和电影。&lt;/p&gt;</description>
     </item>
     <item>
       <title>CentOS 上双网卡双 IP 配置，实现内网访问外网</title>
-      <link>http://localhost:1313/post/config-two-network-interfaces/</link>
+      <link>https://wenqf11.github.io/post/config-two-network-interfaces/</link>
       <pubDate>Fri, 09 Dec 2016 22:09:22 +0000</pubDate>
-      <guid>http://localhost:1313/post/config-two-network-interfaces/</guid>
+      <guid>https://wenqf11.github.io/post/config-two-network-interfaces/</guid>
       <description>&lt;p&gt;前两天配置了一台 CentOS 7 的服务器双网卡双IP，一个内网IP，一个外网IP。这样为这台服务器配置转发规则，内网网段的所有机器都可以通过它作为网关转发来上网了。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Ubuntu 上安装 ACR122U 驱动</title>
-      <link>http://localhost:1313/post/install_acr122u_drivers_ubuntu/</link>
+      <link>https://wenqf11.github.io/post/install_acr122u_drivers_ubuntu/</link>
       <pubDate>Thu, 07 Jul 2016 00:09:22 +0000</pubDate>
-      <guid>http://localhost:1313/post/install_acr122u_drivers_ubuntu/</guid>
+      <guid>https://wenqf11.github.io/post/install_acr122u_drivers_ubuntu/</guid>
       <description>&lt;p&gt;ACR122U 是一种基于13.56MHz非接触式的智能卡读写器，详细资料可以参考&lt;a href=&#34;http://www.acs.com.hk/cn/products/73/acr122u-nfc%E8%AF%BB%E5%86%99%E5%99%A8%EF%BC%88usb%E6%8E%A5%E5%8F%A3%EF%BC%89/&#34;&gt;官方网站&lt;/a&gt;。&lt;/p&gt;</description>
     </item>
     <item>
       <title>记一次 yum remove openssl 引发的灾难</title>
-      <link>http://localhost:1313/post/disaster_causeby_removing_openssl_in_centos5.5/</link>
+      <link>https://wenqf11.github.io/post/disaster_causeby_removing_openssl_in_centos5.5/</link>
       <pubDate>Thu, 21 Apr 2016 22:31:22 +0000</pubDate>
-      <guid>http://localhost:1313/post/disaster_causeby_removing_openssl_in_centos5.5/</guid>
+      <guid>https://wenqf11.github.io/post/disaster_causeby_removing_openssl_in_centos5.5/</guid>
       <description>&lt;p&gt;前段时间本来想要更新一台 Centos 5.5 服务器SSH，所以打算先 yum remove openssl，当时也是粗心大意，没仔细看卸载所依赖的包，结果没曾想把系统的一些 bash 指令都卸载掉了，什么 ls、cp 这些基本指令都不能用了，顿时人就傻了，当时是远程 ssh 连接到服务器的，当时都不敢断开连接，知道断开连接肯定就连不上了，最后还是断开连接了。&lt;/p&gt;</description>
     </item>
     <item>
       <title>说说我的2015</title>
-      <link>http://localhost:1313/post/say_something_about_my_2015/</link>
+      <link>https://wenqf11.github.io/post/say_something_about_my_2015/</link>
       <pubDate>Thu, 31 Dec 2015 00:01:22 +0000</pubDate>
-      <guid>http://localhost:1313/post/say_something_about_my_2015/</guid>
+      <guid>https://wenqf11.github.io/post/say_something_about_my_2015/</guid>
       <description>&lt;p&gt;伴随大数据系统基础课程项目展示结束，就完成了本学期的所有课程，同时2015年也快结束了，觉得该说点什么了。&lt;/p&gt;</description>
     </item>
     <item>
       <title>我是如何从80减到70的</title>
-      <link>http://localhost:1313/post/how-i-lose-weight-from-80-to-70/</link>
+      <link>https://wenqf11.github.io/post/how-i-lose-weight-from-80-to-70/</link>
       <pubDate>Fri, 02 Oct 2015 08:26:11 +0000</pubDate>
-      <guid>http://localhost:1313/post/how-i-lose-weight-from-80-to-70/</guid>
+      <guid>https://wenqf11.github.io/post/how-i-lose-weight-from-80-to-70/</guid>
       <description>&lt;p&gt;之前一直都想写篇文章分享一下自己的减肥经历，虽然自己减肥不算很成功，但还是希望能够分享一下。&lt;/p&gt;</description>
     </item>
     <item>
       <title>音乐情感分类</title>
-      <link>http://localhost:1313/post/music_emotion_classification/</link>
+      <link>https://wenqf11.github.io/post/music_emotion_classification/</link>
       <pubDate>Fri, 09 Jan 2015 21:51:22 +0000</pubDate>
-      <guid>http://localhost:1313/post/music_emotion_classification/</guid>
+      <guid>https://wenqf11.github.io/post/music_emotion_classification/</guid>
       <description>&lt;p&gt;刚上完了&lt;a href=&#34;http://learn.tsinghua.edu.cn:8080/2006990024/index.htm&#34;&gt;王朝坤&lt;/a&gt;老师《数字媒体（2）》音频技术部分的课程，做了一个音乐情感分类的实验，特写出来分享一下。&lt;/p&gt;</description>
     </item>
     <item>
       <title>回首我的2014</title>
-      <link>http://localhost:1313/post/my_reviews_2014/</link>
+      <link>https://wenqf11.github.io/post/my_reviews_2014/</link>
       <pubDate>Wed, 31 Dec 2014 22:18:22 +0000</pubDate>
-      <guid>http://localhost:1313/post/my_reviews_2014/</guid>
+      <guid>https://wenqf11.github.io/post/my_reviews_2014/</guid>
       <description>&lt;p&gt;时间过得真快，一年前与子任一同看清华的新年晚会仿佛还在昨日。临近年末，一直都想写点东西总结一下，但到了此时此刻却不知道该写些什么好。&lt;/p&gt;</description>
     </item>
     <item>
       <title>从一个神奇的Bug开始谈缓存一致性问题</title>
-      <link>http://localhost:1313/post/cache_coherency/</link>
+      <link>https://wenqf11.github.io/post/cache_coherency/</link>
       <pubDate>Tue, 23 Dec 2014 00:18:22 +0000</pubDate>
-      <guid>http://localhost:1313/post/cache_coherency/</guid>
+      <guid>https://wenqf11.github.io/post/cache_coherency/</guid>
       <description>&lt;h2 id=&#34;引入&#34;&gt;引入&lt;/h2&gt;&#xA;&lt;p&gt;前一段时间，我一直都在做一个软件保护的项目，上周一直都忙于&lt;a href=&#34;https://aicraft.net9.org/&#34;&gt;一个赛事&lt;/a&gt;的组织筹备工作，没有空闲写一点东西，这周才补上。我所做的工作主要就是对多个不同平台下的动态链接库进行加密，防止用户对其进行反汇编。在加密的流程中，有一个过程需要实现在内存中先解密代码段，然后再执行解密后的代码。显然，这里需要进行内存中代码段的读写操作。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Python pefile 模块读写 PE 文件</title>
-      <link>http://localhost:1313/post/pe_file/</link>
+      <link>https://wenqf11.github.io/post/pe_file/</link>
       <pubDate>Sat, 08 Nov 2014 19:34:22 +0000</pubDate>
-      <guid>http://localhost:1313/post/pe_file/</guid>
+      <guid>https://wenqf11.github.io/post/pe_file/</guid>
       <description>&lt;h2 id=&#34;pe-文件&#34;&gt;PE 文件&lt;/h2&gt;&#xA;&lt;p&gt;PE（&amp;ldquo;portable executable&amp;rdquo;，可移植的可执行文件）文件是 Windows 操作系统中常见的目标文件、库文件和可执行文件格式，常见的 EXE、DLL、OCX、SYS、COM 都是 PE 文件。深入地了解 PE 文件格式不仅是做一些 Windows hack 相关编程所必须的，同时对我们理解 Windows 系统的内部构造也有很大的帮助。&lt;/p&gt;</description>
     </item>
     <item>
       <title>我是如何用 MASM 汇编写摄像头控制程序的</title>
-      <link>http://localhost:1313/post/masm_opencv/</link>
+      <link>https://wenqf11.github.io/post/masm_opencv/</link>
       <pubDate>Mon, 21 Apr 2014 09:34:22 +0000</pubDate>
-      <guid>http://localhost:1313/post/masm_opencv/</guid>
+      <guid>https://wenqf11.github.io/post/masm_opencv/</guid>
       <description>&lt;p&gt;上周完成了汇编语言这门课程的大作业展示，总体来说做得还是挺满意的。我们小组做的是一个摄像头控制类似微信飞机大战的程序。我们不想只是简单做一个小游戏，希望能将摄像头也加入进来，做一些控制的事情，所以才有了这个项目。在这个项目中，我主要负责的用汇编语言实现摄像头控制，需哥和磊哥负责实现类飞机大战的游戏程序。这是与普通微信飞机大战的区别在于就是我们额外实现了可以用电脑摄像头捕捉人脸移动，对应到飞机的移动，从而实现控制飞机大战游戏。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Apache反向代理实现转发</title>
-      <link>http://localhost:1313/post/apache_proxy_reverse/</link>
+      <link>https://wenqf11.github.io/post/apache_proxy_reverse/</link>
       <pubDate>Thu, 16 Jan 2014 22:19:57 +0000</pubDate>
-      <guid>http://localhost:1313/post/apache_proxy_reverse/</guid>
+      <guid>https://wenqf11.github.io/post/apache_proxy_reverse/</guid>
       <description>&lt;p&gt;这两天一直用 WordPress 在做一个网站，在部署网站的时候遇到了一些困难。服务器是 Windows Server 2008 的，之前上面已经有 Tomcat 了，现在想在 Apache 下来跑 WordPress。两台服务器同时监听80端口显然是不行的，很容易想到一台服务器监听80端口，另一台服务器监听另一个端口，比如说8080端口，然后通过转发来实现 Tomcat 和 Apache 并存。那么如何实现这种转发呢？反向代理！&lt;/p&gt;</description>
     </item>
     <item>
       <title>《软件工程》学习总结</title>
-      <link>http://localhost:1313/post/software-engineering-summary/</link>
+      <link>https://wenqf11.github.io/post/software-engineering-summary/</link>
       <pubDate>Tue, 31 Dec 2013 00:40:11 +0000</pubDate>
-      <guid>http://localhost:1313/post/software-engineering-summary/</guid>
+      <guid>https://wenqf11.github.io/post/software-engineering-summary/</guid>
       <description>&lt;p&gt;这个学期接近尾声，软工课也已经正式结课了，也该好好的给自己这个学期的软工学习做一个总结了。&lt;/p&gt;&#xA;&lt;h2 id=&#34;软件工程工程化的软件开发思想&#34;&gt;软件工程，工程化的软件开发思想&lt;/h2&gt;&#xA;&lt;p&gt;什么是软件工程？软件工程是研究和应用如何以系统性的、规范化的、可定量的过程化方法去开发和维护软件，以及如何把经过时间考验而证明正确的管理技术和当前能够得到的最好的技术方法结合起来的学科（摘自维基百科）。&lt;/p&gt;</description>
     </item>
     <item>
       <title>归档</title>
-      <link>http://localhost:1313/archives/</link>
+      <link>https://wenqf11.github.io/archives/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/archives/</guid>
+      <guid>https://wenqf11.github.io/archives/</guid>
       <description></description>
     </item>
   </channel>

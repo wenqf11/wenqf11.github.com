@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>MASM on Vince&#39;s Blog</title>
-    <link>http://localhost:1313/tags/masm/</link>
+    <link>https://wenqf11.github.io/tags/masm/</link>
     <description>Recent content in MASM on Vince&#39;s Blog</description>
     <generator>Hugo</generator>
     <language>zh-CN</language>
     <lastBuildDate>Mon, 21 Apr 2014 09:34:22 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/masm/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://wenqf11.github.io/tags/masm/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>我是如何用 MASM 汇编写摄像头控制程序的</title>
-      <link>http://localhost:1313/post/masm_opencv/</link>
+      <link>https://wenqf11.github.io/post/masm_opencv/</link>
       <pubDate>Mon, 21 Apr 2014 09:34:22 +0000</pubDate>
-      <guid>http://localhost:1313/post/masm_opencv/</guid>
+      <guid>https://wenqf11.github.io/post/masm_opencv/</guid>
       <description>&lt;p&gt;上周完成了汇编语言这门课程的大作业展示，总体来说做得还是挺满意的。我们小组做的是一个摄像头控制类似微信飞机大战的程序。我们不想只是简单做一个小游戏，希望能将摄像头也加入进来，做一些控制的事情，所以才有了这个项目。在这个项目中，我主要负责的用汇编语言实现摄像头控制，需哥和磊哥负责实现类飞机大战的游戏程序。这是与普通微信飞机大战的区别在于就是我们额外实现了可以用电脑摄像头捕捉人脸移动，对应到飞机的移动，从而实现控制飞机大战游戏。&lt;/p&gt;</description>
     </item>
   </channel>

@@ -2,115 +2,115 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Vince&#39;s Blog</title>
-    <link>http://localhost:1313/tags/</link>
+    <link>https://wenqf11.github.io/tags/</link>
     <description>Recent content in Tags on Vince&#39;s Blog</description>
     <generator>Hugo</generator>
     <language>zh-CN</language>
     <lastBuildDate>Thu, 28 Nov 2024 00:40:11 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://wenqf11.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>LLM推理</title>
-      <link>http://localhost:1313/tags/llm%E6%8E%A8%E7%90%86/</link>
+      <link>https://wenqf11.github.io/tags/llm%E6%8E%A8%E7%90%86/</link>
       <pubDate>Thu, 28 Nov 2024 00:40:11 +0000</pubDate>
-      <guid>http://localhost:1313/tags/llm%E6%8E%A8%E7%90%86/</guid>
+      <guid>https://wenqf11.github.io/tags/llm%E6%8E%A8%E7%90%86/</guid>
       <description></description>
     </item>
     <item>
       <title>MLSys</title>
-      <link>http://localhost:1313/tags/mlsys/</link>
+      <link>https://wenqf11.github.io/tags/mlsys/</link>
       <pubDate>Thu, 28 Nov 2024 00:40:11 +0000</pubDate>
-      <guid>http://localhost:1313/tags/mlsys/</guid>
+      <guid>https://wenqf11.github.io/tags/mlsys/</guid>
       <description></description>
     </item>
     <item>
       <title>MySQL</title>
-      <link>http://localhost:1313/tags/mysql/</link>
+      <link>https://wenqf11.github.io/tags/mysql/</link>
       <pubDate>Thu, 03 Jun 2021 17:55:11 +0800</pubDate>
-      <guid>http://localhost:1313/tags/mysql/</guid>
+      <guid>https://wenqf11.github.io/tags/mysql/</guid>
       <description></description>
     </item>
     <item>
       <title>PostGIS</title>
-      <link>http://localhost:1313/tags/postgis/</link>
+      <link>https://wenqf11.github.io/tags/postgis/</link>
       <pubDate>Thu, 03 Jun 2021 17:55:11 +0800</pubDate>
-      <guid>http://localhost:1313/tags/postgis/</guid>
+      <guid>https://wenqf11.github.io/tags/postgis/</guid>
       <description></description>
     </item>
     <item>
       <title>PostgreSQL</title>
-      <link>http://localhost:1313/tags/postgresql/</link>
+      <link>https://wenqf11.github.io/tags/postgresql/</link>
       <pubDate>Thu, 03 Jun 2021 17:55:11 +0800</pubDate>
-      <guid>http://localhost:1313/tags/postgresql/</guid>
+      <guid>https://wenqf11.github.io/tags/postgresql/</guid>
       <description></description>
     </item>
     <item>
       <title>Spatial Index</title>
-      <link>http://localhost:1313/tags/spatial-index/</link>
+      <link>https://wenqf11.github.io/tags/spatial-index/</link>
       <pubDate>Thu, 03 Jun 2021 17:55:11 +0800</pubDate>
-      <guid>http://localhost:1313/tags/spatial-index/</guid>
+      <guid>https://wenqf11.github.io/tags/spatial-index/</guid>
       <description></description>
     </item>
     <item>
       <title>空间索引</title>
-      <link>http://localhost:1313/tags/%E7%A9%BA%E9%97%B4%E7%B4%A2%E5%BC%95/</link>
+      <link>https://wenqf11.github.io/tags/%E7%A9%BA%E9%97%B4%E7%B4%A2%E5%BC%95/</link>
       <pubDate>Thu, 03 Jun 2021 17:55:11 +0800</pubDate>
-      <guid>http://localhost:1313/tags/%E7%A9%BA%E9%97%B4%E7%B4%A2%E5%BC%95/</guid>
+      <guid>https://wenqf11.github.io/tags/%E7%A9%BA%E9%97%B4%E7%B4%A2%E5%BC%95/</guid>
       <description></description>
     </item>
     <item>
       <title>Exercise</title>
-      <link>http://localhost:1313/tags/exercise/</link>
+      <link>https://wenqf11.github.io/tags/exercise/</link>
       <pubDate>Fri, 02 Oct 2015 08:26:11 +0000</pubDate>
-      <guid>http://localhost:1313/tags/exercise/</guid>
+      <guid>https://wenqf11.github.io/tags/exercise/</guid>
       <description></description>
     </item>
     <item>
       <title>Machine-Learning</title>
-      <link>http://localhost:1313/tags/machine-learning/</link>
+      <link>https://wenqf11.github.io/tags/machine-learning/</link>
       <pubDate>Fri, 09 Jan 2015 21:51:22 +0000</pubDate>
-      <guid>http://localhost:1313/tags/machine-learning/</guid>
+      <guid>https://wenqf11.github.io/tags/machine-learning/</guid>
       <description></description>
     </item>
     <item>
       <title>Cache</title>
-      <link>http://localhost:1313/tags/cache/</link>
+      <link>https://wenqf11.github.io/tags/cache/</link>
       <pubDate>Tue, 23 Dec 2014 00:18:22 +0000</pubDate>
-      <guid>http://localhost:1313/tags/cache/</guid>
+      <guid>https://wenqf11.github.io/tags/cache/</guid>
       <description></description>
     </item>
     <item>
       <title>PE</title>
-      <link>http://localhost:1313/tags/pe/</link>
+      <link>https://wenqf11.github.io/tags/pe/</link>
       <pubDate>Sat, 08 Nov 2014 19:34:22 +0000</pubDate>
-      <guid>http://localhost:1313/tags/pe/</guid>
+      <guid>https://wenqf11.github.io/tags/pe/</guid>
       <description></description>
     </item>
     <item>
       <title>MASM</title>
-      <link>http://localhost:1313/tags/masm/</link>
+      <link>https://wenqf11.github.io/tags/masm/</link>
       <pubDate>Mon, 21 Apr 2014 09:34:22 +0000</pubDate>
-      <guid>http://localhost:1313/tags/masm/</guid>
+      <guid>https://wenqf11.github.io/tags/masm/</guid>
       <description></description>
     </item>
     <item>
       <title>OpenCV</title>
-      <link>http://localhost:1313/tags/opencv/</link>
+      <link>https://wenqf11.github.io/tags/opencv/</link>
       <pubDate>Mon, 21 Apr 2014 09:34:22 +0000</pubDate>
-      <guid>http://localhost:1313/tags/opencv/</guid>
+      <guid>https://wenqf11.github.io/tags/opencv/</guid>
       <description></description>
     </item>
     <item>
       <title>Apache</title>
-      <link>http://localhost:1313/tags/apache/</link>
+      <link>https://wenqf11.github.io/tags/apache/</link>
       <pubDate>Thu, 16 Jan 2014 22:19:57 +0000</pubDate>
-      <guid>http://localhost:1313/tags/apache/</guid>
+      <guid>https://wenqf11.github.io/tags/apache/</guid>
       <description></description>
     </item>
     <item>
       <title>Software-Engineering</title>
-      <link>http://localhost:1313/tags/software-engineering/</link>
+      <link>https://wenqf11.github.io/tags/software-engineering/</link>
       <pubDate>Tue, 31 Dec 2013 00:40:11 +0000</pubDate>
-      <guid>http://localhost:1313/tags/software-engineering/</guid>
+      <guid>https://wenqf11.github.io/tags/software-engineering/</guid>
       <description></description>
     </item>
   </channel>
