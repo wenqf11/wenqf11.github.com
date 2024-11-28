@@ -9,6 +9,7 @@
     <lastBuildDate>Thu, 28 Nov 2024 00:40:11 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
+<<<<<<< HEAD
       <title>浅谈大语言模型推理相关技术之一：综述</title>
       <link>http://localhost:1313/post/llm_inference_survey_01/</link>
       <pubDate>Thu, 28 Nov 2024 00:40:11 +0000</pubDate>
@@ -21,6 +22,14 @@
       <pubDate>Wed, 17 May 2023 17:12:51 +0800</pubDate>
       <guid>http://localhost:1313/about/</guid>
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Basing Shenzhen, China, I am a Software Engineer focusing on LLM Infra and MLSys. I Like running, reading and basketball.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;education&#34;&gt;Education&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Tsinghua University, Beijing（2015－2018）School of Software, Master&lt;/li&gt;&#xA;&lt;li&gt;Tsinghua University, Beijing（2011—2015）School of Software, Bachelor&lt;/li&gt;&#xA;&lt;li&gt;Changjun High School, Changsha（2008－2011）&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;experience&#34;&gt;Experience&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Tecent，Software Engineer（2020—2024)&lt;/li&gt;&#xA;&lt;li&gt;SenseTime，Full-Stack Software Engineer（2018—2020）&lt;/li&gt;&#xA;&lt;li&gt;JD.com，Algorithm Engineer Intern（2017—2017）&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+=======
+      <title>About</title>
+      <link>https://wenqf11.github.io/about/</link>
+      <pubDate>Sun, 25 Aug 2024 11:12:51 +0800</pubDate>
+      
+      <guid>https://wenqf11.github.io/about/</guid>
+      <description>Introduction  Basing Shenzhen, China, I am a Software Engineer focusing on LLM Infra and MLSys.</description>
+>>>>>>> 57c0adf7bc5d6eb5c995fc78c6b0214d8a01a056
     </item>
     <item>
       <title>PostGIS与MySQL空间索引对比</title>
