@@ -2,21 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Software-Engineering on Vince&#39;s Blog</title>
-    <link>https://wenqf11.github.io/tags/software-engineering/</link>
+    <link>http://localhost:1313/tags/software-engineering/</link>
     <description>Recent content in Software-Engineering on Vince&#39;s Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 31 Dec 2013 00:40:11 +0000</lastBuildDate><atom:link href="https://wenqf11.github.io/tags/software-engineering/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 31 Dec 2013 00:40:11 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/software-engineering/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>《软件工程》学习总结</title>
-      <link>https://wenqf11.github.io/post/software-engineering-summary/</link>
+      <link>http://localhost:1313/post/software-engineering-summary/</link>
       <pubDate>Tue, 31 Dec 2013 00:40:11 +0000</pubDate>
-      
-      <guid>https://wenqf11.github.io/post/software-engineering-summary/</guid>
-      <description>&lt;p&gt;这个学期接近尾声，软工课也已经正式结课了，也该好好的给自己这个学期的软工学习做一个总结了。&lt;/p&gt;
-&lt;h2 id=&#34;软件工程工程化的软件开发思想&#34;&gt;软件工程，工程化的软件开发思想&lt;/h2&gt;
-&lt;p&gt;什么是软件工程？软件工程是研究和应用如何以系统性的、规范化的、可定量的过程化方法去开发和维护软件，以及如何把经过时间考验而证明正确的管理技术和当前能够得到的最好的技术方法结合起来的学科（摘自维基百科）。&lt;/p&gt;</description>
+      <guid>http://localhost:1313/post/software-engineering-summary/</guid>
+      <description>&lt;p&gt;这个学期接近尾声，软工课也已经正式结课了，也该好好的给自己这个学期的软工学习做一个总结了。&lt;/p&gt;&#xA;&lt;h2 id=&#34;软件工程工程化的软件开发思想&#34;&gt;软件工程，工程化的软件开发思想&lt;/h2&gt;&#xA;&lt;p&gt;什么是软件工程？软件工程是研究和应用如何以系统性的、规范化的、可定量的过程化方法去开发和维护软件，以及如何把经过时间考验而证明正确的管理技术和当前能够得到的最好的技术方法结合起来的学科（摘自维基百科）。&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

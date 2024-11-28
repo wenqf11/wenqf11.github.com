@@ -2,37 +2,32 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Linux on Vince&#39;s Blog</title>
-    <link>https://wenqf11.github.io/categories/linux/</link>
+    <link>http://localhost:1313/categories/linux/</link>
     <description>Recent content in Linux on Vince&#39;s Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 09 Dec 2016 22:09:22 +0000</lastBuildDate><atom:link href="https://wenqf11.github.io/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 09 Dec 2016 22:09:22 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/linux/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>CentOS 上双网卡双 IP 配置，实现内网访问外网</title>
-      <link>https://wenqf11.github.io/post/config-two-network-interfaces/</link>
+      <link>http://localhost:1313/post/config-two-network-interfaces/</link>
       <pubDate>Fri, 09 Dec 2016 22:09:22 +0000</pubDate>
-      
-      <guid>https://wenqf11.github.io/post/config-two-network-interfaces/</guid>
+      <guid>http://localhost:1313/post/config-two-network-interfaces/</guid>
       <description>&lt;p&gt;前两天配置了一台 CentOS 7 的服务器双网卡双IP，一个内网IP，一个外网IP。这样为这台服务器配置转发规则，内网网段的所有机器都可以通过它作为网关转发来上网了。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Ubuntu 上安装 ACR122U 驱动</title>
-      <link>https://wenqf11.github.io/post/install_acr122u_drivers_ubuntu/</link>
+      <link>http://localhost:1313/post/install_acr122u_drivers_ubuntu/</link>
       <pubDate>Thu, 07 Jul 2016 00:09:22 +0000</pubDate>
-      
-      <guid>https://wenqf11.github.io/post/install_acr122u_drivers_ubuntu/</guid>
+      <guid>http://localhost:1313/post/install_acr122u_drivers_ubuntu/</guid>
       <description>&lt;p&gt;ACR122U 是一种基于13.56MHz非接触式的智能卡读写器，详细资料可以参考&lt;a href=&#34;http://www.acs.com.hk/cn/products/73/acr122u-nfc%E8%AF%BB%E5%86%99%E5%99%A8%EF%BC%88usb%E6%8E%A5%E5%8F%A3%EF%BC%89/&#34;&gt;官方网站&lt;/a&gt;。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>记一次 yum remove openssl 引发的灾难</title>
-      <link>https://wenqf11.github.io/post/disaster_causeby_removing_openssl_in_centos5.5/</link>
+      <link>http://localhost:1313/post/disaster_causeby_removing_openssl_in_centos5.5/</link>
       <pubDate>Thu, 21 Apr 2016 22:31:22 +0000</pubDate>
-      
-      <guid>https://wenqf11.github.io/post/disaster_causeby_removing_openssl_in_centos5.5/</guid>
+      <guid>http://localhost:1313/post/disaster_causeby_removing_openssl_in_centos5.5/</guid>
       <description>&lt;p&gt;前段时间本来想要更新一台 Centos 5.5 服务器SSH，所以打算先 yum remove openssl，当时也是粗心大意，没仔细看卸载所依赖的包，结果没曾想把系统的一些 bash 指令都卸载掉了，什么 ls、cp 这些基本指令都不能用了，顿时人就傻了，当时是远程 ssh 连接到服务器的，当时都不敢断开连接，知道断开连接肯定就连不上了，最后还是断开连接了。&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

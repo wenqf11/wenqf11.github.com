@@ -2,66 +2,53 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>随笔 on Vince&#39;s Blog</title>
-    <link>https://wenqf11.github.io/categories/%E9%9A%8F%E7%AC%94/</link>
+    <link>http://localhost:1313/categories/%E9%9A%8F%E7%AC%94/</link>
     <description>Recent content in 随笔 on Vince&#39;s Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 30 Dec 2016 16:50:22 +0000</lastBuildDate><atom:link href="https://wenqf11.github.io/categories/%E9%9A%8F%E7%AC%94/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 30 Dec 2016 16:50:22 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/%E9%9A%8F%E7%AC%94/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>别了，我的2016</title>
-      <link>https://wenqf11.github.io/post/my_reviews_2016/</link>
+      <link>http://localhost:1313/post/my_reviews_2016/</link>
       <pubDate>Fri, 30 Dec 2016 16:50:22 +0000</pubDate>
-      
-      <guid>https://wenqf11.github.io/post/my_reviews_2016/</guid>
+      <guid>http://localhost:1313/post/my_reviews_2016/</guid>
       <description>&lt;p&gt;一年又过去了，希望自己可以每年都写一篇总结，曾子说“吾日三省吾身”，我做不到每天反省自己，但希望自己至少一年能总结一下自己。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>2016 我的书单和影单</title>
-      <link>https://wenqf11.github.io/post/books_movies_2016/</link>
+      <link>http://localhost:1313/post/books_movies_2016/</link>
       <pubDate>Fri, 23 Dec 2016 22:18:22 +0000</pubDate>
-      
-      <guid>https://wenqf11.github.io/post/books_movies_2016/</guid>
+      <guid>http://localhost:1313/post/books_movies_2016/</guid>
       <description>&lt;p&gt;这一年一直坚持读书，也看过一些电影，希望把自己看过的书和电影简单归纳一下，推荐少量我觉得最值得一看的书和电影。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>说说我的2015</title>
-      <link>https://wenqf11.github.io/post/say_something_about_my_2015/</link>
+      <link>http://localhost:1313/post/say_something_about_my_2015/</link>
       <pubDate>Thu, 31 Dec 2015 00:01:22 +0000</pubDate>
-      
-      <guid>https://wenqf11.github.io/post/say_something_about_my_2015/</guid>
+      <guid>http://localhost:1313/post/say_something_about_my_2015/</guid>
       <description>&lt;p&gt;伴随大数据系统基础课程项目展示结束，就完成了本学期的所有课程，同时2015年也快结束了，觉得该说点什么了。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>我是如何从80减到70的</title>
-      <link>https://wenqf11.github.io/post/how-i-lose-weight-from-80-to-70/</link>
+      <link>http://localhost:1313/post/how-i-lose-weight-from-80-to-70/</link>
       <pubDate>Fri, 02 Oct 2015 08:26:11 +0000</pubDate>
-      
-      <guid>https://wenqf11.github.io/post/how-i-lose-weight-from-80-to-70/</guid>
+      <guid>http://localhost:1313/post/how-i-lose-weight-from-80-to-70/</guid>
       <description>&lt;p&gt;之前一直都想写篇文章分享一下自己的减肥经历，虽然自己减肥不算很成功，但还是希望能够分享一下。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>回首我的2014</title>
-      <link>https://wenqf11.github.io/post/my_reviews_2014/</link>
+      <link>http://localhost:1313/post/my_reviews_2014/</link>
       <pubDate>Wed, 31 Dec 2014 22:18:22 +0000</pubDate>
-      
-      <guid>https://wenqf11.github.io/post/my_reviews_2014/</guid>
+      <guid>http://localhost:1313/post/my_reviews_2014/</guid>
       <description>&lt;p&gt;时间过得真快，一年前与子任一同看清华的新年晚会仿佛还在昨日。临近年末，一直都想写点东西总结一下，但到了此时此刻却不知道该写些什么好。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>《软件工程》学习总结</title>
-      <link>https://wenqf11.github.io/post/software-engineering-summary/</link>
+      <link>http://localhost:1313/post/software-engineering-summary/</link>
       <pubDate>Tue, 31 Dec 2013 00:40:11 +0000</pubDate>
-      
-      <guid>https://wenqf11.github.io/post/software-engineering-summary/</guid>
-      <description>&lt;p&gt;这个学期接近尾声，软工课也已经正式结课了，也该好好的给自己这个学期的软工学习做一个总结了。&lt;/p&gt;
-&lt;h2 id=&#34;软件工程工程化的软件开发思想&#34;&gt;软件工程，工程化的软件开发思想&lt;/h2&gt;
-&lt;p&gt;什么是软件工程？软件工程是研究和应用如何以系统性的、规范化的、可定量的过程化方法去开发和维护软件，以及如何把经过时间考验而证明正确的管理技术和当前能够得到的最好的技术方法结合起来的学科（摘自维基百科）。&lt;/p&gt;</description>
+      <guid>http://localhost:1313/post/software-engineering-summary/</guid>
+      <description>&lt;p&gt;这个学期接近尾声，软工课也已经正式结课了，也该好好的给自己这个学期的软工学习做一个总结了。&lt;/p&gt;&#xA;&lt;h2 id=&#34;软件工程工程化的软件开发思想&#34;&gt;软件工程，工程化的软件开发思想&lt;/h2&gt;&#xA;&lt;p&gt;什么是软件工程？软件工程是研究和应用如何以系统性的、规范化的、可定量的过程化方法去开发和维护软件，以及如何把经过时间考验而证明正确的管理技术和当前能够得到的最好的技术方法结合起来的学科（摘自维基百科）。&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

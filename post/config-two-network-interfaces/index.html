@@ -1,36 +1,40 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="generator" content="Hugo 0.82.0" />
+  <meta name="generator" content="Hugo 0.139.2">
 
   <title>CentOS 上双网卡双 IP 配置，实现内网访问外网 &middot; Vince&#39;s Blog</title>
 
   <meta name="description" content="" />
 
   
-
-<meta itemprop="name" content="CentOS 上双网卡双 IP 配置，实现内网访问外网">
-<meta itemprop="description" content="前两天配置了一台 CentOS 7 的服务器双网卡双IP，一个内网IP，一个外网IP。这样为这台服务器配置转发规则，内网网段的所有机器都可以通过它作为网关转发来上网了。"><meta itemprop="datePublished" content="2016-12-09T22:09:22&#43;00:00" />
-<meta itemprop="dateModified" content="2016-12-09T22:09:22&#43;00:00" />
-<meta itemprop="wordCount" content="936"><meta itemprop="image" content="https://wenqf11.github.io/images/profile.jpg"/>
-<meta itemprop="keywords" content="" />
-
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://wenqf11.github.io/images/profile.jpg"/>
-
-<meta name="twitter:title" content="CentOS 上双网卡双 IP 配置，实现内网访问外网"/>
-<meta name="twitter:description" content="前两天配置了一台 CentOS 7 的服务器双网卡双IP，一个内网IP，一个外网IP。这样为这台服务器配置转发规则，内网网段的所有机器都可以通过它作为网关转发来上网了。"/>
+  <meta itemprop="name" content="CentOS 上双网卡双 IP 配置，实现内网访问外网">
+  <meta itemprop="description" content="前两天配置了一台 CentOS 7 的服务器双网卡双IP，一个内网IP，一个外网IP。这样为这台服务器配置转发规则，内网网段的所有机器都可以通过它作为网关转发来上网了。">
+  <meta itemprop="datePublished" content="2016-12-09T22:09:22+00:00">
+  <meta itemprop="dateModified" content="2016-12-09T22:09:22+00:00">
+  <meta itemprop="wordCount" content="936">
+  <meta itemprop="image" content="http://localhost:1313/images/profile.jpg">
+  <meta itemprop="keywords" content="Linux">
 
 
-<meta property="og:title" content="CentOS 上双网卡双 IP 配置，实现内网访问外网" />
-<meta property="og:description" content="前两天配置了一台 CentOS 7 的服务器双网卡双IP，一个内网IP，一个外网IP。这样为这台服务器配置转发规则，内网网段的所有机器都可以通过它作为网关转发来上网了。" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://wenqf11.github.io/post/config-two-network-interfaces/" /><meta property="og:image" content="https://wenqf11.github.io/images/profile.jpg"/><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2016-12-09T22:09:22&#43;00:00" />
-<meta property="article:modified_time" content="2016-12-09T22:09:22&#43;00:00" /><meta property="og:site_name" content="Vince&#39;s Blog" />
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/images/profile.jpg">
+  <meta name="twitter:title" content="CentOS 上双网卡双 IP 配置，实现内网访问外网">
+  <meta name="twitter:description" content="前两天配置了一台 CentOS 7 的服务器双网卡双IP，一个内网IP，一个外网IP。这样为这台服务器配置转发规则，内网网段的所有机器都可以通过它作为网关转发来上网了。">
 
+
+<meta property="og:url" content="http://localhost:1313/post/config-two-network-interfaces/">
+  <meta property="og:site_name" content="Vince&#39;s Blog">
+  <meta property="og:title" content="CentOS 上双网卡双 IP 配置，实现内网访问外网">
+  <meta property="og:description" content="前两天配置了一台 CentOS 7 的服务器双网卡双IP，一个内网IP，一个外网IP。这样为这台服务器配置转发规则，内网网段的所有机器都可以通过它作为网关转发来上网了。">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2016-12-09T22:09:22+00:00">
+    <meta property="article:modified_time" content="2016-12-09T22:09:22+00:00">
+    <meta property="og:image" content="http://localhost:1313/images/profile.jpg">
 
 
 
@@ -40,42 +44,42 @@
   "@graph": [
     {
       "@type":"Person",
-      "@id": "https://wenqf11.github.io/#author",
+      "@id": "http://localhost:1313/#author",
       "name":  null ,
       "image": {
         "@type":"ImageObject",
         
-        "url": "https://wenqf11.github.io/images/profile.jpg"
+        "url": "http://localhost:1313/images/profile.jpg"
         
       },
       "description": "淡泊明志，宁静致远"
     },
     {
       "@type": "WebSite",
-      "@id": "https://wenqf11.github.io/#website",
-      "url": "https://wenqf11.github.io/",
+      "@id": "http://localhost:1313/#website",
+      "url": "http://localhost:1313/",
       "name": "Vince's Blog",
       "description": "淡泊明志，宁静致远",
       "publisher": {
-        "@id": "https://wenqf11.github.io/#author"
+        "@id": "http://localhost:1313/#author"
       },
       "inLanguage": "zh-CN"
     },
     {
       "@type": "ImageObject",
-      "url": "https://wenqf11.github.io/images/profile.jpg",
+      "url": "http://localhost:1313/images/profile.jpg",
       "caption": "Vince's Blog"
     },
     {
       "@type": "WebPage",
-      "@id": "https://wenqf11.github.io/post/config-two-network-interfaces/#webpage",
-      "url": "https://wenqf11.github.io/post/config-two-network-interfaces/",
+      "@id": "http://localhost:1313/post/config-two-network-interfaces/#webpage",
+      "url": "http://localhost:1313/post/config-two-network-interfaces/",
       "name": "CentOS 上双网卡双 IP 配置，实现内网访问外网",
       "isPartOf": {
-        "@id": "https://wenqf11.github.io/#website"
+        "@id": "http://localhost:1313/#website"
       },
       "about": {
-         "@id": "https://wenqf11.github.io/#author"
+         "@id": "http://localhost:1313/#author"
       },
       "datePublished": "2016-12-09T22:09:22+00:00",
       "dateModified": "2016-12-09T22:09:22+00:00",
@@ -85,7 +89,7 @@
         {
           "@type": "ReadAction",
           "target": [
-            "https://wenqf11.github.io/post/config-two-network-interfaces/"
+            "http://localhost:1313/post/config-two-network-interfaces/"
           ]
         }
       ]
@@ -93,16 +97,16 @@
     {
       "@type": "Article",
       "isPartOf": {
-        "@id": "https://wenqf11.github.io/post/config-two-network-interfaces/#webpage"
+        "@id": "http://localhost:1313/post/config-two-network-interfaces/#webpage"
       },
       "mainEntityOfPage": {
-        "@id": "https://wenqf11.github.io/post/config-two-network-interfaces/#webpage"
+        "@id": "http://localhost:1313/post/config-two-network-interfaces/#webpage"
       },
       "headline": "CentOS 上双网卡双 IP 配置，实现内网访问外网",
       "datePublished": "2016-12-09T22:09:22+00:00",
       "dateModified": "2016-12-09T22:09:22+00:00",
       "publisher": {
-        "@id": "https://wenqf11.github.io/#author"
+        "@id": "http://localhost:1313/#author"
       },
       "keywords": [
       ],
@@ -119,7 +123,7 @@
           "@type": "CommentAction",
           "name": "Comment",
           "target": [
-            "https://wenqf11.github.io/post/config-two-network-interfaces/#comments"
+            "http://localhost:1313/post/config-two-network-interfaces/#comments"
           ]
         }
       ]
@@ -171,7 +175,7 @@
       
         
         <div class="author-image">
-          <a href="https://wenqf11.github.io/">
+          <a href="http://localhost:1313/">
             <img src="/images/profile.jpg" class="img-circle img-headshot center" alt="Profile Picture">
           </a>
         </div>
@@ -188,7 +192,7 @@
     <nav>
       <ul class="sidebar-nav">
         <li>
-          <a href="https://wenqf11.github.io/">Home</a>
+          <a href="http://localhost:1313/">Home</a>
         </li>
         <li>
           <a href="/categories/">Categories</a>
@@ -212,6 +216,10 @@
         <i class="fab fa-github" aria-hidden="true"></i>
       </a>
       
+      <a href="https://www.zhihu.com/people/wenqingfu/posts" rel="me" title="Zhihu" target="_blank">
+        <i class="fab fa-zhihu" aria-hidden="true"></i>
+      </a>
+      
     </section>
   </div>
 </aside>
@@ -231,8 +239,8 @@
 <h3 id="配置双网卡ip">配置双网卡IP</h3>
 <p>首先需要做的是确保双网卡都能正常工作并且已经开启，这里可以使用 ifconfig 来查看网卡工作状态。确保有两块网卡正常工作，然后就可以去 /etc/sysconfig/network-scripts/ 目录下配置每块网卡的 IP 了。</p>
 <p>该机器的外网 IP 配置为 166.111.80.x，网关为 166.111.80.gate，子网掩码255.255.255.0；内网IP配置为 192.168.3.y，网关为 192.168.3.gate，子网掩码255.255.255.0。</p>
-<pre><code>vim /etc/sysconfig/network-scripts/ifcfg-eth0
-</code></pre><pre><code>HWADDR=A0:42:3F:32:F0:5C
+<pre tabindex="0"><code>vim /etc/sysconfig/network-scripts/ifcfg-eth0
+</code></pre><pre tabindex="0"><code>HWADDR=A0:42:3F:32:F0:5C
 TYPE=Ethernet
 BOOTPROTO=static
 DEFROUTE=yes 
@@ -242,8 +250,8 @@ PREFIX=24  #子网掩码为255.255.255.0
 GATEWAY=166.111.80.gate  #网关
 DNS1=166.111.8.28 #根据设置自己的DNS设置
 </code></pre><p>保存后配置内网IP</p>
-<pre><code>vim /etc/sysconfig/network-scripts/ifcfg-eth1
-</code></pre><pre><code>HWADDR=A0:42:3F:32:F0:5D
+<pre tabindex="0"><code>vim /etc/sysconfig/network-scripts/ifcfg-eth1
+</code></pre><pre tabindex="0"><code>HWADDR=A0:42:3F:32:F0:5D
 TYPE=Ethernet
 BOOTPROTO=static
 DEFROUTE=yes 
@@ -254,12 +262,12 @@ PREFIX=24  #子网掩码为255.255.255.0
 DNS1=166.111.8.28 #根据设置自己的DNS设置
 </code></pre><h3 id="配置双网关路由表">配置双网关路由表</h3>
 <p>目前系统默认网关是外网网关，内网IP是不能正常访问的，需要增加两个路由表，实现双网关正常访问。</p>
-<pre><code>vim /etc/iproute2/rt_tables
+<pre tabindex="0"><code>vim /etc/iproute2/rt_tables
 </code></pre><p>增加如下内容：</p>
-<pre><code>252  net2
+<pre tabindex="0"><code>252  net2
 251  net3
 </code></pre><p>修改 /etc/rc.local，动添加静态路由规则，让网络请求哪里进来的，就从哪里出去。</p>
-<pre><code>ip route flush table net2
+<pre tabindex="0"><code>ip route flush table net2
 ip route add default via 166.111.80.gate dev eth0 src 166.111.80.x table net2
 ip rule add from 166.111.80.x table net2
 
@@ -267,20 +275,20 @@ ip route flush table net3
 ip route add default via 192.168.3.gate dev eth1 src 192.168.3.y table net3
 ip rule add from 192.168.3.y table net3
 </code></pre><p>这样，双网卡双IP应该就配置好了，重启网络服务检测一下。在内网用内网IP访问，在外网用外网IP访问应该可以正常连接。</p>
-<pre><code>service network restart
+<pre tabindex="0"><code>service network restart
 </code></pre><h3 id="配置转发规则">配置转发规则</h3>
 <p>添加SNAT 规则，POSTROUTING 经过路由的源地址为192.168.3.0/24包把源地址改变为166.111.80.x。</p>
-<pre><code>iptables -t nat -A POSTROUTING -s 192.168.3.0/24 -j SNAT --to-source 166.111.80.x
+<pre tabindex="0"><code>iptables -t nat -A POSTROUTING -s 192.168.3.0/24 -j SNAT --to-source 166.111.80.x
 iptables -A FORWARD -s 192.168.3.0/24 -j ACCEPT
 iptables -A FORWARD -d 192.168.3.0/24 -j ACCEPT
 service iptables save
 </code></pre><p>然后重启重启防火墙。</p>
-<pre><code>service iptables restart
-</code></pre><p>为了防止别人修改，可以把上述指令写入到 /etc/rc.local，每次开机启动时会重新执行。 
+<pre tabindex="0"><code>service iptables restart
+</code></pre><p>为了防止别人修改，可以把上述指令写入到 /etc/rc.local，每次开机启动时会重新执行。
 此外，还要打开 Linux 内核转发功能，使Linux内核的IP层能够数据转发。直接修改 /etc/sysctl.conf 增加 net.ipv4.ip_forward=1 或者直接执行下面指令：</p>
-<pre><code>sysctl net.ipv4.ip_forward=1
+<pre tabindex="0"><code>sysctl net.ipv4.ip_forward=1
 </code></pre><p>重启一下网络服务</p>
-<pre><code>service network restart
+<pre tabindex="0"><code>service network restart
 </code></pre><h3 id="配置内网机器访问外网">配置内网机器访问外网</h3>
 <p>将内网某台机器的网关设置为 192.168.3.y，重启网络服务，应该就可以正常访问外网了。</p>
 <h3 id="参考资料">参考资料</h3>
@@ -295,44 +303,43 @@ service iptables save
 
 
   <div class="share-buttons">
-  <a class="weibo-share-button"
+  <a class="twitter-share-button"
      href="#"
-     title="Share on Weibo"
-     data-url="https://wenqf11.github.io/post/config-two-network-interfaces/"
-     data-text="CentOS 上双网卡双 IP 配置，实现内网访问外网"><i class="fab fa-weibo"></i></a>
+     title="Share on Twitter"
+     data-url="http://localhost:1313/post/config-two-network-interfaces/"
+     data-text="CentOS 上双网卡双 IP 配置，实现内网访问外网"><i class="fab fa-twitter"></i></a>
 
   <a class="linkedin-share-button"
      href="#"
      title="Share on LinkedIn"
-     data-url="https://wenqf11.github.io/post/config-two-network-interfaces/"
+     data-url="http://localhost:1313/post/config-two-network-interfaces/"
      data-text="CentOS 上双网卡双 IP 配置，实现内网访问外网"><i class="fab fa-linkedin-in"></i></a>
 
   <a class="facebook-share-button"
      href="#"
      title="Share on Facebook"
-     data-url="https://wenqf11.github.io/post/config-two-network-interfaces/"
+     data-url="http://localhost:1313/post/config-two-network-interfaces/"
      data-text="CentOS 上双网卡双 IP 配置，实现内网访问外网"><i class="fab fa-facebook"></i></a>
-
-  <a class="twitter-share-button"
-     href="#"
-     title="Share on Twitter"
-     data-url="https://wenqf11.github.io/post/config-two-network-interfaces/"
-     data-text="CentOS 上双网卡双 IP 配置，实现内网访问外网"><i class="fab fa-twitter"></i></a>
 
   <a class="telegram-share-button"
      href="#"
      title="Share on Telegram"
-     data-url="https://wenqf11.github.io/post/config-two-network-interfaces/"
+     data-url="http://localhost:1313/post/config-two-network-interfaces/"
      data-text="CentOS 上双网卡双 IP 配置，实现内网访问外网"><i class="fab fa-telegram"></i></a>
 
+  <a class="pinterest-share-button"
+     href="#"
+     title="Share on Pinterest"
+     data-url="http://localhost:1313/post/config-two-network-interfaces/"
+     data-text="CentOS 上双网卡双 IP 配置，实现内网访问外网"><i class="fab fa-pinterest"></i></a>
 </div>
 
 
   <div class="comments">
     <h2>Comments</h2>
     <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+<script>
+    window.disqus_config = function () {
     
     
     
@@ -357,7 +364,7 @@ service iptables save
   <footer>
   <div>
     <p>
-      &copy; Qingfu Wen 2023
+      &copy; Qingfu Wen 2024
 
       &middot; <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank">CC BY-SA 4.0</a>
 
@@ -377,6 +384,6 @@ service iptables save
 
   
 
-  
+    
 </body>
 </html>

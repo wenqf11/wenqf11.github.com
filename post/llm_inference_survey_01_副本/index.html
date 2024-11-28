@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="Hugo 0.139.2">
+
+  <title>浅谈大语言模型推理相关技术之一：综述 &middot; Vince&#39;s Blog</title>
+
+  <meta name="description" content="" />
+
+  
+  <meta itemprop="name" content="浅谈大语言模型推理相关技术之一：综述">
+  <meta itemprop="description" content="引言 随着ChatGPT应用的爆火出圈，大模型相关的技术被广泛关注。利用大模型技术来生成文字、图像、音频、视频、3D模型等多种模态数据的应用也层出不穷，诸如ChatGPT(文字)、Midjourney(图像)、Suno(音频)、Sora(视频)、Meshy(3D)等。同时，融合文本、图像、视频、音频等多种模态数据的大模型研究也日益增多。这些大模型以其庞大的参数量著称，对计算和内存资源的需求巨大，给模型训练和推理部署带来了挑战。 本文聚焦于大语言模型（Large Language Model, LLM）推理技术，从Transformer结构出发，探讨大模型推理的难点及常见解决方案。鉴于篇幅限制，本文将以系列文章形式发布，本篇为综述。">
+  <meta itemprop="datePublished" content="2024-11-27T00:40:11+00:00">
+  <meta itemprop="dateModified" content="2024-11-27T00:40:11+00:00">
+  <meta itemprop="wordCount" content="2863">
+  <meta itemprop="image" content="http://localhost:1313/images/profile.jpg">
+  <meta itemprop="keywords" content="MLSys,LLM推理">
+
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/images/profile.jpg">
+  <meta name="twitter:title" content="浅谈大语言模型推理相关技术之一：综述">
+  <meta name="twitter:description" content="引言 随着ChatGPT应用的爆火出圈，大模型相关的技术被广泛关注。利用大模型技术来生成文字、图像、音频、视频、3D模型等多种模态数据的应用也层出不穷，诸如ChatGPT(文字)、Midjourney(图像)、Suno(音频)、Sora(视频)、Meshy(3D)等。同时，融合文本、图像、视频、音频等多种模态数据的大模型研究也日益增多。这些大模型以其庞大的参数量著称，对计算和内存资源的需求巨大，给模型训练和推理部署带来了挑战。 本文聚焦于大语言模型（Large Language Model, LLM）推理技术，从Transformer结构出发，探讨大模型推理的难点及常见解决方案。鉴于篇幅限制，本文将以系列文章形式发布，本篇为综述。">
+
+
+<meta property="og:url" content="http://localhost:1313/post/llm_inference_survey_01_%E5%89%AF%E6%9C%AC/">
+  <meta property="og:site_name" content="Vince&#39;s Blog">
+  <meta property="og:title" content="浅谈大语言模型推理相关技术之一：综述">
+  <meta property="og:description" content="引言 随着ChatGPT应用的爆火出圈，大模型相关的技术被广泛关注。利用大模型技术来生成文字、图像、音频、视频、3D模型等多种模态数据的应用也层出不穷，诸如ChatGPT(文字)、Midjourney(图像)、Suno(音频)、Sora(视频)、Meshy(3D)等。同时，融合文本、图像、视频、音频等多种模态数据的大模型研究也日益增多。这些大模型以其庞大的参数量著称，对计算和内存资源的需求巨大，给模型训练和推理部署带来了挑战。 本文聚焦于大语言模型（Large Language Model, LLM）推理技术，从Transformer结构出发，探讨大模型推理的难点及常见解决方案。鉴于篇幅限制，本文将以系列文章形式发布，本篇为综述。">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2024-11-27T00:40:11+00:00">
+    <meta property="article:modified_time" content="2024-11-27T00:40:11+00:00">
+    <meta property="article:tag" content="MLSys">
+    <meta property="article:tag" content="LLM推理">
+    <meta property="og:image" content="http://localhost:1313/images/profile.jpg">
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type":"Person",
+      "@id": "http://localhost:1313/#author",
+      "name":  null ,
+      "image": {
+        "@type":"ImageObject",
+        
+        "url": "http://localhost:1313/images/profile.jpg"
+        
+      },
+      "description": "淡泊明志，宁静致远"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "http://localhost:1313/#website",
+      "url": "http://localhost:1313/",
+      "name": "Vince's Blog",
+      "description": "淡泊明志，宁静致远",
+      "publisher": {
+        "@id": "http://localhost:1313/#author"
+      },
+      "inLanguage": "zh-CN"
+    },
+    {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/images/profile.jpg",
+      "caption": "Vince's Blog"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "http://localhost:1313/post/llm_inference_survey_01_%E5%89%AF%E6%9C%AC/#webpage",
+      "url": "http://localhost:1313/post/llm_inference_survey_01_%E5%89%AF%E6%9C%AC/",
+      "name": "浅谈大语言模型推理相关技术之一：综述",
+      "isPartOf": {
+        "@id": "http://localhost:1313/#website"
+      },
+      "about": {
+         "@id": "http://localhost:1313/#author"
+      },
+      "datePublished": "2024-11-27T00:40:11+00:00",
+      "dateModified": "2024-11-27T00:40:11+00:00",
+      "description": "\u003ch2 id=\"引言\"\u003e引言\u003c/h2\u003e\n\u003cp\u003e随着ChatGPT应用的爆火出圈，大模型相关的技术被广泛关注。利用大模型技术来生成文字、图像、音频、视频、3D模型等多种模态数据的应用也层出不穷，诸如ChatGPT(文字)、Midjourney(图像)、Suno(音频)、Sora(视频)、Meshy(3D)等。同时，融合文本、图像、视频、音频等多种模态数据的大模型研究也日益增多。这些大模型以其庞大的参数量著称，对计算和内存资源的需求巨大，给模型训练和推理部署带来了挑战。\n本文聚焦于大语言模型（Large Language Model, LLM）推理技术，从Transformer结构出发，探讨大模型推理的难点及常见解决方案。鉴于篇幅限制，本文将以系列文章形式发布，本篇为综述。\u003c/p\u003e",
+      "inLanguage": "zh-CN",
+      "potentialAction": [
+        {
+          "@type": "ReadAction",
+          "target": [
+            "http://localhost:1313/post/llm_inference_survey_01_%E5%89%AF%E6%9C%AC/"
+          ]
+        }
+      ]
+    },
+    {
+      "@type": "Article",
+      "isPartOf": {
+        "@id": "http://localhost:1313/post/llm_inference_survey_01_%E5%89%AF%E6%9C%AC/#webpage"
+      },
+      "mainEntityOfPage": {
+        "@id": "http://localhost:1313/post/llm_inference_survey_01_%E5%89%AF%E6%9C%AC/#webpage"
+      },
+      "headline": "浅谈大语言模型推理相关技术之一：综述",
+      "datePublished": "2024-11-27T00:40:11+00:00",
+      "dateModified": "2024-11-27T00:40:11+00:00",
+      "publisher": {
+        "@id": "http://localhost:1313/#author"
+      },
+      "keywords": [
+        "MLSys",
+        "LLM推理"
+      ],
+      "articleSection": [
+        "机器学习"
+      ],
+      "inLanguage": "zh-CN",
+      "author": {
+        "@type": "Person",
+        "name":  null 
+      },
+      "potentialAction": [
+        {
+          "@type": "CommentAction",
+          "name": "Comment",
+          "target": [
+            "http://localhost:1313/post/llm_inference_survey_01_%E5%89%AF%E6%9C%AC/#comments"
+          ]
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="/css/print.css"
+        media="print">
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="/css/poole.css">
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="/css/hyde.css">
+
+  
+
+
+  
+
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&display=swap">
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+        integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
+        crossorigin="anonymous" />
+
+  <link rel="apple-touch-icon-precomposed"
+        sizes="144x144"
+        href="/apple-touch-icon-144-precomposed.png">
+
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  </head>
+<body>
+  <aside class="sidebar">
+  <div class="container">
+    <div class="sidebar-about">
+      
+        
+        <div class="author-image">
+          <a href="http://localhost:1313/">
+            <img src="/images/profile.jpg" class="img-circle img-headshot center" alt="Profile Picture">
+          </a>
+        </div>
+        
+      
+
+      <h1>Vince&#39;s Blog</h1>
+
+      
+      <p class="lead">淡泊明志，宁静致远</p>
+      
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li>
+          <a href="http://localhost:1313/">Home</a>
+        </li>
+        <li>
+          <a href="/categories/">Categories</a>
+        </li><li>
+          <a href="/tags/">Tags</a>
+        </li><li>
+          <a href="/post/">Posts</a>
+        </li><li>
+          <a href="/about/">About</a>
+        </li>
+      </ul>
+    </nav>
+
+    <section class="social-icons">
+      
+      <a href="https://www.linkedin.com/in/wenqingfu" rel="me" title="Linkedin" target="_blank">
+        <i class="fab fa-linkedin" aria-hidden="true"></i>
+      </a>
+      
+      <a href="https://github.com/wenqf11" rel="me" title="GitHub" target="_blank">
+        <i class="fab fa-github" aria-hidden="true"></i>
+      </a>
+      
+      <a href="https://www.zhihu.com/people/wenqingfu/posts" rel="me" title="Zhihu" target="_blank">
+        <i class="fab fa-zhihu" aria-hidden="true"></i>
+      </a>
+      
+    </section>
+  </div>
+</aside>
+
+
+  <main class="content container">
+  <div class="post">
+  <h1 class="title">浅谈大语言模型推理相关技术之一：综述</h1>
+  
+
+  <div class="post-date">
+    <time datetime="2024-11-27T00:40:11Z">Nov 27, 2024</time> <span class="readtime">&middot; 6 min read</span>
+  </div>
+
+  <div>
+  <h2 id="引言">引言</h2>
+<p>随着ChatGPT应用的爆火出圈，大模型相关的技术被广泛关注。利用大模型技术来生成文字、图像、音频、视频、3D模型等多种模态数据的应用也层出不穷，诸如ChatGPT(文字)、Midjourney(图像)、Suno(音频)、Sora(视频)、Meshy(3D)等。同时，融合文本、图像、视频、音频等多种模态数据的大模型研究也日益增多。这些大模型以其庞大的参数量著称，对计算和内存资源的需求巨大，给模型训练和推理部署带来了挑战。
+本文聚焦于大语言模型（Large Language Model, LLM）推理技术，从Transformer结构出发，探讨大模型推理的难点及常见解决方案。鉴于篇幅限制，本文将以系列文章形式发布，本篇为综述。</p>
+<h2 id="大语言模型推理的基础知识">大语言模型推理的基础知识</h2>
+<h3 id="大语言模型的基本概念">大语言模型的基本概念</h3>
+<p>大语言模型（LLM）是人工智能领域，尤其是自然语言处理（NLP）领域的一项关键技术。它们是基于深度学习算法（如反向传播、梯度下降）训练的庞大神经网络模型，专门用于理解和生成人类语言文本。
+LLM的核心在于其庞大的参数规模和训练数据集。这些模型通常包含数十亿至数万亿个参数，通过大规模数据集的预训练，学习丰富的语言知识和模式。这种预训练使LLM能够捕捉语言的语法、语义和上下文信息，从而在多种NLP任务中表现出色。LLM的应用范围广泛，包括但不限于机器翻译、文本摘要、情感分析、问答系统、对话生成等。随着LLM的发展，其在知识获取、智能助手、内容创作等领域的潜力也日益显现。
+然而，LLM也面临数据偏见、可解释性、计算资源需求量大等挑战。本文探讨的大语言模型推理技术旨在解决计算资源消耗问题，通过一系列方法减少大模型推理部署过程中的资源消耗。</p>
+<h3 id="transformer架构">Transformer架构</h3>
+<p>2017年，Google发表的“Attention is all you need”论文标志着使用Attention机制的Transformer网络结构成为NLP领域的主流。随后，基于Transformer的预训练语言模型BERT和GPT脱颖而出。除了NLP领域，Transformer结构也被应用于其他领域，如计算机视觉领域，催生了ViT和DiT等一系列新模型。Transformer结构已成为MLP、RNN、CNN后又一主流基础网络结构。</p>
+<p><img src="image-1.png" alt="alt text"></p>
+<!-- raw HTML omitted -->
+<p>Scaled Dot-Product Attention（如上图左侧所示），亦称Self-Attention（自注意力）。Multi-head Attention（MHA）（如上图右所示）, 通过多个Head学习不同的子空间语义，最后通过Concat和Linear操作降维至单Head的Size，相当于多个子空间语义表示的Ensemble。自注意力机制是Transformer架构的核心创新之一，能够动态地为序列数据的每个位置分配不同权重，捕捉长距离依赖关系。具体步骤如下：
+输入嵌入：将输入序列转换为词嵌入向量。
+线性变换：通过三个不同的线性变换得到查询向量（Query）、键向量（Key）和值向量（Value）
+计算注意力：计算查询向量和键向量的点积，得到注意力得分矩阵，除以缩放因子（通常是键向量维度的平方根），并通过Softmax函数归一化，得到注意力权重。
+加权求和：将注意力权重与值向量相乘，并进行加权求和，得到自注意力的输出。
+自注意力机制的公式表示如下：</p>
+<p>其中Q、K、V分别表示query、key和vaue向量，  表示key向量的维度。自注意力机制的优势在于其全局依赖关系的捕捉能力，扩展模型的感受野，并因其并行处理特性，显著提升计算效率。然而，这一机制在精准捕捉有效信息方面存在局限，计算复杂度高且需要大量数据训练以优化性能。
+<img src="image-2.png" alt="alt text"></p>
+<!-- raw HTML omitted -->
+<h3 id="大模型推理过程">大模型推理过程</h3>
+<p><img src="image-3.png" alt="alt text"></p>
+<!-- raw HTML omitted -->
+<p><img src="image-4.png" alt="alt text"></p>
+<!-- raw HTML omitted -->
+<p><img src="image-5.png" alt="alt text"></p>
+<!-- raw HTML omitted -->
+<p><img src="image-6.png" alt="alt text"></p>
+<!-- raw HTML omitted -->
+<p>对于上述的step 1，我们一般称为prefill阶段，大部分场景下用户的输入token长度会有上K，甚至上M，这个过程是计算密集型，往往耗时较长。对于step 1之后的所有step，我们一般称为decoding阶段，这个过程每次输入token长度为1，核心矩阵计算都是GEMV的，因此是一个访存密集型。</p>
+<h3 id="llm推理存在的挑战">LLM推理存在的挑战</h3>
+<p>LLM在实际部署应用中，面临着多种不同方式的挑战。
+延迟和响应时间：高效的大型语言模型推理需要实现低延迟和快速响应时间，尤其是在聊天机器人、虚拟助手和交互系统等实时应用中。平衡模型复杂性与推理速度是关键挑战，需要优化算法和系统架构，以最小化响应时间，同时不牺牲准确性。
+模型大小和内存占用：大型语言模型因其大量参数，带来显著的内存需求。在内存受限的设备上部署此类模型是挑战，需要开发有效的模型压缩技术和系统优化，以减少内存占用，同时不牺牲性能。
+可扩展性和吞吐量：推理系统在生产环境中经常面临不同级别的请求负载。确保可扩展性和高吞吐量以有效处理多个同时请求，需要并行计算、请求调度以及其他系统级优化，以有效地在资源间分配计算工作负载。
+硬件兼容性和加速：高效利用硬件资源对于大型语言模型推理至关重要。将LLM模型适应不同的硬件平台和架构，包括CPU、GPU和专用加速器，需要硬件感知的算法设计和优化，以充分利用底层硬件的潜力。
+准确性与效率之间的权衡：优化LLM推理的效率有时可能涉及与模型准确性的权衡。在模型大小、计算复杂性和性能之间找到正确的平衡是一项挑战性任务，需要仔细考虑和评估各种算法和系统级技术。</p>
+<h3 id="推理效率的关键指标">推理效率的关键指标</h3>
+<p>延迟（Latency）：对于LLM推理，我们首要关注的就是延迟。如果LLM推理耗时太长，用户需要等待的时间就会很长，这会直接影响到用户体验。LLM推理延迟可细分为prefill阶段延迟和decoding阶段延迟，对应该术语就是首字延迟（TTFT，time to frist token）和字间延迟（TBT，time between tokens，也称TPOT，Time Per Output Token）。对于不同的LLM任务，可能关注的延迟也不一定相同。对于聊天类的任务，我们可能会更加在意首字延迟。而对于长文本生成任务，我们可能会更在意整体延迟时间（当decoding阶段足够长时，字间延迟占据整体延迟时间的绝大部分），整体延迟等于TTFT + TBT* (生成Token总数量-1)。
+吞吐量（Throughput，单位tokens per second）：对于一个推理服务而言，吞吐量是我们整体要考虑的指标。因为它决定了整个服务需要多少服务器（成本）。实际过程中，吞吐会与QPS（每秒请求数，Query per Second）、以及batch大小等配置相关，对应不同QPS，我们可能需要动态调整batch大小以达到最优的吞吐量。
+内存使用（Memory Usage）：这里所提内存，对于LLM而言更多是指GPU的显存。因为LLM参数量比较大，需要有足够多显存来存储模型权重、激活值以及KV Cache。虽然显存占用一般不是首要考虑的指标，但减少显存占用也可降低成本。</p>
+<h2 id="llm推理优化的分类">LLM推理优化的分类</h2>
+<p>LLM推理优化的主要目的是为了降低LLM服务的成本。众所周知，LLM Pretrain训练需要成千上万，甚至数十万张英伟达显卡集群来处理。然而LLM大规模服务也是需要大量显卡的，峰值请求数量越高，需要的显卡数量越多。
+暂时无法在飞书文档外展示此内容</p>
+<p><img src="image-7.png" alt="alt text"></p>
+<!-- raw HTML omitted -->
+
+  </div>
+
+  
+<div>
+  <ul class="tags">
+  <li>
+    <a href="http://localhost:1313/tags/mlsys/" class="tag-link">MLSys</a>
+  </li>
+  
+  <li>
+    <a href="http://localhost:1313/tags/llm%E6%8E%A8%E7%90%86/" class="tag-link">LLM推理</a>
+  </li>
+  </ul>
+</div>
+
+
+
+  <div class="share-buttons">
+  <a class="twitter-share-button"
+     href="#"
+     title="Share on Twitter"
+     data-url="http://localhost:1313/post/llm_inference_survey_01_%E5%89%AF%E6%9C%AC/"
+     data-text="浅谈大语言模型推理相关技术之一：综述"><i class="fab fa-twitter"></i></a>
+
+  <a class="linkedin-share-button"
+     href="#"
+     title="Share on LinkedIn"
+     data-url="http://localhost:1313/post/llm_inference_survey_01_%E5%89%AF%E6%9C%AC/"
+     data-text="浅谈大语言模型推理相关技术之一：综述"><i class="fab fa-linkedin-in"></i></a>
+
+  <a class="facebook-share-button"
+     href="#"
+     title="Share on Facebook"
+     data-url="http://localhost:1313/post/llm_inference_survey_01_%E5%89%AF%E6%9C%AC/"
+     data-text="浅谈大语言模型推理相关技术之一：综述"><i class="fab fa-facebook"></i></a>
+
+  <a class="telegram-share-button"
+     href="#"
+     title="Share on Telegram"
+     data-url="http://localhost:1313/post/llm_inference_survey_01_%E5%89%AF%E6%9C%AC/"
+     data-text="浅谈大语言模型推理相关技术之一：综述"><i class="fab fa-telegram"></i></a>
+
+  <a class="pinterest-share-button"
+     href="#"
+     title="Share on Pinterest"
+     data-url="http://localhost:1313/post/llm_inference_survey_01_%E5%89%AF%E6%9C%AC/"
+     data-text="浅谈大语言模型推理相关技术之一：综述"><i class="fab fa-pinterest"></i></a>
+</div>
+
+
+  <div class="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "wenqf11" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+</div>
+  </main>
+
+  <footer>
+  <div>
+    <p>
+      &copy; Qingfu Wen 2024
+
+      &middot; <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank">CC BY-SA 4.0</a>
+
+      &middot; Build with <a href="https://gohugo.io/" target="_blank">Hugo</a> & <a href="https://themes.gohugo.io/soho/" target="_blank">Soho</a> theme
+    </p>
+  </div>
+</footer>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js"
+          integrity="sha256-MAgcygDRahs+F/Nk5Vz387whB4kSK9NXlDN3w58LLq0="
+          crossorigin="anonymous"></script>
+
+
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/soho.js"></script>
+
+  
+
+    
+</body>
+</html>

@@ -2,20 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>PE on Vince&#39;s Blog</title>
-    <link>https://wenqf11.github.io/tags/pe/</link>
+    <link>http://localhost:1313/tags/pe/</link>
     <description>Recent content in PE on Vince&#39;s Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 08 Nov 2014 19:34:22 +0000</lastBuildDate><atom:link href="https://wenqf11.github.io/tags/pe/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 08 Nov 2014 19:34:22 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/pe/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Python pefile 模块读写 PE 文件</title>
-      <link>https://wenqf11.github.io/post/pe_file/</link>
+      <link>http://localhost:1313/post/pe_file/</link>
       <pubDate>Sat, 08 Nov 2014 19:34:22 +0000</pubDate>
-      
-      <guid>https://wenqf11.github.io/post/pe_file/</guid>
-      <description>&lt;h2 id=&#34;pe-文件&#34;&gt;PE 文件&lt;/h2&gt;
-&lt;p&gt;PE（&amp;ldquo;portable executable&amp;rdquo;，可移植的可执行文件）文件是 Windows 操作系统中常见的目标文件、库文件和可执行文件格式，常见的 EXE、DLL、OCX、SYS、COM 都是 PE 文件。深入地了解 PE 文件格式不仅是做一些 Windows hack 相关编程所必须的，同时对我们理解 Windows 系统的内部构造也有很大的帮助。&lt;/p&gt;</description>
+      <guid>http://localhost:1313/post/pe_file/</guid>
+      <description>&lt;h2 id=&#34;pe-文件&#34;&gt;PE 文件&lt;/h2&gt;&#xA;&lt;p&gt;PE（&amp;ldquo;portable executable&amp;rdquo;，可移植的可执行文件）文件是 Windows 操作系统中常见的目标文件、库文件和可执行文件格式，常见的 EXE、DLL、OCX、SYS、COM 都是 PE 文件。深入地了解 PE 文件格式不仅是做一些 Windows hack 相关编程所必须的，同时对我们理解 Windows 系统的内部构造也有很大的帮助。&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

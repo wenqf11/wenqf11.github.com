@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>LLM推理 on Vince&#39;s Blog</title>
+    <link>http://localhost:1313/tags/llm%E6%8E%A8%E7%90%86/</link>
+    <description>Recent content in LLM推理 on Vince&#39;s Blog</description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 28 Nov 2024 00:40:11 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/llm%E6%8E%A8%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>浅谈大语言模型推理相关技术之一：综述</title>
+      <link>http://localhost:1313/post/llm_inference_survey_01/</link>
+      <pubDate>Thu, 28 Nov 2024 00:40:11 +0000</pubDate>
+      <guid>http://localhost:1313/post/llm_inference_survey_01/</guid>
+      <description>&lt;h2 id=&#34;引言&#34;&gt;引言&lt;/h2&gt;&#xA;&lt;p&gt;随着ChatGPT应用的爆火出圈，大模型相关的技术被广泛关注。利用大模型技术来生成文字、图像、音频、视频、3D模型等多种模态数据的应用也层出不穷，诸如ChatGPT(文字)、Midjourney(图像)、Suno(音频)、Sora(视频)、Meshy(3D)等。同时，融合文本、图像、视频、音频等多种模态数据的大模型研究也日益增多。这些大模型以其庞大的参数量著称，对计算和内存资源的需求巨大，给模型训练和推理部署带来了挑战。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -2,19 +2,25 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>机器学习 on Vince&#39;s Blog</title>
-    <link>https://wenqf11.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</link>
+    <link>http://localhost:1313/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</link>
     <description>Recent content in 机器学习 on Vince&#39;s Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 09 Jan 2015 21:51:22 +0000</lastBuildDate><atom:link href="https://wenqf11.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 28 Nov 2024 00:40:11 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>浅谈大语言模型推理相关技术之一：综述</title>
+      <link>http://localhost:1313/post/llm_inference_survey_01/</link>
+      <pubDate>Thu, 28 Nov 2024 00:40:11 +0000</pubDate>
+      <guid>http://localhost:1313/post/llm_inference_survey_01/</guid>
+      <description>&lt;h2 id=&#34;引言&#34;&gt;引言&lt;/h2&gt;&#xA;&lt;p&gt;随着ChatGPT应用的爆火出圈，大模型相关的技术被广泛关注。利用大模型技术来生成文字、图像、音频、视频、3D模型等多种模态数据的应用也层出不穷，诸如ChatGPT(文字)、Midjourney(图像)、Suno(音频)、Sora(视频)、Meshy(3D)等。同时，融合文本、图像、视频、音频等多种模态数据的大模型研究也日益增多。这些大模型以其庞大的参数量著称，对计算和内存资源的需求巨大，给模型训练和推理部署带来了挑战。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>音乐情感分类</title>
-      <link>https://wenqf11.github.io/post/music_emotion_classification/</link>
+      <link>http://localhost:1313/post/music_emotion_classification/</link>
       <pubDate>Fri, 09 Jan 2015 21:51:22 +0000</pubDate>
-      
-      <guid>https://wenqf11.github.io/post/music_emotion_classification/</guid>
+      <guid>http://localhost:1313/post/music_emotion_classification/</guid>
       <description>&lt;p&gt;刚上完了&lt;a href=&#34;http://learn.tsinghua.edu.cn:8080/2006990024/index.htm&#34;&gt;王朝坤&lt;/a&gt;老师《数字媒体（2）》音频技术部分的课程，做了一个音乐情感分类的实验，特写出来分享一下。&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>
